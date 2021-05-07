@@ -1,6 +1,6 @@
-# frutafeia
+# frutafeia :cherries: :tangerine: :watermelon:
 
-Fruta Feia Django API :cherries: :tangerine: :watermelon:
+Fruta Feia Django API
 
 ## SETUP
 
