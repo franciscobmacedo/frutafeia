@@ -85,3 +85,45 @@ def read_update_produtos():
     print("\n\nDone!")
     print(len(df), Produto.objects.all().count())
     print(len(df.familia.unique()), FamiliaProduto.objects.all().count())
+
+
+def read_update_disponibilidade():
+    """Reads isponibilidades data from google sheets and updates database"""
+
+    print("reading sheet 'Disponibilidade' from google sheets")
+    gs = ConnectGS()
+    data = gs.read_sheet(
+        sheet_id=spreadsheet,
+        worksheet="Disponibilidade",
+        range="A:E",
+    )
+    df = pd.DataFrame().from_dict(data["values"])
+    df.columns = df.iloc[0]
+    df = df[1:]
+    # df.to_csv("disponibilidade.csv")
+
+    df.columns = [c.lower() for c in df.columns]
+    df.rename(
+        columns={"delegação": "delegacao", "quantidade total": "quantidade"},
+        inplace=True,
+    )
+    df.data = pd.to_datetime(df.data)
+
+    for i, row in df.iterrows():
+        try:
+            produto_obj = Produto.objects.get(nome=row.produto)
+        except Produto.DoesNotExist:
+            print(f"cant find product {row.producto}")
+            continue
+        try:
+            produtor_obj = Produtor.objects.get(nome=row.produtor)
+        except Produtor.DoesNotExist:
+            print(f"cant find produtor {row.produtor}")
+            continue
+        Disponibilidade.objects.get_or_create(
+            data=row.data,
+            delegacao=row.delegacao,
+            quantidade=row.quantidade,
+            produto=produto_obj,
+            produtor=produtor_obj,
+        )

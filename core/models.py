@@ -1,4 +1,6 @@
 from django.db import models
+from googleapiclient import model
+from pandas.core.algorithms import quantile
 from core.enum import TIPO_PRODUTO_CHOICES, ESTADO_CHOICES
 
 # Create your models here.
@@ -6,6 +8,10 @@ from core.enum import TIPO_PRODUTO_CHOICES, ESTADO_CHOICES
 
 class FamiliaProduto(models.Model):
     nome = models.CharField(max_length=255)
+
+    class Meta:
+        verbose_name = "Família de Produto"
+        verbose_name_plural = "Famílias de Produtos"
 
     def __str__(self):
         return str(self.nome)
@@ -28,15 +34,6 @@ class Produto(models.Model):
         return f"{self.nome} - {self.tipo_name}"
 
 
-class Telefone(models.Model):
-    """Phone numbers"""
-
-    numero = models.BigIntegerField()
-
-    def __str__(self):
-        return str(self.numero)
-
-
 class Produtor(models.Model):
     """Produts providers"""
 
@@ -44,7 +41,6 @@ class Produtor(models.Model):
     produtos = models.ManyToManyField("Produto")
     estado = models.PositiveSmallIntegerField(choices=ESTADO_CHOICES)
     email = models.EmailField(max_length=255, null=True, blank=True)
-    telefone = models.ManyToManyField("Telefone")
     morada = models.CharField(max_length=255, null=True, blank=True)
     concelho = models.CharField(max_length=255, null=True, blank=True)
 
@@ -57,3 +53,14 @@ class Produtor(models.Model):
 
     def __str__(self):
         return self.nome
+
+
+class Disponibilidade(models.Model):
+    data = models.DateField()
+    delegacao = models.CharField(max_length=255)
+    produto = models.ForeignKey("Produto", on_delete=models.CASCADE)
+    produtor = models.ForeignKey("Produtor", on_delete=models.CASCADE)
+    quantidade = models.FloatField()
+
+    def __str__(self):
+        return f"{self.data} : {self.produtor} : {self.produto}"
