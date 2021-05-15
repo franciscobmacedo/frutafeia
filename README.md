@@ -31,10 +31,21 @@ _MAC/LINUX_
 
 <br />
 
-## Run
+## RUN
 
 ```bash
     python manage.py runserver
 ```
 
 Open http://localhost:8000/ on your browser and enjoy :wink:
+
+
+## API
+
+These are the API endpoints and their description.
+
+### /api/
+    Main endpoint. lists all enpoints
+
+### /api/produtores/
+    lists all providers

@@ -127,4 +127,4 @@ STATIC_URL = "/static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-SPREADSHEET_ID = "1eIiG4PTrtGi7bLcsdzhzI2HB4RsAkjMmfAsidzKabqc"
+SPREADSHEET_ID = "1rGTPmY7BTazRxiCUuQMeHBA_w30b3gTiw_H6-VW_4Ro"

@@ -2,16 +2,20 @@ from django.db import models
 from core.enum import TIPO_PRODUTO_CHOICES, ESTADO_CHOICES
 
 # Create your models here.
-"""
-Produtor	Produtos	Estado do Produtor	Email	Telefone	Morada	Concelho	Origem do Contacto	Visita	Reactivação contacto	Descrição (site: texto + foto)	Acordo Entregue	Ultimo Contacto / Comentários
 
-"""
+
+class FamiliaProduto(models.Model):
+    nome = models.CharField(max_length=255)
+
+    def __str__(self):
+        return str(self.nome)
 
 
 class Produto(models.Model):
     """Possible products"""
 
     nome = models.CharField(max_length=255)
+    familia = models.ForeignKey("FamiliaProduto", on_delete=models.CASCADE)
     tipo = models.PositiveSmallIntegerField(
         choices=TIPO_PRODUTO_CHOICES, blank=True, null=True
     )
@@ -37,9 +41,9 @@ class Produtor(models.Model):
     """Produts providers"""
 
     nome = models.CharField(max_length=255)
-    produto = models.ManyToManyField("Produto")
+    produtos = models.ManyToManyField("Produto")
     estado = models.PositiveSmallIntegerField(choices=ESTADO_CHOICES)
-    email = models.EmailField(max_length=255)
+    email = models.EmailField(max_length=255, null=True, blank=True)
     telefone = models.ManyToManyField("Telefone")
     morada = models.CharField(max_length=255, null=True, blank=True)
     concelho = models.CharField(max_length=255, null=True, blank=True)
