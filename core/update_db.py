@@ -73,7 +73,7 @@ def read_update_produtos():
     df.columns = cols
 
     df.rename(columns={"família": "familia"}, inplace=True)
-    print("Updating 'Produtos' Table\n")
+    print("Updating 'Produto' Table\n")
     for i, row in df.iterrows():
         print(row.produto)
         family_obj, created = FamiliaProduto.objects.get_or_create(nome=row.familia)
@@ -109,7 +109,9 @@ def read_update_disponibilidade():
     )
     df.data = pd.to_datetime(df.data)
 
+    print("Updating 'Disponobilidade' Table\n")
     for i, row in df.iterrows():
+        print(row.data, row.produtor, row.produto)
         try:
             produto_obj = Produto.objects.get(nome=row.produto)
         except Produto.DoesNotExist:
@@ -120,10 +122,11 @@ def read_update_disponibilidade():
         except Produtor.DoesNotExist:
             print(f"cant find produtor {row.produtor}")
             continue
-        Disponibilidade.objects.get_or_create(
+        disponibilidade_obj, created = Disponibilidade.objects.get_or_create(
             data=row.data,
             delegacao=row.delegacao,
             quantidade=row.quantidade,
             produto=produto_obj,
             produtor=produtor_obj,
         )
+    print("\n\nDone!")
