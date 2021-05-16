@@ -21,6 +21,14 @@ class ProdutoSerializer(serializers.ModelSerializer):
 class DisponibilidadeSerializer(serializers.ModelSerializer):
     """Serializer for disponibilidade objects"""
 
+    produto = serializers.SlugRelatedField(
+        queryset=Produto.objects.all(), read_only=False, slug_field="nome"
+    )
+
+    produtor = serializers.SlugRelatedField(
+        queryset=Produtor.objects.all(), read_only=False, slug_field="nome"
+    )
+
     class Meta:
         model = Disponibilidade
-        fields = "__all__"
+        fields = ("data", "delegacao", "quantidade", "produtor", "produto")
