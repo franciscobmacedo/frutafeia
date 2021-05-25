@@ -31,4 +31,4 @@ class DisponibilidadeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Disponibilidade
-        fields = ("data", "delegacao", "quantidade", "produtor", "produto")
+        fields = ("data", "produto", "produtor", "quantidade", "medida", "preco", "urgente")

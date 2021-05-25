@@ -1,7 +1,7 @@
 from django.db import models
 from googleapiclient import model
 from pandas.core.algorithms import quantile
-from core.enum import TIPO_PRODUTO_CHOICES, ESTADO_CHOICES
+from core.enum import TIPO_PRODUTO_CHOICES, ESTADO_CHOICES, MEDIDA_CHOICES
 
 # Create your models here.
 
@@ -57,10 +57,16 @@ class Produtor(models.Model):
 
 class Disponibilidade(models.Model):
     data = models.DateField()
-    delegacao = models.CharField(max_length=255)
     produto = models.ForeignKey("Produto", on_delete=models.CASCADE)
     produtor = models.ForeignKey("Produtor", on_delete=models.CASCADE)
     quantidade = models.FloatField()
+    medida = models.PositiveSmallIntegerField(choices=MEDIDA_CHOICES)
+    preco = models.FloatField()
+    urgente = models.BooleanField()
 
+    @property
+    def medida_name(self):
+        return dict(MEDIDA_CHOICES).get(self.medida)
+    
     def __str__(self):
         return f"{self.data} : {self.produtor} : {self.produto}"

@@ -27,3 +27,14 @@ ESTADO_CHOICES = (
     (Estado.ANTIGO.value, "Antigo"),
     (Estado.LISTA_NEGRA.value, "Lista Negra"),
 )
+
+
+class Medida(Enum):
+    UNIDADE = 1
+    KG = 2
+
+
+MEDIDA_CHOICES = (
+    (Medida.UNIDADE.value, "Unidade"),
+    (Medida.KG.value, "Kg"),
+)

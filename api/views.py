@@ -5,6 +5,9 @@ from rest_framework.views import APIView
 from core.models import Produtor, Produto, Disponibilidade
 from api import serializers
 from core.update_db import read_update_disponibilidade
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
 
 
 class ProdutorViewSet(viewsets.ModelViewSet):
@@ -27,6 +30,21 @@ class DisponibilidadeViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.DisponibilidadeSerializer
     queryset = Disponibilidade.objects.all()
 
+    def create(self, request, *args, **kwargs):
+        print(args)
+        print(kwargs)
+        data = request.data
+        if data.get('delete') and data.get('delete').lower() == "true":
+            print('deleting!')
+
+            qs = Disponibilidade.objects.filter(data=data.get('data'), produto__nome=data.get('produto'), produtor__nome=data.get('produtor'), quantidade=data.get('quantidade'), medida=data.get('medida'), preco=data.get('preco'), urgente=data.get('urgente')=='true')
+            print(qs)
+            if qs.exists:
+                qs.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+        else:
+            return super().create(request, *args, **kwargs)
 
 class getDisponibilidades(APIView):
     def get(self, request, *args, **kwargs):
