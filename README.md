@@ -3,7 +3,7 @@
 Fruta Feia Django API
 
 ## SETUP
-
+- You need to store a file with the google cloud credentials in `gsheets/keys.json`. Go to https://console.cloud.google.com for more.
 - The libraries required and their versions are listed in the `requirements.txt` file.
   Run the following commands to setup environment:
 
@@ -28,6 +28,7 @@ _MAC/LINUX_
     pip install -r requirements.txt
     python manage.py migrate
 ```
+
 
 <br />
 
