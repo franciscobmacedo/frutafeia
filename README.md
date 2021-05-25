@@ -32,6 +32,25 @@ _MAC/LINUX_
 
 <br />
 
+## FILL DATABASE
+
+To fill your database with data from google sheets (remember, you need the file `keys.json` in the directory `gsheets`)
+
+To fill the table `Produtor`:
+```bash
+    python manage.py tasks -produtor
+```
+
+To fill the table `Produto`:
+```bash
+    python manage.py tasks -produto
+```
+
+To fill the table `Disponibilidade`:
+```bash
+    python manage.py tasks -disponibilidade
+```
+
 ## RUN
 
 ```bash

@@ -11,7 +11,7 @@ spreadsheet = settings.SPREADSHEET_ID
 def read_update_produtores():
     """Reads produtores data from google sheets and updates database"""
 
-    print("reading sheet 'Produtores' from google sheets")
+    print("\nReading sheet 'Produtores' from google sheets")
     gs = ConnectGS()
     data = gs.read_sheet(
         sheet_id=spreadsheet,
@@ -57,7 +57,7 @@ def read_update_produtores():
 def read_update_produtos():
     """Reads produtos data from google sheets and updates database"""
 
-    print("reading sheet 'Produtos' from google sheets")
+    print("\nReading sheet 'Produtos' from google sheets")
     gs = ConnectGS()
     data = gs.read_sheet(
         sheet_id=spreadsheet,
@@ -90,7 +90,7 @@ def read_update_produtos():
 def read_update_disponibilidade():
     """Reads isponibilidades data from google sheets and updates database"""
 
-    print("reading sheet 'Disponibilidade' from google sheets")
+    print("\nReading sheet 'Disponibilidade' from google sheets")
     gs = ConnectGS()
     data = gs.read_sheet(
         sheet_id=spreadsheet,
@@ -119,9 +119,8 @@ def read_update_disponibilidade():
 
     # Delete everything first, so we make sure we dont have any duplicates
     Disponibilidade.objects.all().delete()
-    print(df)
     for i, row in df.iterrows():
-        print(row.data, row.produtor, row.produto)
+        print('getting', row.data, row.produtor, row.produto)
         if row.remover:
             continue
         try:
