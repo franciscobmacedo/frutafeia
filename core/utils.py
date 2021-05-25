@@ -1,4 +1,4 @@
-from core.enum import ESTADO_CHOICES, TIPO_PRODUTO_CHOICES
+from core.enum import ESTADO_CHOICES, MEDIDA_CHOICES, TIPO_PRODUTO_CHOICES
 
 
 def get_choice_value(choice_str, choices):
@@ -16,3 +16,6 @@ def get_estado(estado_str):
 
 def get_tipo_produto(tipo_str):
     return get_choice_value(tipo_str, TIPO_PRODUTO_CHOICES)
+
+def get_medida(medida_str):
+    return get_choice_value(medida_str, MEDIDA_CHOICES)

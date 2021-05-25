@@ -3,7 +3,7 @@ from gsheets.connect import ConnectGS
 import pandas as pd
 import numpy as np
 from core.models import *
-from core.utils import get_estado, get_tipo_produto
+from core.utils import get_estado, get_tipo_produto, get_medida
 
 spreadsheet = settings.SPREADSHEET_ID
 
@@ -110,7 +110,7 @@ def read_update_disponibilidade():
         inplace=True,
     )
     df.data = pd.to_datetime(df.data)
-    df.medida = df.medida.map(int)
+    df.medida = df.medida.map(get_medida)
     df.quantidade = df.quantidade.map(float)
     df.preco = df.preco.map(float)
     df.remover = df.remover.apply(lambda x: x.lower() == 'true')
