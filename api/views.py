@@ -36,8 +36,8 @@ class DisponibilidadeViewSet(viewsets.ModelViewSet):
         data = request.data
         if data.get('delete') and data.get('delete').lower() == "true":
             print('deleting!')
-
-            qs = Disponibilidade.objects.filter(data=data.get('data'), produto__nome=data.get('produto'), produtor__nome=data.get('produtor'), quantidade=data.get('quantidade'), medida=data.get('medida'), preco=data.get('preco'), urgente=data.get('urgente')=='true')
+            print(data)
+            qs = Disponibilidade.objects.filter(data=data.get('data'), produto__nome=data.get('produto'), produtor__nome=data.get('produtor'), quantidade=data.get('quantidade'), medida=data.get('medida'), preco=data.get('preco'), urgente=data.get('urgente').lower()=='true')
             print(qs)
             if qs.exists:
                 qs.delete()

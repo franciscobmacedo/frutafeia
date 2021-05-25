@@ -28,7 +28,8 @@ class DisponibilidadeSerializer(serializers.ModelSerializer):
     produtor = serializers.SlugRelatedField(
         queryset=Produtor.objects.all(), read_only=False, slug_field="nome"
     )
+    medida = serializers.CharField(source='get_medida_display')
 
     class Meta:
         model = Disponibilidade
-        fields = ("data", "produto", "produtor", "quantidade", "medida", "preco", "urgente")
+        fields ="__all__"
