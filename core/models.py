@@ -71,6 +71,23 @@ class Disponibilidade(models.Model):
     def __str__(self):
         return f"{self.data} : {self.produtor} : {self.produto}"
 
+
+class MapaDeCampo(models.Model):
+    data = models.DateField()
+    produto = models.ForeignKey("Produto", on_delete=models.CASCADE)
+    produtor = models.ForeignKey("Produtor", on_delete=models.CASCADE)
+    quantidade = models.FloatField()
+    medida = models.PositiveSmallIntegerField(choices=MEDIDA_CHOICES)
+    preco = models.FloatField()
+    urgente = models.BooleanField()
+
+    @property
+    def medida_name(self):
+        return dict(MEDIDA_CHOICES).get(self.medida)
+    
+    def __str__(self):
+        return f"{self.data} : {self.produtor} : {self.produto}"
+
 class Ranking(models.Model):
     data = models.DateField()
     produto = models.ForeignKey("Produto", on_delete=models.CASCADE)
