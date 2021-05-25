@@ -2,21 +2,30 @@ from rest_framework import serializers
 from core.models import Disponibilidade, Produtor, Produto, Ranking
 
 
-class ProdutorSerializer(serializers.ModelSerializer):
-    """Serializer for produtor objects"""
 
-    class Meta:
-        model = Produtor
-        fields = "__all__"
 
 
 class ProdutoSerializer(serializers.ModelSerializer):
     """Serializer for produto objects"""
-
+   
     class Meta:
         model = Produto
         fields = "__all__"
 
+class ProdutoNameSerializer(serializers.ModelSerializer):
+    """Serializer for produto objects"""
+   
+    class Meta:
+        model = Produto
+        fields = ('nome',)
+
+
+class ProdutorSerializer(serializers.ModelSerializer):
+    """Serializer for produtor objects"""
+    produtos = ProdutoSerializer(many=True, read_only=True)
+    class Meta:
+        model = Produtor
+        fields = "__all__"
 
 class DisponibilidadeSerializer(serializers.ModelSerializer):
     """Serializer for disponibilidade objects"""
