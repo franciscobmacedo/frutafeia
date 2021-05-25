@@ -95,23 +95,35 @@ def read_update_disponibilidade():
     data = gs.read_sheet(
         sheet_id=spreadsheet,
         worksheet="Disponibilidade",
-        range="A:E",
+        range="A:H",
     )
     df = pd.DataFrame().from_dict(data["values"])
+    df = df.iloc[7:]
     df.columns = df.iloc[0]
     df = df[1:]
     # df.to_csv("disponibilidade.csv")
 
     df.columns = [c.lower() for c in df.columns]
+
     df.rename(
-        columns={"delegação": "delegacao", "quantidade total": "quantidade"},
+        columns={"preço": "preco", "quantidade total": "quantidade", "urgente ?": "urgente"},
         inplace=True,
     )
     df.data = pd.to_datetime(df.data)
-
+    df.medida = df.medida.map(int)
+    df.quantidade = df.quantidade.map(float)
+    df.preco = df.preco.map(float)
+    df.remover = df.remover.apply(lambda x: x.lower() == 'true')
+    df.urgente = df.urgente.apply(lambda x: x.lower() == 'sim' or x.lower == 'true')
     print("Updating 'Disponobilidade' Table\n")
+
+    # Delete everything first, so we make sure we dont have any duplicates
+    Disponibilidade.objects.all().delete()
+    print(df)
     for i, row in df.iterrows():
         print(row.data, row.produtor, row.produto)
+        if row.remover:
+            continue
         try:
             produto_obj = Produto.objects.get(nome=row.produto)
         except Produto.DoesNotExist:
@@ -122,11 +134,14 @@ def read_update_disponibilidade():
         except Produtor.DoesNotExist:
             print(f"cant find produtor {row.produtor}")
             continue
-        disponibilidade_obj, created = Disponibilidade.objects.get_or_create(
+
+        Disponibilidade.objects.create(
             data=row.data,
-            delegacao=row.delegacao,
-            quantidade=row.quantidade,
-            produto=produto_obj,
+            produto=produto_obj, 
             produtor=produtor_obj,
-        )
+            quantidade=row.quantidade,
+            medida=row.medida,
+            preco=row.preco,
+            urgente=row.urgente
+        ).save()
     print("\n\nDone!")
