@@ -2,7 +2,7 @@ from django.http.response import JsonResponse
 from rest_framework import viewsets
 from rest_framework.views import APIView
 
-from core.models import Produtor, Produto, Disponibilidade
+from core.models import Produtor, Produto, Disponibilidade, Ranking
 from api import serializers
 from core.update_db import read_update_disponibilidade
 from rest_framework.decorators import api_view
@@ -30,22 +30,29 @@ class DisponibilidadeViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.DisponibilidadeSerializer
     queryset = Disponibilidade.objects.all()
 
-    def create(self, request, *args, **kwargs):
-        print(args)
-        print(kwargs)
-        data = request.data
-        print(data)
 
-        if data.get('delete') and data.get('delete').lower() == "true":
-            print('deleting!')
-            qs = Disponibilidade.objects.filter(data=data.get('data'), produto__nome=data.get('produto'), produtor__nome=data.get('produtor'), quantidade=float(data.get('quantidade')), medida=int(data.get('medida')), preco=float(data.get('preco')), urgente=data.get('urgente').lower()=='true')
-            print(qs)
-            if qs.exists:
-                qs.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
+class RankingViewSet(viewsets.ModelViewSet):
+    """Access Disponibilidade in the database"""
 
-        else:
-            return super().create(request, *args, **kwargs)
+    serializer_class = serializers.RankingSerializer
+    queryset = Ranking.objects.all()
+
+    # def create(self, request, *args, **kwargs):
+    #     print(args)
+    #     print(kwargs)
+    #     data = request.data
+    #     print(data)
+
+    #     if data.get('delete') and data.get('delete').lower() == "true":
+    #         print('deleting!')
+    #         qs = Disponibilidade.objects.filter(data=data.get('data'), produto__nome=data.get('produto'), produtor__nome=data.get('produtor'), quantidade=float(data.get('quantidade')), medida=int(data.get('medida')), preco=float(data.get('preco')), urgente=data.get('urgente').lower()=='true')
+    #         print(qs)
+    #         if qs.exists:
+    #             qs.delete()
+    #         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    #     else:
+    #         return super().create(request, *args, **kwargs)
 
 class getDisponibilidades(APIView):
     def get(self, request, *args, **kwargs):

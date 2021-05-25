@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Disponibilidade, Produtor, Produto
+from core.models import Disponibilidade, Produtor, Produto, Ranking
 
 
 class ProdutorSerializer(serializers.ModelSerializer):
@@ -31,4 +31,21 @@ class DisponibilidadeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Disponibilidade
+        fields ="__all__"
+
+
+
+class RankingSerializer(serializers.ModelSerializer):
+    """Serializer for disponibilidade objects"""
+
+    produto = serializers.SlugRelatedField(
+        queryset=Produto.objects.all(), read_only=False, slug_field="nome"
+    )
+
+    produtor = serializers.SlugRelatedField(
+        queryset=Produtor.objects.all(), read_only=False, slug_field="nome"
+    )
+
+    class Meta:
+        model = Ranking
         fields ="__all__"

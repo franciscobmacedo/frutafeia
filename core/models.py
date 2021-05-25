@@ -70,3 +70,9 @@ class Disponibilidade(models.Model):
     
     def __str__(self):
         return f"{self.data} : {self.produtor} : {self.produto}"
+
+class Ranking(models.Model):
+    data = models.DateField()
+    produto = models.ForeignKey("Produto", on_delete=models.CASCADE)
+    produtor = models.ForeignKey("Produtor", on_delete=models.CASCADE)
+    pontuacao = models.FloatField()

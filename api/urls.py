@@ -7,6 +7,7 @@ router = DefaultRouter()
 router.register("produtores", views.ProdutorViewSet)
 router.register("produtos", views.ProdutoViewSet)
 router.register("disponibilidades", views.DisponibilidadeViewSet)
+router.register("ranking", views.RankingViewSet)
 
 
 app_name = "api"
