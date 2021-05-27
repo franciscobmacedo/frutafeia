@@ -93,3 +93,6 @@ class Ranking(models.Model):
     produto = models.ForeignKey("Produto", on_delete=models.CASCADE)
     produtor = models.ForeignKey("Produtor", on_delete=models.CASCADE)
     pontuacao = models.FloatField()
+
+
+# TODO - Model(s) para a sugestão de cestas

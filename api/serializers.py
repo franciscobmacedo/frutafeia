@@ -2,9 +2,6 @@ from rest_framework import serializers
 from core.models import Disponibilidade, Produtor, Produto, Ranking
 
 
-
-
-
 class ProdutoSerializer(serializers.ModelSerializer):
     """Serializer for produto objects"""
    

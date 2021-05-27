@@ -68,3 +68,11 @@ These are the API endpoints and their description.
     - `/api/produtores/` lists all produtores
     - `/api/produtos/` lists all produtos
     - `/api/disponibilidades/` lists all disponibilidades
+
+
+## TODO
+- Quantidade de cestas a fazer
+- Produtos Quantidades de referencia
+- Sazonalidade de Produtos (inteiro, produto, float)
+
+
