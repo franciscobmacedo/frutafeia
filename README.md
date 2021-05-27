@@ -16,6 +16,9 @@ _WINDOWS_
     .\venv\scripts\activate
     pip install -r requirements.txt
     py manage.py migrate
+    python manage.py createsuperuser
+        user: admin
+        password: admin
 ```
 
 _MAC/LINUX_
@@ -26,7 +29,10 @@ _MAC/LINUX_
     python3 -m venv venv
     source venv/bin/activate
     pip install -r requirements.txt
-    python manage.py migrate
+    python3 manage.py migrate
+    python manage.py createsuperuser
+        user: admin
+        password: admin
 ```
 
 
@@ -34,16 +40,20 @@ _MAC/LINUX_
 
 ## FILL DATABASE
 
-To fill your database with data from google sheets (remember, you need the file `keys.json` in the directory `gsheets`)
+To fill your database with data from google sheets (remember, you need the file `keys.json` in the directory `gsheets`) 
 
-To fill the table `Produtor`:
-```bash
-    python manage.py tasks -produtor
-```
+
+__RUN IN THE FOLLOWING ORDER!__
+
 
 To fill the table `Produto`:
 ```bash
     python manage.py tasks -produto
+```
+
+To fill the table `Produtor`:
+```bash
+    python manage.py tasks -produtor
 ```
 
 To fill the table `Disponibilidade`:
@@ -73,6 +83,6 @@ These are the API endpoints and their description.
 ## TODO
 - Quantidade de cestas a fazer
 - Produtos Quantidades de referencia
-- Sazonalidade de Produtos (inteiro, produto, float)
+- Sazonalidade de Produtos (semana: inteiro, produto: foreignKey, sazonalidade: float)
 
 

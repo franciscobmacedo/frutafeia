@@ -18,4 +18,5 @@ def get_tipo_produto(tipo_str):
     return get_choice_value(tipo_str, TIPO_PRODUTO_CHOICES)
 
 def get_medida(medida_str):
+    medida_str = medida_str.lower().capitalize()
     return get_choice_value(medida_str, MEDIDA_CHOICES)

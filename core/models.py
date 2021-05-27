@@ -1,5 +1,6 @@
 from django.db import models
 from googleapiclient import model
+from numpy import true_divide
 from pandas.core.algorithms import quantile
 from core.enum import TIPO_PRODUTO_CHOICES, ESTADO_CHOICES, MEDIDA_CHOICES
 
@@ -7,6 +8,7 @@ from core.enum import TIPO_PRODUTO_CHOICES, ESTADO_CHOICES, MEDIDA_CHOICES
 
 
 class FamiliaProduto(models.Model):
+    """Family of products. one family can have many products associated. One product only has one Family"""
     nome = models.CharField(max_length=255)
 
     class Meta:
@@ -25,6 +27,9 @@ class Produto(models.Model):
     tipo = models.PositiveSmallIntegerField(
         choices=TIPO_PRODUTO_CHOICES, blank=True, null=True
     )
+    quantidade_cesta_pequena = models.FloatField(null=True, blank=True)
+    quantidade_cesta_grande = models.FloatField(null=True, blank=True)
+    medida = models.PositiveSmallIntegerField(choices=MEDIDA_CHOICES, null=True, blank=True)
 
     @property
     def tipo_name(self):
@@ -56,12 +61,13 @@ class Produtor(models.Model):
 
 
 class Disponibilidade(models.Model):
+    """ Disponibilidades registadas semanalmente. Atualizado sempre que há iteração com o frontend. Reset no inicio da semana"""
     data = models.DateField()
     produto = models.ForeignKey("Produto", on_delete=models.CASCADE)
     produtor = models.ForeignKey("Produtor", on_delete=models.CASCADE)
     quantidade = models.FloatField()
     medida = models.PositiveSmallIntegerField(choices=MEDIDA_CHOICES)
-    preco = models.FloatField()
+    preco = models.FloatField(null=True, blank=True)
     urgente = models.BooleanField()
 
     @property
@@ -73,13 +79,14 @@ class Disponibilidade(models.Model):
 
 
 class MapaDeCampo(models.Model):
+    """ Registo dos produtores e produtos utilizados em cada semana"""
+
     data = models.DateField()
     produto = models.ForeignKey("Produto", on_delete=models.CASCADE)
     produtor = models.ForeignKey("Produtor", on_delete=models.CASCADE)
-    quantidade = models.FloatField()
+    quantidade = models.FloatField(null=True, blank=True)
     medida = models.PositiveSmallIntegerField(choices=MEDIDA_CHOICES)
-    preco = models.FloatField()
-    urgente = models.BooleanField()
+    preco = models.FloatField(null=True, blank=True)
 
     @property
     def medida_name(self):
@@ -88,11 +95,25 @@ class MapaDeCampo(models.Model):
     def __str__(self):
         return f"{self.data} : {self.produtor} : {self.produto}"
 
+
+class CestasFeitas(models.Model):
+    """Quantidade de cestas feitas em cada semana"""
+
+    data = models.DateField()
+    cestas_pequenas = models.PositiveIntegerField(null=True, blank=True)
+    cestas_grandes = models.PositiveIntegerField(null=True, blank=True)
+
+
 class Ranking(models.Model):
+    """Sugestão de produtor/produtos a contactar para cada semana. Atualizado semanalmente"""
     data = models.DateField()
     produto = models.ForeignKey("Produto", on_delete=models.CASCADE)
     produtor = models.ForeignKey("Produtor", on_delete=models.CASCADE)
     pontuacao = models.FloatField()
 
 
-# TODO - Model(s) para a sugestão de cestas
+class Sazonalidade(models.Model):
+    """Sazonalidade (de 0 a 1 ou de 0 a 100) de produtos"""
+    semana = models.SmallIntegerField()
+    produto = models.ForeignKey("Produto", on_delete=models.CASCADE)
+    sazonalidade = models.FloatField()
