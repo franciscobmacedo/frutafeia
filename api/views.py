@@ -9,6 +9,7 @@ from core.update_db import (
     read_update_produtores,
     read_update_produtos,
 )
+from core.enum import MEDIDA_CHOICES, TIPO_PRODUTO_CHOICES, ESTADO_CHOICES
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -58,3 +59,24 @@ class getProdutos(APIView):
     def get(self, request, *args, **kwargs):
         read_update_produtos()
         return JsonResponse({"success": True})
+
+
+class tipoProdutos(APIView):
+    def get(self, request, *args, **kwargs):
+        return JsonResponse(
+            [{"id": t[0], "nome": t[1]} for t in TIPO_PRODUTO_CHOICES], safe=False
+        )
+
+
+class estadoProdutor(APIView):
+    def get(self, request, *args, **kwargs):
+        return JsonResponse(
+            [{"id": t[0], "nome": t[1]} for t in ESTADO_CHOICES], safe=False
+        )
+
+
+class medida(APIView):
+    def get(self, request, *args, **kwargs):
+        return JsonResponse(
+            [{"id": t[0], "nome": t[1]} for t in MEDIDA_CHOICES], safe=False
+        )

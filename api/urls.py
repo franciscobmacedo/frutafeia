@@ -29,4 +29,19 @@ urlpatterns = [
         views.getProdutos.as_view(),
         name="get_produtos",
     ),
+    path(
+        "tipoprodutos",
+        views.tipoProdutos.as_view(),
+        name="tipo_produtos",
+    ),
+    path(
+        "estadoprodutor",
+        views.estadoProdutor.as_view(),
+        name="estado_produtor",
+    ),
+    path(
+        "medida",
+        views.medida.as_view(),
+        name="medida",
+    ),
 ]
