@@ -19,4 +19,14 @@ urlpatterns = [
         views.getDisponibilidades.as_view(),
         name="get_disponibilidades",
     ),
+    path(
+        "getprodutores",
+        views.getProdutores.as_view(),
+        name="get_produtores",
+    ),
+    path(
+        "getprodutos",
+        views.getProdutos.as_view(),
+        name="get_produtos",
+    ),
 ]
