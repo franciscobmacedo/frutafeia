@@ -6,6 +6,7 @@ from api import views
 router = DefaultRouter()
 router.register("produtores", views.ProdutorViewSet)
 router.register("produtos", views.ProdutoViewSet)
+router.register("familiaproduto", views.FamiliaProdutoViewSet)
 router.register("disponibilidades", views.DisponibilidadeViewSet)
 router.register("ranking", views.RankingViewSet)
 

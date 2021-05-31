@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Disponibilidade, Produtor, Produto, Ranking
+from core.models import Disponibilidade, FamiliaProduto, Produtor, Produto, Ranking
 
 
 class ProdutoSerializer(serializers.ModelSerializer):
@@ -7,6 +7,14 @@ class ProdutoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Produto
+        fields = "__all__"
+
+
+class FamiliaProdutoSerializer(serializers.ModelSerializer):
+    """Serializer for familia produto objects"""
+
+    class Meta:
+        model = FamiliaProduto
         fields = "__all__"
 
 

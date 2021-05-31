@@ -2,7 +2,7 @@ from django.http.response import JsonResponse
 from rest_framework import viewsets
 from rest_framework.views import APIView
 
-from core.models import Produtor, Produto, Disponibilidade, Ranking
+from core.models import FamiliaProduto, Produtor, Produto, Disponibilidade, Ranking
 from api import serializers
 from core.update_db import (
     read_update_disponibilidade,
@@ -20,6 +20,13 @@ class ProdutorViewSet(viewsets.ModelViewSet):
 
     serializer_class = serializers.ProdutorSerializer
     queryset = Produtor.objects.all()
+
+
+class FamiliaProdutoViewSet(viewsets.ModelViewSet):
+    """Access Products in the database"""
+
+    serializer_class = serializers.FamiliaProdutoSerializer
+    queryset = FamiliaProduto.objects.all()
 
 
 class ProdutoViewSet(viewsets.ModelViewSet):
