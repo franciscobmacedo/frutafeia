@@ -4,25 +4,50 @@ from core.models import Disponibilidade, Produtor, Produto, Ranking
 
 class ProdutoSerializer(serializers.ModelSerializer):
     """Serializer for produto objects"""
-   
+
     class Meta:
         model = Produto
         fields = "__all__"
 
-class ProdutoNameSerializer(serializers.ModelSerializer):
+
+class ProdutoSimpleSerializer(serializers.ModelSerializer):
     """Serializer for produto objects"""
-   
+
+    id = serializers.IntegerField()
+
     class Meta:
         model = Produto
-        fields = ('nome',)
+        fields = "__all__"
+
+
+class ProdutoNameSerializer(serializers.ModelSerializer):
+    """Serializer for produto objects"""
+
+    class Meta:
+        model = Produto
+        fields = ("nome",)
 
 
 class ProdutorSerializer(serializers.ModelSerializer):
     """Serializer for produtor objects"""
+
     produtos = ProdutoSerializer(many=True, read_only=True)
+    produtos_ids = serializers.PrimaryKeyRelatedField(
+        many=True, read_only=False, queryset=Produto.objects.all(), source="produtos"
+    )
+
     class Meta:
         model = Produtor
-        fields = "__all__"
+        fields = (
+            "nome",
+            "produtos",
+            "estado_name",
+            "email",
+            "morada",
+            "concelho",
+            "produtos_ids",
+        )
+
 
 class DisponibilidadeSerializer(serializers.ModelSerializer):
     """Serializer for disponibilidade objects"""
@@ -37,8 +62,7 @@ class DisponibilidadeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Disponibilidade
-        fields ="__all__"
-
+        fields = "__all__"
 
 
 class RankingSerializer(serializers.ModelSerializer):
@@ -54,4 +78,4 @@ class RankingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Ranking
-        fields ="__all__"
+        fields = "__all__"
