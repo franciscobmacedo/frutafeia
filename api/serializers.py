@@ -42,6 +42,7 @@ class ProdutorSerializer(serializers.ModelSerializer):
             "id",
             "nome",
             "produtos",
+            "estado",
             "estado_name",
             "email",
             "morada",
