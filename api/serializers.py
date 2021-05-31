@@ -39,6 +39,7 @@ class ProdutorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Produtor
         fields = (
+            "id",
             "nome",
             "produtos",
             "estado_name",
