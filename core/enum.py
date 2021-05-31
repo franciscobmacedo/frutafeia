@@ -18,7 +18,7 @@ class Estado(Enum):
     FINAL = 1
     POTENCIAL = 2
     ANTIGO = 3
-    LISTA_NEGRA = 3
+    LISTA_NEGRA = 4
 
 
 ESTADO_CHOICES = (
