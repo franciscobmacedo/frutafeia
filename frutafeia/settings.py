@@ -26,7 +26,12 @@ SECRET_KEY = "django-insecure-vgw60c)c*4ub5tltxi$ut$me6t6vxsu8gmoyfm31^z7taz-phj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "franciscomacedo.pythonanywhere.com", "frutafeia.pythonanywhere.com"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "franciscomacedo.pythonanywhere.com",
+    "frutafeia.pythonanywhere.com",
+]
 
 
 # Application definition
@@ -40,7 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "core",
-    "api"
+    "api",
 ]
 
 MIDDLEWARE = [
@@ -131,3 +136,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 SPREADSHEET_ID = "1rGTPmY7BTazRxiCUuQMeHBA_w30b3gTiw_H6-VW_4Ro"
+
+START_WEEK_DAY = 3  # Dia da semana em que começa uma nova iteração do uso da ferramenta (0 - segunda; 6 - domingo)

@@ -2,7 +2,14 @@ from django.http.response import JsonResponse
 from rest_framework import viewsets
 from rest_framework.views import APIView
 
-from core.models import FamiliaProduto, Produtor, Produto, Disponibilidade, Ranking
+from core.models import (
+    FamiliaProduto,
+    MapaDeCampo,
+    Produtor,
+    Produto,
+    Disponibilidade,
+    Ranking,
+)
 from api import serializers
 from core.update_db import (
     read_update_disponibilidade,
@@ -13,6 +20,10 @@ from core.enum import MEDIDA_CHOICES, TIPO_PRODUTO_CHOICES, ESTADO_CHOICES
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from datetime import datetime as dt
+from datetime import timedelta
+
+from django.conf import settings
 
 
 class ProdutorViewSet(viewsets.ModelViewSet):
@@ -87,3 +98,19 @@ class medida(APIView):
         return JsonResponse(
             [{"id": t[0], "nome": t[1]} for t in MEDIDA_CHOICES], safe=False
         )
+
+
+# class mapaDeCampoAtualizado(APIView):
+#     def get(self, request, *args, **kwargs):
+#         last_map = MapaDeCampo.objects.order_by("data").last()
+
+#         today = dt.now()
+#         # offset = (today.weekday() - settings.START_WEEK_DAY) % 7
+#         # last_week_day = today - timedelta(days=offset)
+#         recent_map_data = False
+
+#         if today.weekday >= settings.START_WEEK_DAY and not recent_map_data:
+#             return
+#         return JsonResponse(
+#             [{"id": t[0], "nome": t[1]} for t in MEDIDA_CHOICES], safe=False
+#         )

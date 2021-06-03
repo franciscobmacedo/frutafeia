@@ -41,7 +41,6 @@ def read_update_produtores():
 
     print("Updating 'Produtores' Table\n")
     for i, row in df.iterrows():
-        print(row.remover)
         if row.remover:
             try:
                 Produtor.objects.get(nome=row.produtor).delete()
@@ -56,6 +55,7 @@ def read_update_produtores():
                 "estado": get_estado(row.estado),
                 "morada": row.morada,
                 "concelho": row.concelho,
+                "telefone": row.telefone,
             },
         )
 

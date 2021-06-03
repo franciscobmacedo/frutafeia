@@ -9,6 +9,7 @@ from core.enum import TIPO_PRODUTO_CHOICES, ESTADO_CHOICES, MEDIDA_CHOICES
 
 class FamiliaProduto(models.Model):
     """Family of products. one family can have many products associated. One product only has one Family"""
+
     nome = models.CharField(max_length=255)
 
     class Meta:
@@ -29,7 +30,9 @@ class Produto(models.Model):
     )
     quantidade_cesta_pequena = models.FloatField(null=True, blank=True)
     quantidade_cesta_grande = models.FloatField(null=True, blank=True)
-    medida = models.PositiveSmallIntegerField(choices=MEDIDA_CHOICES, null=True, blank=True)
+    medida = models.PositiveSmallIntegerField(
+        choices=MEDIDA_CHOICES, null=True, blank=True
+    )
 
     @property
     def tipo_name(self):
@@ -48,6 +51,7 @@ class Produtor(models.Model):
     email = models.EmailField(max_length=255, null=True, blank=True)
     morada = models.CharField(max_length=255, null=True, blank=True)
     concelho = models.CharField(max_length=255, null=True, blank=True)
+    telefone = models.CharField(max_length=255, null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "Produtores"
@@ -61,7 +65,8 @@ class Produtor(models.Model):
 
 
 class Disponibilidade(models.Model):
-    """ Disponibilidades registadas semanalmente. Atualizado sempre que há iteração com o frontend. Reset no inicio da semana"""
+    """Disponibilidades registadas semanalmente. Atualizado sempre que há iteração com o frontend. Reset no inicio da semana"""
+
     data = models.DateField()
     produto = models.ForeignKey("Produto", on_delete=models.CASCADE)
     produtor = models.ForeignKey("Produtor", on_delete=models.CASCADE)
@@ -73,13 +78,13 @@ class Disponibilidade(models.Model):
     @property
     def medida_name(self):
         return dict(MEDIDA_CHOICES).get(self.medida)
-    
+
     def __str__(self):
         return f"{self.data} : {self.produtor} : {self.produto}"
 
 
 class MapaDeCampo(models.Model):
-    """ Registo dos produtores e produtos utilizados em cada semana"""
+    """Registo dos produtores e produtos utilizados em cada semana"""
 
     data = models.DateField()
     produto = models.ForeignKey("Produto", on_delete=models.CASCADE)
@@ -91,7 +96,7 @@ class MapaDeCampo(models.Model):
     @property
     def medida_name(self):
         return dict(MEDIDA_CHOICES).get(self.medida)
-    
+
     def __str__(self):
         return f"{self.data} : {self.produtor} : {self.produto}"
 
@@ -106,6 +111,7 @@ class CestasFeitas(models.Model):
 
 class Ranking(models.Model):
     """Sugestão de produtor/produtos a contactar para cada semana. Atualizado semanalmente"""
+
     data = models.DateField()
     produto = models.ForeignKey("Produto", on_delete=models.CASCADE)
     produtor = models.ForeignKey("Produtor", on_delete=models.CASCADE)
@@ -114,6 +120,7 @@ class Ranking(models.Model):
 
 class Sazonalidade(models.Model):
     """Sazonalidade (de 0 a 1 ou de 0 a 100) de produtos"""
+
     semana = models.SmallIntegerField()
     produto = models.ForeignKey("Produto", on_delete=models.CASCADE)
     sazonalidade = models.FloatField()
