@@ -8,6 +8,17 @@ from core.utils import get_estado, get_tipo_produto, get_medida
 spreadsheet = settings.SPREADSHEET_ID
 
 
+def rename_produtores_columns(cols):
+    clean_cols = []
+    for c_ in cols:
+        c = c_.lower()
+        if "estado" in c:
+            clean_cols.append("estado")
+        else:
+            clean_cols.append(c)
+    return clean_cols
+
+
 def read_update_produtores():
     """Reads produtores data from google sheets and updates database"""
 
@@ -16,7 +27,7 @@ def read_update_produtores():
     data = gs.read_sheet(
         sheet_id=spreadsheet,
         worksheet="Produtores",
-        range="A:G",
+        range="A:H",
     )
     df = pd.DataFrame().from_dict(data["values"])
     df.columns = df.iloc[0]
@@ -25,11 +36,19 @@ def read_update_produtores():
     # df.to_csv("produtores.csv")
     df.columns = [c.lower() for c in df.columns]
 
-    df.rename(columns={"estado do produtor": "estado"}, inplace=True)
+    df.columns = rename_produtores_columns(df.columns)
+    df.remover = df.remover.apply(lambda x: x.lower() == "true")
 
     print("Updating 'Produtores' Table\n")
     for i, row in df.iterrows():
-        print(row.produtor)
+        print(row.remover)
+        if row.remover:
+            try:
+                Produtor.objects.get(nome=row.produtor).delete()
+            except:
+                pass
+            continue
+
         provider, created = Produtor.objects.update_or_create(
             nome=row.produtor,
             defaults={
@@ -58,14 +77,14 @@ def rename_produtos_columns(cols):
     clean_cols = []
     for c_ in cols:
         c = c_.lower()
-        if 'família' in c:
-            clean_cols.append('familia')
-        elif 'quantidade' in c and 'pequena' in c:
-            clean_cols.append('quantidade_cesta_pequena')
-        elif 'quantidade' in c and 'grande' in c:
-            clean_cols.append('quantidade_cesta_grande')
+        if "família" in c:
+            clean_cols.append("familia")
+        elif "quantidade" in c and "pequena" in c:
+            clean_cols.append("quantidade_cesta_pequena")
+        elif "quantidade" in c and "grande" in c:
+            clean_cols.append("quantidade_cesta_grande")
         else:
-            clean_cols.append(c.lower())
+            clean_cols.append(c)
     return clean_cols
 
 
@@ -89,23 +108,27 @@ def read_update_produtos():
     print("Updating 'Produto' Table\n")
     for i, row in df.iterrows():
         print(row)
+
         family_obj, created = FamiliaProduto.objects.get_or_create(nome=row.familia)
         if isinstance(row.quantidade_cesta_pequena, str):
             try:
-                row.quantidade_cesta_pequena = float(row.quantidade_cesta_pequena) 
+                row.quantidade_cesta_pequena = float(row.quantidade_cesta_pequena)
             except:
                 row.quantidade_cesta_pequena = None
 
         if isinstance(row.quantidade_cesta_grande, str):
             try:
-                row.quantidade_cesta_grande = float(row.quantidade_cesta_grande) 
+                row.quantidade_cesta_grande = float(row.quantidade_cesta_grande)
             except:
                 row.quantidade_cesta_grande = None
 
         product_obj, created = Produto.objects.get_or_create(
-            familia=family_obj, nome=row.produto, tipo=get_tipo_produto(row.tipo), medida=get_medida(row.medida),
+            familia=family_obj,
+            nome=row.produto,
+            tipo=get_tipo_produto(row.tipo),
+            medida=get_medida(row.medida),
             quantidade_cesta_pequena=row.quantidade_cesta_pequena,
-            quantidade_cesta_grande=row.quantidade_cesta_grande
+            quantidade_cesta_grande=row.quantidade_cesta_grande,
         )
 
     print("\n\nDone!")
@@ -116,14 +139,14 @@ def read_update_produtos():
 def rename_disponibilidade_columns(cols):
     clean_cols = []
     for c in cols:
-        if 'data' in c.lower():
-            clean_cols.append('data')
-        elif 'preço' in c.lower():
-            clean_cols.append('preco')
-        elif 'quantidade' in c.lower():
-            clean_cols.append('quantidade')
-        elif 'urgente' in c.lower():
-            clean_cols.append('urgente')
+        if "data" in c.lower():
+            clean_cols.append("data")
+        elif "preço" in c.lower():
+            clean_cols.append("preco")
+        elif "quantidade" in c.lower():
+            clean_cols.append("quantidade")
+        elif "urgente" in c.lower():
+            clean_cols.append("urgente")
         else:
             clean_cols.append(c.lower())
     return clean_cols
@@ -150,14 +173,14 @@ def read_update_disponibilidade():
     df.medida = df.medida.map(get_medida)
     df.quantidade = df.quantidade.map(float)
     df.preco = df.preco.map(float)
-    df.remover = df.remover.apply(lambda x: x.lower() == 'true')
-    df.urgente = df.urgente.apply(lambda x: x.lower() == 'sim' or x.lower == 'true')
+    df.remover = df.remover.apply(lambda x: x.lower() == "true")
+    df.urgente = df.urgente.apply(lambda x: x.lower() == "sim" or x.lower == "true")
     print("Updating 'Disponobilidade' Table\n")
 
     # Delete everything first, so we make sure we dont have any duplicates
     Disponibilidade.objects.all().delete()
     for i, row in df.iterrows():
-        print('getting', row.data, row.produtor, row.produto)
+        print("getting", row.data, row.produtor, row.produto)
         if row.remover:
             continue
         try:
@@ -173,11 +196,11 @@ def read_update_disponibilidade():
 
         Disponibilidade.objects.create(
             data=row.data,
-            produto=produto_obj, 
+            produto=produto_obj,
             produtor=produtor_obj,
             quantidade=row.quantidade,
             medida=row.medida,
             preco=row.preco,
-            urgente=row.urgente
+            urgente=row.urgente,
         ).save()
     print("\n\nDone!")
