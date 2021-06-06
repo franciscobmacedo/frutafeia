@@ -9,6 +9,7 @@ router.register("produtos", views.ProdutoViewSet)
 router.register("familiaproduto", views.FamiliaProdutoViewSet)
 router.register("disponibilidades", views.DisponibilidadeViewSet)
 router.register("ranking", views.RankingViewSet)
+router.register("mapasdecampo", views.MapasDeCampoViewSet)
 
 
 app_name = "api"

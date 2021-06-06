@@ -1,5 +1,13 @@
+from pandas.core import series
 from rest_framework import serializers
-from core.models import Disponibilidade, FamiliaProduto, Produtor, Produto, Ranking
+from core.models import (
+    Disponibilidade,
+    FamiliaProduto,
+    MapaDeCampo,
+    Produtor,
+    Produto,
+    Ranking,
+)
 
 
 class ProdutoSerializer(serializers.ModelSerializer):
@@ -76,6 +84,17 @@ class DisponibilidadeSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class DisponibilidadeDetailSerializer(serializers.ModelSerializer):
+    """Serializer for disponibilidade objects"""
+
+    produtor = ProdutorSerializer(many=False, read_only=False)
+    produto = ProdutoSerializer(many=False, read_only=False)
+
+    class Meta:
+        model = Disponibilidade
+        fields = "__all__"
+
+
 class RankingSerializer(serializers.ModelSerializer):
     """Serializer for disponibilidade objects"""
 
@@ -89,4 +108,15 @@ class RankingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Ranking
+        fields = "__all__"
+
+
+class MapaDeCampoSerializer(serializers.ModelSerializer):
+    """Serializer for mapa de campo"""
+
+    produtor = ProdutorSerializer(many=False, read_only=True)
+    produto = ProdutoSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = MapaDeCampo
         fields = "__all__"

@@ -50,7 +50,13 @@ class ProdutoViewSet(viewsets.ModelViewSet):
 class DisponibilidadeViewSet(viewsets.ModelViewSet):
     """Access Disponibilidade in the database"""
 
-    serializer_class = serializers.DisponibilidadeSerializer
+    def get_serializer_class(self):
+        if self.action == "list":
+            return serializers.DisponibilidadeDetailSerializer
+        return (
+            serializers.DisponibilidadeSerializer
+        )  # I dont' know what you want for create/destroy/update.
+
     queryset = Disponibilidade.objects.all()
 
 
@@ -59,6 +65,13 @@ class RankingViewSet(viewsets.ModelViewSet):
 
     serializer_class = serializers.RankingSerializer
     queryset = Ranking.objects.all()
+
+
+class MapasDeCampoViewSet(viewsets.ModelViewSet):
+    """Access Disponibilidade in the database"""
+
+    serializer_class = serializers.MapaDeCampoSerializer
+    queryset = MapaDeCampo.objects.all()
 
 
 class getDisponibilidades(APIView):
