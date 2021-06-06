@@ -114,9 +114,6 @@ class RankingSerializer(serializers.ModelSerializer):
 class MapaDeCampoSerializer(serializers.ModelSerializer):
     """Serializer for mapa de campo"""
 
-    produtor = ProdutorSerializer(many=False, read_only=True)
-    produto = ProdutoSerializer(many=False, read_only=True)
-
     class Meta:
         model = MapaDeCampo
         fields = "__all__"
