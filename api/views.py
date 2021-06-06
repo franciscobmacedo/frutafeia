@@ -70,8 +70,21 @@ class RankingViewSet(viewsets.ModelViewSet):
 class MapasDeCampoViewSet(viewsets.ModelViewSet):
     """Access Disponibilidade in the database"""
 
-    serializer_class = serializers.MapaDeCampoSerializer
+    # serializer_class = serializers.MapaDeCampoSerializer
+    # queryset = MapaDeCampo.objects.all()
     queryset = MapaDeCampo.objects.all()
+    serializer_class = serializers.MapaDeCampoSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(
+            data=request.data, many=isinstance(request.data, list)
+        )
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(
+            serializer.data, status=status.HTTP_201_CREATED, headers=headers
+        )
 
 
 class getDisponibilidades(APIView):
