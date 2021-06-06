@@ -114,6 +114,10 @@ class RankingSerializer(serializers.ModelSerializer):
 class MapaDeCampoSerializer(serializers.ModelSerializer):
     """Serializer for mapa de campo"""
 
+    def __init__(self, *args, **kwargs):
+        many = kwargs.pop("many", True)
+        super(MapaDeCampoSerializer, self).__init__(many=many, *args, **kwargs)
+
     class Meta:
         model = MapaDeCampo
         fields = "__all__"
