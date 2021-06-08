@@ -126,6 +126,44 @@ class medida(APIView):
         )
 
 
+"""
+    - Mapas de campo dos ultimos 2 anos (ex de 5 Junho de 2020 a 5 Junho de 2021)
+    - Passar uma dataframe com data, produtor, produto
+    
+    from core.utils import get_start_end_week
+    start_week, end_week = get_start_end_week()
+    ranking = Ranking.objects.filter(data__gte=start_week, data__lte=end_week).values('produtor', 'produto', 'pontuacao')
+
+    # daqui sai isto
+    ls = [
+        {'produtor': 'Natália Dias', 'produto': 'laranja', 'pontuação': 64.58333333333334},
+        {'produtor': 'Adelino', 'produto': 'limão', 'pontuação': 81.25},
+        {'produtor': 'Francelina', 'produto': 'morango', 'pontuação': 100.0},
+        {'produtor': 'David Oliveira', 'produto': 'alface', 'pontuação': 68.75},
+        {'produtor': 'PAM', 'produto': 'couve coração', 'pontuação': 68.75}
+    ]
+    # df = read_frame(ls)
+
+    # .... Código a fazer ....
+    # daqui sai isto
+    ranking_ajustado = 
+                [
+                    {  
+                        'produtor': 'PAM',
+                        'produtos' : [
+                                        {'produto': 'couve coração', 'pontuação': 68.75},
+                                        {'produto': 'alho-francês', 'pontuação': 33.33333333333333}
+                                        {'produto': 'espargos', 'pontuação': 33.33333333333333}
+                                    ]
+                    },
+                    {
+                        'produtor': 'Natália Dias', 
+                        'produtos' : [
+                                        {'produto': 'laranja', 'pontuação': 34.5}
+                                    ]
+                    },
+                ]
+"""
 # class mapaDeCampoAtualizado(APIView):
 #     def get(self, request, *args, **kwargs):
 #         last_map = MapaDeCampo.objects.order_by("data").last()

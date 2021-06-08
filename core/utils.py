@@ -1,4 +1,6 @@
 from core.enum import ESTADO_CHOICES, MEDIDA_CHOICES, TIPO_PRODUTO_CHOICES
+from datetime import datetime as dt, time
+from datetime import timedelta
 
 
 def get_choice_value(choice_str, choices):
@@ -24,3 +26,10 @@ def get_medida(medida_str):
         return get_choice_value(medida_str, MEDIDA_CHOICES)
     else:
         return None
+
+
+def get_start_end_week():
+    now = dt.now()
+    start = now - timedelta(days=now.weekday())
+    end = start + timedelta(days=6)
+    return start, end

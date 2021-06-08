@@ -79,6 +79,10 @@ class Disponibilidade(models.Model):
     def medida_name(self):
         return dict(MEDIDA_CHOICES).get(self.medida)
 
+    @property
+    def medida_dict(self):
+        return {"id": self.medida, "nome": dict(MEDIDA_CHOICES).get(self.medida)}
+
     def __str__(self):
         return f"{self.data} : {self.produtor} : {self.produto}"
 

@@ -92,7 +92,17 @@ class DisponibilidadeDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Disponibilidade
-        fields = "__all__"
+        # fields = "__all__"
+        fields = (
+            "id",
+            "data",
+            "produto",
+            "produtor",
+            "quantidade",
+            "preco",
+            "medida_dict",
+            "medida",
+        )
 
 
 class RankingSerializer(serializers.ModelSerializer):

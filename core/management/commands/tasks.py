@@ -5,6 +5,13 @@ from core.update_db import (
     read_update_produtores,
     read_update_disponibilidade,
 )
+from core.utils import get_start_end_week
+from gsheets.connect import ConnectGS
+from django.conf import settings
+import locale
+
+spreadsheet = settings.SPREADSHEET_ID
+script_id = settings.SCRIPT_ID
 
 
 class Command(BaseCommand):
@@ -38,6 +45,22 @@ class Command(BaseCommand):
         disponibilidade = options["disponibilidade"]
 
         if not any([produto, produtor, disponibilidade]):
+            # locale.setlocale(locale.LC_ALL, "pt_pt.UTF-8")
+
+            # week_start, week_end = get_start_end_week()
+            # if week_start.month != week_end.month:
+            #     cell_text = f"Semana de {week_start.day} de {week_start.strftime('%B')} a {week_end.day} de {week_end.strftime('%B')}"
+            # else:
+            #     cell_text = f"Semana de {week_start.day} a {week_end.day} de {week_end.strftime('%B')}"
+
+            # gs = ConnectGS()
+            # data = gs.write_sheet(
+            #     sheet_id=spreadsheet,
+            #     worksheet="Disponibilidade",
+            #     range="A5:A5",
+            #     values=[[cell_text]],
+            # )
+            # gs.run_function(script_id, "resetAvailability")
             read_update_produtos()
             read_update_produtores()
             read_update_disponibilidade()

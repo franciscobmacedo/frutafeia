@@ -20,7 +20,6 @@ class ConnectGS:
             SERVICE_ACCOUNT_FILE, scopes=SCOPES
         )
         service = build("sheets", "v4", credentials=self.creds)
-
         # Call the Sheets API
         self.sheet = service.spreadsheets()
 
@@ -57,6 +56,16 @@ class ConnectGS:
         )
         print(f"{result.get('updatedCells')} cells updated.")
         return result
+
+    def run_function(self, script_id, function_name):
+        # The ID, worksheet and range of a sample spreadsheet.
+        # SAMPLE_SPREADSHEET_ID = "1m8jS9QNxtm1FqWP4PLc0VO2z1NQsGe-cWkwcFdd0m5Y"
+        # values = [["a", 3], ["b", 5], ["c", 6]]
+        request = {"function": function_name}
+        service = build("script", "v1", credentials=self.creds)
+
+        response = service.scripts().run(body=request, scriptId=script_id).execute()
+        return response
 
 
 # if __name__ == "__main__":

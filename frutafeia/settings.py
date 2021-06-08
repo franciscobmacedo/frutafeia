@@ -136,5 +136,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 SPREADSHEET_ID = "1rGTPmY7BTazRxiCUuQMeHBA_w30b3gTiw_H6-VW_4Ro"
+SCRIPT_ID = "1SPpPRvrxuHL0GR97u_4holiJYmLZ6zW42HbfV3naHy5lRV-XEKCJrDac"
+
 
 START_WEEK_DAY = 3  # Dia da semana em que começa uma nova iteração do uso da ferramenta (0 - segunda; 6 - domingo)
