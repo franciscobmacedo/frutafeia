@@ -152,6 +152,15 @@ def rename_disponibilidade_columns(cols):
     return clean_cols
 
 
+def check_bool(u):
+    if u:
+        if u.lower() == "sim":
+            return True
+        elif u.lower() == "true":
+            return True
+    return False
+
+
 def read_update_disponibilidade():
     """Reads isponibilidades data from google sheets and updates database"""
 
@@ -174,8 +183,8 @@ def read_update_disponibilidade():
     df.medida = df.medida.map(get_medida)
     df.quantidade = df.quantidade.map(float)
     df.preco = df.preco.map(float)
-    df.remover = df.remover.apply(lambda x: x.lower() == "true")
-    df.urgente = df.urgente.apply(lambda x: x.lower() == "sim" or x.lower == "true")
+    df.remover = df.remover.map(check_bool)
+    df.urgente = df.urgente.map(check_bool)
     print("Updating 'Disponobilidade' Table\n")
 
     # Delete everything first, so we make sure we dont have any duplicates
