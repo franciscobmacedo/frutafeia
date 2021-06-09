@@ -70,7 +70,7 @@ class Disponibilidade(models.Model):
     data = models.DateField()
     produto = models.ForeignKey("Produto", on_delete=models.CASCADE)
     produtor = models.ForeignKey("Produtor", on_delete=models.CASCADE)
-    quantidade = models.FloatField()
+    quantidade = models.FloatField(null=True, blank=True)
     medida = models.PositiveSmallIntegerField(choices=MEDIDA_CHOICES)
     preco = models.FloatField(null=True, blank=True)
     urgente = models.BooleanField()

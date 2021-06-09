@@ -161,6 +161,13 @@ def check_bool(u):
     return False
 
 
+def try_float(x):
+    if not x:
+        return None
+    else:
+        return float(x)
+
+
 def read_update_disponibilidade():
     """Reads isponibilidades data from google sheets and updates database"""
 
@@ -181,8 +188,8 @@ def read_update_disponibilidade():
     df = df.loc[~df.produtor.isnull()]
     df.data = pd.to_datetime(df.data)
     df.medida = df.medida.map(get_medida)
-    df.quantidade = df.quantidade.map(float)
-    df.preco = df.preco.map(float)
+    df.quantidade = df.quantidade.map(try_float)
+    df.preco = df.preco.map(try_float)
     df.remover = df.remover.map(check_bool)
     df.urgente = df.urgente.map(check_bool)
     print("Updating 'Disponobilidade' Table\n")
