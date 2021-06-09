@@ -163,12 +163,13 @@ def read_update_disponibilidade():
         range="A:H",
     )
     df = pd.DataFrame().from_dict(data["values"])
-    df = df.iloc[7:]
+    df = df.iloc[4:]
     df.columns = df.iloc[0]
     df = df[1:]
     # df.to_csv("disponibilidade.csv")
 
     df.columns = rename_disponibilidade_columns(df.columns)
+    df = df.loc[~df.produtor.isnull()]
     df.data = pd.to_datetime(df.data)
     df.medida = df.medida.map(get_medida)
     df.quantidade = df.quantidade.map(float)
