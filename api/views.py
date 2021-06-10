@@ -131,7 +131,7 @@ class comMapaDeCampo(APIView):
     def get(self, request, *args, **kwargs):
         last_mapa = MapaDeCampo.objects.all().order_by("data").last()
         start, end = get_start_end_this_week()
-        if last_mapa.data > start.date():
+        if last_mapa.data >= start.date():
             return JsonResponse({"has_data": True})
         else:
             return JsonResponse({"has_data": False})
