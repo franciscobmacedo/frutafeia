@@ -17,6 +17,7 @@ from core.update_db import (
     read_update_produtos,
 )
 from core.enum import MEDIDA_CHOICES, TIPO_PRODUTO_CHOICES, ESTADO_CHOICES
+from core.utils import get_start_end_this_week, get_start_end_last_week
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -124,6 +125,16 @@ class medida(APIView):
         return JsonResponse(
             [{"id": t[0], "nome": t[1]} for t in MEDIDA_CHOICES], safe=False
         )
+
+
+class comMapaDeCampo(APIView):
+    def get(self, request, *args, **kwargs):
+        last_mapa = MapaDeCampo.objects.all().order_by("data").last()
+        start, end = get_start_end_this_week()
+        if last_mapa.data > start.date():
+            return JsonResponse({"has_data": True})
+        else:
+            return JsonResponse({"has_data": False})
 
 
 """

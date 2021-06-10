@@ -46,4 +46,9 @@ urlpatterns = [
         views.medida.as_view(),
         name="medida",
     ),
+    path(
+        "com_mapadecampo",
+        views.comMapaDeCampo.as_view(),
+        name="medida",
+    ),
 ]

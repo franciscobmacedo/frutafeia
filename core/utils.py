@@ -28,8 +28,24 @@ def get_medida(medida_str):
         return None
 
 
-def get_start_end_week():
+def get_start_end_this_week():
     now = dt.now()
     start = now - timedelta(days=now.weekday())
+    end = start + timedelta(days=6)
+    return start, end
+
+
+def get_start_end_last_week():
+    now = dt.now()
+
+    start = now - timedelta(days=now.weekday() + 7)
+    end = start + timedelta(days=6)
+    return start, end
+
+
+def get_start_end_next_week():
+    now = dt.now()
+
+    start = now - timedelta(days=now.weekday() - 7)
     end = start + timedelta(days=6)
     return start, end
