@@ -142,44 +142,44 @@ class rankingAlterado(APIView):
         data = [
             {
                 "produtor": "António Marques",
-                "produtos": [{"produto": "morango", "pontuação": 10.0}],
+                "produtos": [{"produto": "morango", "pontuacao": 10.0}],
             },
             {
                 "produtor": "João Saramago",
                 "produtos": [
-                    {"produto": "nectarina", "pontuação": 10.0},
-                    {"produto": "pêra", "pontuação": 6.875},
-                    {"produto": "maçã", "pontuação": 6.458333333333334},
+                    {"produto": "nectarina", "pontuacao": 10.0},
+                    {"produto": "pêra", "pontuacao": 6.875},
+                    {"produto": "maçã", "pontuacao": 6.458333333333334},
                 ],
             },
             {
                 "produtor": "Francelina",
-                "produtos": [{"produto": "morango", "pontuação": 10.0}],
+                "produtos": [{"produto": "morango", "pontuacao": 10.0}],
             },
             {
                 "produtor": "Jorge Silva",
                 "produtos": [
-                    {"produto": "damasco", "pontuação": 9.375},
-                    {"produto": "morango", "pontuação": 9.375},
+                    {"produto": "damasco", "pontuacao": 9.375},
+                    {"produto": "morango", "pontuacao": 9.375},
                 ],
             },
             {
                 "produtor": "João Mineiro",
-                "produtos": [{"produto": "pimento", "pontuação": 9.375}],
+                "produtos": [{"produto": "pimento", "pontuacao": 9.375}],
             },
             {
                 "produtor": "António Gomes",
                 "produtos": [
-                    {"produto": "cereja", "pontuação": 8.75},
-                    {"produto": "ameixa", "pontuação": 6.875},
-                    {"produto": "maçã", "pontuação": 5.208333333333332},
+                    {"produto": "cereja", "pontuacao": 8.75},
+                    {"produto": "ameixa", "pontuacao": 6.875},
+                    {"produto": "maçã", "pontuacao": 5.208333333333332},
                 ],
             },
             {
                 "produtor": "Luísa Botelho/ João Botelho",
                 "produtos": [
-                    {"produto": "cereja", "pontuação": 8.75},
-                    {"produto": "ameixa", "pontuação": 6.875},
+                    {"produto": "cereja", "pontuacao": 8.75},
+                    {"produto": "ameixa", "pontuacao": 6.875},
                 ],
             },
         ]
