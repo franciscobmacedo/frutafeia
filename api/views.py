@@ -82,6 +82,16 @@ class MapasDeCampoViewSet(viewsets.ModelViewSet):
         )
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
+        """
+            today = dt.now()
+            start_date = today - timedelta(years=2)
+            qs_mapas_de_campo = MapaDeCampo.objects.filter(data__gte=start_date)
+            df_mapas_de_campo = read_frame(qs_mapas_de_campo)
+            ranking = get_ranking(df_mapas_de_campo)
+            Ranking.objects.all().delete()
+            obj_list = [Ranking(**r) for r in ranking]
+            objs = Ranking.objects.bulk_create(obj_list)
+        """
         headers = self.get_success_headers(serializer.data)
         return Response(
             serializer.data, status=status.HTTP_201_CREATED, headers=headers
@@ -139,6 +149,10 @@ class comMapaDeCampo(APIView):
 
 class rankingAlterado(APIView):
     def get(self, request, *args, **kwargs):
+        """
+        ranking = Ranking.objects.all()
+        data = clean_ranking(ranking)
+        """
         data = [
             {
                 "produtor": "António Marques",
