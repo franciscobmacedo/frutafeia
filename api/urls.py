@@ -49,6 +49,11 @@ urlpatterns = [
     path(
         "com_mapadecampo",
         views.comMapaDeCampo.as_view(),
-        name="medida",
+        name="com_mapadecampo",
+    ),
+    path(
+        "ranking_alterado",
+        views.rankingAlterado.as_view(),
+        name="ranking_alterado",
     ),
 ]
