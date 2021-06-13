@@ -142,11 +142,11 @@ class comMapaDeCampo(APIView):
         qs = MapaDeCampo.objects.all()
         if qs.exists:
             last_mapa = qs.order_by("data").last()
-        start, end = get_start_end_this_week()
-        if last_mapa.data >= start.date():
-            return JsonResponse({"has_data": True})
-        else:
-            return JsonResponse({"has_data": False})
+            start, end = get_start_end_this_week()
+            if last_mapa.data >= start.date():
+                return JsonResponse({"has_data": True})
+
+        return JsonResponse({"has_data": False})
 
 
 class rankingAlterado(APIView):
