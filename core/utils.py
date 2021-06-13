@@ -49,3 +49,31 @@ def get_start_end_next_week():
     start = now - timedelta(days=now.weekday() - 7)
     end = start + timedelta(days=6)
     return start, end
+
+
+def check():
+    from core.models import Produtor
+    import pandas as pd
+    import numpy as np
+
+    produtores = Produtor.objects.values_list("nome", flat=True)
+    produtores = [p.lower().strip() for p in produtores if p is not np.nan]
+
+    # df = pd.read_clipboard()
+    # df.to_csv('mapa_de_campo.csv')
+    df = pd.read_csv("mapa_de_campo.csv", index_col=0)
+
+
+# count = 0
+# mismatch = []
+# for p in df.Produtor.unique():
+#     if p is np.nan:
+#         continue
+#     if p.lower().strip() not in produtores:
+#         produtos = df.loc[df.Produtor == p, "Produto"].unique().tolist()
+#         produtos = [p.lower().strip() for p in produtos]
+#         mismatch.append({"produtor": p, "produtos": produtos})
+#         count += 1
+# df_falta = pd.DataFrame(mismatch)
+# df_falta.produtos = df_falta.produtos.apply(lambda x: ", ".join(x))
+# df_falta.to_excel("produtores_em_falta.xlsx")
