@@ -140,7 +140,7 @@ class medida(APIView):
 class comMapaDeCampo(APIView):
     def get(self, request, *args, **kwargs):
         qs = MapaDeCampo.objects.all()
-        if qs.exists:
+        if qs.exists():
             last_mapa = qs.order_by("data").last()
             start, end = get_start_end_this_week()
             if last_mapa.data >= start.date():
