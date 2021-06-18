@@ -86,7 +86,7 @@ def ranking(df_mapas_campo):
                                 agricultor_dict[pair['produtor']]['antiquity'] + 
                                 produto_dict[pair['produto']]['inv_frequency'] +
                                 produto_dict[pair['produto']]['antiquity'])
-        ranked_dict = {'Produtor': pair['produtor'], 'Produto': pair['produto'], 'Pontuacao': pontuacao}
+        ranked_dict = {'produtor': pair['produtor'], 'produto': pair['produto'], 'pontuacao': pontuacao}
         ranking.append(ranked_dict)
     
     return ranking
