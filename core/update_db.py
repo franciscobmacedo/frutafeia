@@ -239,12 +239,16 @@ def calculate_and_update_ranking():
     df.rename(columns={"produto__nome": "produto"}, inplace=True)
     df.data = pd.to_datetime(df.data)
     result = ranking(df)
+    if not result:
+        return False
+    Ranking.objects.all().delete()
     for rank in result:
         # rank = result[0]
         produtor = Produtor.objects.get(nome=rank.get("produtor"))
         produto = Produto.objects.get(nome=rank.get("produto"))
         pontuacao = rank.get("pontuacao")
         Ranking.objects.create(produtor=produtor, produto=produto, pontuacao=pontuacao)
+    return True
 
 
 def calculate_and_update_cestas():

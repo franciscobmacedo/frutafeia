@@ -1,4 +1,5 @@
 from django.http.response import JsonResponse
+from django_pandas.io import read_frame
 from rest_framework import viewsets
 from rest_framework.views import APIView
 
@@ -25,6 +26,7 @@ from datetime import datetime as dt
 from datetime import timedelta
 
 from django.conf import settings
+from analysis.ranking.adjusted_ranking import adjusted_ranking
 
 
 class ProdutorViewSet(viewsets.ModelViewSet):
@@ -151,59 +153,59 @@ class comMapaDeCampo(APIView):
 
 class rankingAlterado(APIView):
     def get(self, request, *args, **kwargs):
-        """
-        ranking = Ranking.objects.all()
-        data = clean_ranking(ranking)
-        """
-        data = [
-            {
-                "produtor": "António Marques",
-                "produtos": [{"produto": "morango", "pontuacao": 10.0}],
-            },
-            {
-                "produtor": "João Saramago",
-                "produtos": [
-                    {"produto": "nectarina", "pontuacao": 10.0},
-                    {"produto": "pêra", "pontuacao": 6.875},
-                    {"produto": "maçã", "pontuacao": 6.458333333333334},
-                ],
-            },
-            {
-                "produtor": "Francelina",
-                "produtos": [{"produto": "morango", "pontuacao": 10.0}],
-            },
-            {
-                "produtor": "Jorge Silva",
-                "produtos": [
-                    {"produto": "damasco", "pontuacao": 9.375},
-                    {"produto": "morango", "pontuacao": 9.375},
-                ],
-            },
-            {
-                "produtor": "João Mineiro",
-                "produtos": [{"produto": "pimento", "pontuacao": 9.375}],
-            },
-            {
-                "produtor": "António Gomes",
-                "produtos": [
-                    {"produto": "cereja", "pontuacao": 8.75},
-                    {"produto": "ameixa", "pontuacao": 6.875},
-                    {"produto": "maçã", "pontuacao": 5.208333333333332},
-                ],
-            },
-            {
-                "produtor": "Luísa Botelho/ João Botelho",
-                "produtos": [
-                    {"produto": "cereja", "pontuacao": 8.75},
-                    {"produto": "ameixa", "pontuacao": 6.875},
-                ],
-            },
-        ]
+        qs = Ranking.objects.values("produtor", "produto__nome", "pontuacao")
+        df = read_frame(qs)
+        df.rename(columns={"produto__nome": "produto"}, inplace=True)
+        data = adjusted_ranking(df)
 
-        for d in data:
-            d["produtor"] = Produtor.objects.filter(nome=d["produtor"]).values()[0]
+        # data = [
+        #     {
+        #         "produtor": "António Marques",
+        #         "produtos": [{"produto": "morango", "pontuacao": 10.0}],
+        #     },
+        #     {
+        #         "produtor": "João Saramago",
+        #         "produtos": [
+        #             {"produto": "nectarina", "pontuacao": 10.0},
+        #             {"produto": "pêra", "pontuacao": 6.875},
+        #             {"produto": "maçã", "pontuacao": 6.458333333333334},
+        #         ],
+        #     },
+        #     {
+        #         "produtor": "Francelina",
+        #         "produtos": [{"produto": "morango", "pontuacao": 10.0}],
+        #     },
+        #     {
+        #         "produtor": "Jorge Silva",
+        #         "produtos": [
+        #             {"produto": "damasco", "pontuacao": 9.375},
+        #             {"produto": "morango", "pontuacao": 9.375},
+        #         ],
+        #     },
+        #     {
+        #         "produtor": "João Mineiro",
+        #         "produtos": [{"produto": "pimento", "pontuacao": 9.375}],
+        #     },
+        #     {
+        #         "produtor": "António Gomes",
+        #         "produtos": [
+        #             {"produto": "cereja", "pontuacao": 8.75},
+        #             {"produto": "ameixa", "pontuacao": 6.875},
+        #             {"produto": "maçã", "pontuacao": 5.208333333333332},
+        #         ],
+        #     },
+        #     {
+        #         "produtor": "Luísa Botelho/ João Botelho",
+        #         "produtos": [
+        #             {"produto": "cereja", "pontuacao": 8.75},
+        #             {"produto": "ameixa", "pontuacao": 6.875},
+        #         ],
+        #     },
+        # ]
 
-        print(d)
+        # for d in data:
+        #     d["produtor"] = Produtor.objects.filter(nome=d["produtor"]).values()[0]
+
         return JsonResponse({"data": data})
 
 
