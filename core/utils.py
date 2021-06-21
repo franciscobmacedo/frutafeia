@@ -1,15 +1,18 @@
+import string
+from pandas.core.algorithms import isin
 from core.enum import ESTADO_CHOICES, MEDIDA_CHOICES, TIPO_PRODUTO_CHOICES
 from datetime import datetime as dt, time
 from datetime import timedelta
 
 
 def get_choice_value(choice_str, choices):
-    choice_nr = [
-        t[0] for t in choices if t[1].lower().strip() == choice_str.lower().strip()
-    ]
-    if not choice_nr:
-        return None
-    return choice_nr[0]
+    if isinstance(choice_str, str):
+        choice_nr = [
+            t[0] for t in choices if t[1].lower().strip() == choice_str.lower().strip()
+        ]
+        if choice_nr:
+            return choice_nr[0]
+    return None
 
 
 def get_estado(estado_str):

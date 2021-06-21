@@ -211,8 +211,8 @@ class rankingAlterado(APIView):
     - Mapas de campo dos ultimos 2 anos (ex de 5 Junho de 2020 a 5 Junho de 2021)
     - Passar uma dataframe com data, produtor, produto
     
-    from core.utils import get_start_end_week
-    start_week, end_week = get_start_end_week()
+    from core.utils import get_start_end_this_week
+    start_week, end_week = get_start_end_this_week()
     ranking = Ranking.objects.filter(data__gte=start_week, data__lte=end_week).values('produtor', 'produto', 'pontuacao')
 
     # daqui sai isto
