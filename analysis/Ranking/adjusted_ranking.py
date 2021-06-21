@@ -22,20 +22,20 @@ def adjusted_ranking(ranking):
     # of its pairs
     
     # Transform the structure and contents of the Ranking DataFrame into something that can be useful
-    df_ranking_usable = df_ranking.groupby(['Produtor']).max()
+    df_ranking_usable = df_ranking.groupby(['produtor']).max()
     df_ranking_usable = df_ranking_usable.reset_index()
     
-    df_ranking_usable = df_ranking_usable[{'Produtor', 'Pontuacao'}]
-    df_ranking_usable = df_ranking_usable.sort_values('Pontuacao', ascending = False)
+    df_ranking_usable = df_ranking_usable[{'produtor', 'pontuacao'}]
+    df_ranking_usable = df_ranking_usable.sort_values('pontuacao', ascending = False)
     
     # Create the list
-    lista_prod = df_ranking_usable['Produtor'].tolist()
+    lista_prod = df_ranking_usable['produtor'].tolist()
     
     
     # Create a DataFrame that has the ranking sorted by the name of the Produtor and that
     # for each Produtor, is sorted by the Pontuacao each of its Produtos has
     
-    sorted_ranking = df_ranking.sort_values(by = ['Produtor', 'Pontuacao'], ascending = False)
+    sorted_ranking = df_ranking.sort_values(by = ['produtor', 'pontuacao'], ascending = False)
     
     
     # Create the final Adjusted Ranking
@@ -44,9 +44,9 @@ def adjusted_ranking(ranking):
     
     for produtor in lista_prod:
         auxiliary_dict = {}
-        auxiliary_dict['Produtor'] = produtor
-        auxiliary_dict['Produtos'] = (sorted_ranking.loc[sorted_ranking['Produtor'] == produtor]
-                                      [{'Produto', 'Pontuacao'}]).to_dict('records')
+        auxiliary_dict['produtor'] = produtor
+        auxiliary_dict['produtos'] = (sorted_ranking.loc[sorted_ranking['produtor'] == produtor]
+                                      [{'produto', 'pontuacao'}]).to_dict('records')
         ranking_ajustado.append(auxiliary_dict)
     
     return ranking_ajustado

@@ -86,17 +86,13 @@ def ranking(df_mapas_campo):
     ranking = []
 
     for pair in dict_of_pairs:
-        pontuacao = (10 / 4) * (
-            agricultor_dict[pair["produtor"]]["inv_frequency"]
-            + agricultor_dict[pair["produtor"]]["antiquity"]
-            + produto_dict[pair["produto"]]["inv_frequency"]
-            + produto_dict[pair["produto"]]["antiquity"]
-        )
-        ranked_dict = {
-            "produtor": pair["produtor"],
-            "produto": pair["produto"],
-            "pontuacao": pontuacao,
-        }
+
+        pontuacao = (10 / 4) * (agricultor_dict[pair['produtor']]['inv_frequency'] + 
+                                agricultor_dict[pair['produtor']]['antiquity'] + 
+                                produto_dict[pair['produto']]['inv_frequency'] +
+                                produto_dict[pair['produto']]['antiquity'])
+        ranked_dict = {'produtor': pair['produtor'], 'produto': pair['produto'], 'pontuacao': pontuacao}
+
         ranking.append(ranked_dict)
 
     return ranking
