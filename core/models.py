@@ -47,7 +47,9 @@ class Produtor(models.Model):
 
     nome = models.CharField(max_length=255)
     produtos = models.ManyToManyField("Produto")
-    estado = models.PositiveSmallIntegerField(choices=ESTADO_CHOICES)
+    estado = models.PositiveSmallIntegerField(
+        choices=ESTADO_CHOICES, null=True, blank=True
+    )
     email = models.EmailField(max_length=255, null=True, blank=True)
     morada = models.CharField(max_length=255, null=True, blank=True)
     concelho = models.CharField(max_length=255, null=True, blank=True)
@@ -118,7 +120,6 @@ class CestasFeitas(models.Model):
 class Ranking(models.Model):
     """Sugestão de produtor/produtos a contactar para cada semana. Atualizado semanalmente"""
 
-    data = models.DateField()
     produto = models.ForeignKey("Produto", on_delete=models.CASCADE)
     produtor = models.ForeignKey("Produtor", on_delete=models.CASCADE)
     pontuacao = models.FloatField()

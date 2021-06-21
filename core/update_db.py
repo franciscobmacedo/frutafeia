@@ -4,6 +4,12 @@ import pandas as pd
 import numpy as np
 from core.models import *
 from core.utils import get_estado, get_tipo_produto, get_medida
+from datetime import datetime as dt
+from dateutil.relativedelta import relativedelta
+from django_pandas.io import read_frame
+from core.enum import TIPO_PRODUTO_CHOICES
+from analysis.ranking.ranking import ranking
+from analysis import cesta
 
 spreadsheet = settings.SPREADSHEET_ID
 
@@ -221,3 +227,71 @@ def read_update_disponibilidade():
             urgente=row.urgente,
         ).save()
     print("\n\nDone!")
+
+
+def calculate_and_update_ranking():
+    today = dt.now()
+    two_years_ago = today - relativedelta(years=2)
+    qs = MapaDeCampo.objects.filter(data__gte=two_years_ago).values(
+        "data", "produto__nome", "produtor"
+    )
+    df = read_frame(qs)
+    df.rename(columns={"produto__nome": "produto"}, inplace=True)
+    df.data = pd.to_datetime(df.data)
+    result = ranking(df)
+    for rank in result:
+        # rank = result[0]
+        produtor = Produtor.objects.get(nome=rank.get("produtor"))
+        produto = Produto.objects.get(nome=rank.get("produto"))
+        pontuacao = rank.get("pontuacao")
+        Ranking.objects.create(produtor=produtor, produto=produto, pontuacao=pontuacao)
+
+
+def calculate_and_update_cestas():
+
+    qs = Disponibilidade.objects.all().values(
+        "produto__nome",
+        "produto__id",
+        "produto__familia__nome",
+        "produto__tipo",
+        "produto__quantidade_cesta_pequena",
+        "produto__quantidade_cesta_grande",
+        "produtor__nome",
+        "produtor__id",
+        "quantidade",
+        "medida",
+        "preco",
+        "urgente",
+    )
+    df = read_frame(qs)
+    df.reset_index(inplace=True, drop=True)
+    df.produto__tipo = df.produto__tipo.apply(
+        lambda x: dict(TIPO_PRODUTO_CHOICES).get(x).lower()
+    )
+
+    df["ranking"] = 10
+    for i, row in df.iterrows():
+        try:
+            r = Ranking.objects.get(
+                produtor__nome=row.produtor__nome, produto__nome=row.produto__nome
+            )
+            df.iloc[i, "ranking"] = r
+            print("success")
+        except:
+            continue
+    df.rename(
+        columns={
+            "produto__id": "ID_PRODUTO",
+            "produto__nome": "produto",
+            "produto__familia__nome": "familia",
+            "produto__tipo": "tipo",
+            "produto__quantidade_cesta_pequena": "quantidade_cesta_pequena",
+            "produto__quantidade_cesta_grande": "quantidade_cesta_grande",
+            "produtor__nome": "produtor",
+            "produtor__id": "ID_PRODUTOR",
+        },
+        inplace=True,
+    )
+
+    result = cesta.main(df)
+    return result

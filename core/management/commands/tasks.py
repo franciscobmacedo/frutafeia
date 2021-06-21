@@ -5,10 +5,7 @@ from core.update_db import (
     read_update_produtores,
     read_update_disponibilidade,
 )
-from core.utils import get_start_end_week
-from gsheets.connect import ConnectGS
 from django.conf import settings
-import locale
 
 spreadsheet = settings.SPREADSHEET_ID
 script_id = settings.SCRIPT_ID
@@ -71,3 +68,5 @@ class Command(BaseCommand):
                 read_update_produtores()
             if disponibilidade:
                 read_update_disponibilidade()
+
+    # def calculate_ran
