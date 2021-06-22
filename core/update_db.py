@@ -234,6 +234,7 @@ def read_update_disponibilidade():
 
 
 def calculate_and_update_ranking():
+    print("calculating Ranking")
     today = dt.now()
     two_years_ago = today - relativedelta(years=2)
     qs = MapaDeCampo.objects.filter(data__gte=two_years_ago).values(
@@ -244,6 +245,7 @@ def calculate_and_update_ranking():
     df.data = pd.to_datetime(df.data)
     result = ranking(df)
     if not result:
+        print("No data estimated..")
         return False
     Ranking.objects.all().delete()
     for rank in result:
@@ -252,6 +254,7 @@ def calculate_and_update_ranking():
         produto = Produto.objects.get(nome=rank.get("produto"))
         pontuacao = rank.get("pontuacao")
         Ranking.objects.create(produtor=produtor, produto=produto, pontuacao=pontuacao)
+    print("Done")
     return True
 
 

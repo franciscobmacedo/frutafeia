@@ -16,6 +16,7 @@ from core.update_db import (
     read_update_disponibilidade,
     read_update_produtores,
     read_update_produtos,
+    calculate_and_update_ranking,
 )
 from core.enum import MEDIDA_CHOICES, TIPO_PRODUTO_CHOICES, ESTADO_CHOICES
 from core.utils import get_start_end_this_week, get_start_end_last_week
@@ -84,6 +85,7 @@ class MapasDeCampoViewSet(viewsets.ModelViewSet):
         )
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
+        calculate_and_update_ranking()
         """
             today = dt.now()
             start_date = today - timedelta(years=2)
