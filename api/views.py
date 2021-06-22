@@ -161,7 +161,11 @@ class rankingAlterado(APIView):
         data = adjusted_ranking(df)
         for d in data:
             try:
-                produtor_obj = Produtor.objects.get(nome=d["produtor"])
+                produtor_obj = Produtor.objects.get(nome=d["produtor"]).__dict__
+                produtor_obj = {
+                    key: value for key, value in produtor_obj.items() if key != "_state"
+                }
+
                 d["produtor"] = produtor_obj
             except:
                 continue
