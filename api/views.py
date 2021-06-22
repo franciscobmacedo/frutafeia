@@ -159,7 +159,12 @@ class rankingAlterado(APIView):
         df = read_frame(qs)
         df.rename(columns={"produto__nome": "produto"}, inplace=True)
         data = adjusted_ranking(df)
-
+        for d in data:
+            try:
+                produtor_obj = Produtor.objects.get(nome=d["produtor"])
+                d["produtor"] = produtor_obj
+            except:
+                continue
         # data = [
         #     {
         #         "produtor": "António Marques",
