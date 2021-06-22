@@ -10,6 +10,7 @@ from core.models import (
     Produto,
     Disponibilidade,
     Ranking,
+    Cesta,
 )
 from api import serializers
 from core.update_db import (
@@ -28,6 +29,13 @@ from datetime import timedelta
 
 from django.conf import settings
 from analysis.ranking.adjusted_ranking import adjusted_ranking
+
+
+class CestaViewSet(viewsets.ModelViewSet):
+    """Access Providers in the database"""
+
+    serializer_class = serializers.CestaSerializer
+    queryset = Cesta.objects.all()
 
 
 class ProdutorViewSet(viewsets.ModelViewSet):

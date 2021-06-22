@@ -1,6 +1,8 @@
 from pandas.core import series
 from rest_framework import serializers
 from core.models import (
+    Cesta,
+    ConteudoCesta,
     Disponibilidade,
     FamiliaProduto,
     MapaDeCampo,
@@ -8,6 +10,39 @@ from core.models import (
     Produto,
     Ranking,
 )
+
+
+class ConteudoCestaSerializer(serializers.ModelSerializer):
+    """Serializer for cesta content objects"""
+
+    produto = serializers.SlugRelatedField(
+        queryset=Produto.objects.all(), read_only=False, slug_field="nome"
+    )
+    produtor = serializers.SlugRelatedField(
+        queryset=Produtor.objects.all(), read_only=False, slug_field="nome"
+    )
+
+    class Meta:
+        model = ConteudoCesta
+        fields = (
+            "produto",
+            "produtor",
+            "quantidade_pequena",
+            "quantidade_grande",
+            "medida_name",
+            "preco_unitario",
+            "produto_extra",
+        )
+
+
+class CestaSerializer(serializers.ModelSerializer):
+    """Serializer for cesta objects"""
+
+    conteudo = ConteudoCestaSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Cesta
+        fields = "__all__"
 
 
 class ProdutoSerializer(serializers.ModelSerializer):

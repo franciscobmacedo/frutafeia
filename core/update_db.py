@@ -3,13 +3,20 @@ from gsheets.connect import ConnectGS
 import pandas as pd
 import numpy as np
 from core.models import *
-from core.utils import get_estado, get_tipo_produto, get_medida
+from core.utils import (
+    get_estado,
+    get_tipo_produto,
+    get_medida,
+    get_produtor_by_name,
+    get_produto_by_name,
+    get_start_end_this_week,
+)
 from datetime import datetime as dt
 from dateutil.relativedelta import relativedelta
 from django_pandas.io import read_frame
 from core.enum import TIPO_PRODUTO_CHOICES
 from analysis.ranking.ranking import ranking
-from analysis import cesta
+from analysis import cesta_feia
 
 spreadsheet = settings.SPREADSHEET_ID
 
@@ -259,6 +266,7 @@ def calculate_and_update_ranking():
 
 
 def calculate_and_update_cestas():
+    print("calculating cestas")
 
     qs = Disponibilidade.objects.all().values(
         "produto__nome",
@@ -304,5 +312,44 @@ def calculate_and_update_cestas():
         inplace=True,
     )
 
-    result = cesta.main(df)
-    return result
+    sucess, result = cesta_feia.main(df)
+    if not sucess:
+        print(result)
+        return
+    print(f"Updating {len(result)} cestas..")
+    for i, res in enumerate(result):
+        print(f"cesta {i + 1}")
+        df = res["df"]
+        df = df[
+            [
+                "produto",
+                "produtor",
+                "quantidade_cesta_pequena",
+                "quantidade_cesta_grande",
+                "medida",
+                "preco",
+                "yij",
+            ]
+        ]
+        df.produtor = df.produtor.map(get_produtor_by_name)
+        df.produto = df.produto.map(get_produto_by_name)
+        df.medida = df.medida.map(get_medida)
+        date_start, _ = get_start_end_this_week()
+        cesta, _ = Cesta.objects.get_or_create(
+            data=date_start,
+            preco_pequena=res["stats"]["pequena"]["preco"],
+            peso_pequena=res["stats"]["pequena"]["peso"],
+            preco_grande=res["stats"]["grande"]["preco"],
+            peso_grande=res["stats"]["grande"]["peso"],
+        )
+        for i, row in df.iterrows():
+            obj, created = ConteudoCesta.objects.get_or_create(
+                produto=row.produto,
+                produtor=row.produtor,
+                quantidade_pequena=row.quantidade_cesta_pequena,
+                quantidade_grande=row.quantidade_cesta_grande,
+                medida=row.medida,
+                preco_unitario=3,
+                produto_extra=int(row.yij) == 1,
+            )
+            cesta.conteudo.add(obj)

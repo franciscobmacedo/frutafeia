@@ -21,45 +21,76 @@ def stats(
     stats_pequena = {}
     stats_grande = {}
     # principais métricas sobre a cesta
-    stats_pequena["numero_verde"] = lpSum(
-        xij[(i, j)].varValue for (i, j) in produtores_produtor_verde
+    stats_pequena["numero_verde"] = float(
+        str(lpSum(xij[(i, j)].varValue for (i, j) in produtores_produtor_verde))
     )
 
-    stats_pequena["numero_fruta"] = lpSum(
-        xij[(i, j)].varValue for (i, j) in produtores_produtor_fruta
+    stats_pequena["numero_fruta"] = float(
+        str(lpSum(xij[(i, j)].varValue for (i, j) in produtores_produtor_fruta))
     )
 
-    stats_pequena["peso"] = lpSum(
-        xij[(i, j)].varValue * df.Peso_CP.loc[i, j] for (i, j) in produtores_produtor
+    stats_pequena["peso"] = float(
+        str(
+            lpSum(
+                xij[(i, j)].varValue * df.Peso_CP.loc[i, j]
+                for (i, j) in produtores_produtor
+            )
+        )
     )
 
-    stats_pequena["preco"] = lpSum(
-        xij[(i, j)].varValue
-        * df.preco.loc[i, j]
-        * df.quantidade_cesta_pequena.loc[i, j]
-        for (i, j) in produtores_produtor
+    stats_pequena["preco"] = float(
+        str(
+            lpSum(
+                xij[(i, j)].varValue
+                * df.preco.loc[i, j]
+                * df.quantidade_cesta_pequena.loc[i, j]
+                for (i, j) in produtores_produtor
+            )
+        )
     )
 
-    stats_grande["numero_verde"] = lpSum(
-        xij[(i, j)].varValue for (i, j) in produtores_produtor_verde
-    ) + lpSum(yij[(i, j)].varValue for (i, j) in produtores_produtor_verde)
-
-    stats_grande["numero_fruta"] = lpSum(
-        xij[(i, j)].varValue for (i, j) in produtores_produtor_fruta
-    ) + lpSum(yij[(i, j)].varValue for (i, j) in produtores_produtor_fruta)
-
-    stats_grande["peso"] = lpSum(
-        xij[(i, j)].varValue * df.Peso_CG.loc[i, j] for (i, j) in produtores_produtor
-    ) + lpSum(
-        yij[(i, j)].varValue * df.Peso_CG.loc[i, j] for (i, j) in produtores_produtor
+    stats_grande["numero_verde"] = float(
+        str(
+            lpSum(xij[(i, j)].varValue for (i, j) in produtores_produtor_verde)
+            + lpSum(yij[(i, j)].varValue for (i, j) in produtores_produtor_verde)
+        )
     )
 
-    stats_grande["preco"] = lpSum(
-        xij[(i, j)].varValue * df.preco.loc[i, j] * df.quantidade_cesta_grande.loc[i, j]
-        for (i, j) in produtores_produtor
-    ) + lpSum(
-        yij[(i, j)].varValue * df.preco.loc[i, j] * df.quantidade_cesta_grande.loc[i, j]
-        for (i, j) in produtores_produtor
+    stats_grande["numero_fruta"] = float(
+        str(
+            lpSum(xij[(i, j)].varValue for (i, j) in produtores_produtor_fruta)
+            + lpSum(yij[(i, j)].varValue for (i, j) in produtores_produtor_fruta)
+        )
+    )
+
+    stats_grande["peso"] = float(
+        str(
+            lpSum(
+                xij[(i, j)].varValue * df.Peso_CG.loc[i, j]
+                for (i, j) in produtores_produtor
+            )
+            + lpSum(
+                yij[(i, j)].varValue * df.Peso_CG.loc[i, j]
+                for (i, j) in produtores_produtor
+            )
+        )
+    )
+
+    stats_grande["preco"] = float(
+        str(
+            lpSum(
+                xij[(i, j)].varValue
+                * df.preco.loc[i, j]
+                * df.quantidade_cesta_grande.loc[i, j]
+                for (i, j) in produtores_produtor
+            )
+            + lpSum(
+                yij[(i, j)].varValue
+                * df.preco.loc[i, j]
+                * df.quantidade_cesta_grande.loc[i, j]
+                for (i, j) in produtores_produtor
+            )
+        )
     )
     return stats_pequena, stats_grande
 
@@ -139,7 +170,7 @@ def cesta_feia(df):
         return False, error_msg
 
     else:
-        print(LpStatus[prob.status], prob.objective.value())
+        # print(LpStatus[prob.status], prob.objective.value())
         n = n + 1
         print("A cesta está a: ", "{0:.0%}".format(n / 5))
 
@@ -157,7 +188,7 @@ def cesta_feia(df):
         return False, error_msg
 
     else:
-        print(LpStatus[prob.status], prob.objective.value())
+        # print(LpStatus[prob.status], prob.objective.value())
         n = n + 1
         print("A cesta está a : ", "{0:.0%}".format(n / 5))
 
@@ -178,7 +209,7 @@ def cesta_feia(df):
         error_msg = "Erro na construção ideal de cestas - 3 verdes e 4 frutas"
         return False, error_msg
     else:
-        print(LpStatus[prob.status], prob.objective.value())
+        # print(LpStatus[prob.status], prob.objective.value())
         n = n + 1
         print("A cesta está a : ", "{0:.0%}".format(n / 5))
 
@@ -202,7 +233,7 @@ def cesta_feia(df):
         return False, error_msg
 
     else:
-        print(LpStatus[prob.status], prob.objective.value())
+        # print(LpStatus[prob.status], prob.objective.value())
         n = n + 1
         print("A cesta está a : ", "{0:.0%}".format(n / 5))
 
@@ -228,7 +259,7 @@ def cesta_feia(df):
         error_msg = "A lista de disponibiliade não cumpre o critério - 6-8 kg para cestas pequenas"
         return False, error_msg
     else:
-        print(LpStatus[prob.status], prob.objective.value())
+        # print(LpStatus[prob.status], prob.objective.value())
         n = n + 1
         print("A cesta está a : ", "{0:.0%}".format(n / 5))
 
@@ -254,8 +285,12 @@ def cesta_feia(df):
         print(
             "Solução Alternativa - lamentamos mas não foi possível encontrar uma cesta alternativa"
         )
-    else:
-        print(LpStatus[prob.status], prob.objective.value())
+        return True, [
+            {
+                "df": df_cesta_1,
+                "stats": {"pequena": stats_pequena_1, "grande": stats_grande_1},
+            }
+        ]
 
     stats_pequena_2, stats_grande_2 = stats(
         df,
@@ -267,7 +302,7 @@ def cesta_feia(df):
     )
     df_cesta_2 = format_df(df, produtores_produtor, xij, yij)
 
-    return [
+    return True, [
         {
             "df": df_cesta_1,
             "stats": {"pequena": stats_pequena_1, "grande": stats_grande_1},
@@ -303,9 +338,9 @@ def main(df):
     return cesta_feia(df)
 
 
-if __name__ == "__main__":
-    df = pd.read_csv("data.csv", index_col=0)
-    result = main(df)
+# if __name__ == "__main__":
+#     df = pd.read_csv("data.csv", index_col=0)
+#     result = main(df)
 """---------------------------------------------------------------------------------------
 
 # ## Extra

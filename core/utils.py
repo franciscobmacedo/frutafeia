@@ -1,8 +1,22 @@
-import string
 from pandas.core.algorithms import isin
 from core.enum import ESTADO_CHOICES, MEDIDA_CHOICES, TIPO_PRODUTO_CHOICES
 from datetime import datetime as dt, time
 from datetime import timedelta
+from core.models import Produtor, Produto
+
+
+def get_produtor_by_name(produtor_str):
+    try:
+        return Produtor.objects.get(nome=produtor_str)
+    except:
+        return None
+
+
+def get_produto_by_name(produto_str):
+    try:
+        return Produto.objects.get(nome=produto_str)
+    except:
+        return None
 
 
 def get_choice_value(choice_str, choices):

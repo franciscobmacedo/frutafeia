@@ -117,6 +117,35 @@ class CestasFeitas(models.Model):
     cestas_grandes = models.PositiveIntegerField(null=True, blank=True)
 
 
+class ConteudoCesta(models.Model):
+    """Informação de cada Produto-Produtor que faz parte de uma cesta"""
+
+    produtor = models.ForeignKey("Produtor", on_delete=models.CASCADE)
+    produto = models.ForeignKey("Produto", on_delete=models.CASCADE)
+    quantidade_pequena = models.FloatField(null=True, blank=True)
+    quantidade_grande = models.FloatField()
+    medida = models.PositiveSmallIntegerField(
+        choices=MEDIDA_CHOICES, null=True, blank=True
+    )
+    preco_unitario = models.FloatField()
+    produto_extra = models.BooleanField()
+
+    @property
+    def medida_name(self):
+        return dict(MEDIDA_CHOICES).get(self.medida)
+
+
+class Cesta(models.Model):
+    """cada cesta que foi feita, com o respetivo conteudo, preços e pesos"""
+
+    data = models.DateField()
+    conteudo = models.ManyToManyField("ConteudoCesta")
+    preco_pequena = models.FloatField()
+    peso_pequena = models.FloatField()
+    preco_grande = models.FloatField()
+    peso_grande = models.FloatField()
+
+
 class Ranking(models.Model):
     """Sugestão de produtor/produtos a contactar para cada semana. Atualizado semanalmente"""
 
