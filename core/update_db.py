@@ -25,7 +25,7 @@ def rename_produtores_columns(cols):
     return clean_cols
 
 
-def read_update_produtores():
+def read_update_produtores(replace=False):
     """Reads produtores data from google sheets and updates database"""
 
     print("\nReading sheet 'Produtores' from google sheets")
@@ -44,6 +44,9 @@ def read_update_produtores():
 
     df.columns = rename_produtores_columns(df.columns)
     df.remover = df.remover.apply(lambda x: x.lower() == "true")
+
+    if not df.empty and replace:
+        Produtor.objects.all().delete()
 
     print("Updating 'Produtores' Table\n")
     for i, row in df.iterrows():
@@ -94,7 +97,7 @@ def rename_produtos_columns(cols):
     return clean_cols
 
 
-def read_update_produtos():
+def read_update_produtos(replace=False):
     """Reads produtos data from google sheets and updates database"""
 
     print("\nReading sheet 'Produtos' from google sheets")
@@ -110,7 +113,8 @@ def read_update_produtos():
 
     # df.to_csv("produtos.csv")
     df.columns = rename_produtos_columns(df.columns)
-
+    if not df.empty and replace:
+        Produto.objects.all().delete()
     print("Updating 'Produto' Table\n")
     for i, row in df.iterrows():
         print(row)
@@ -185,7 +189,7 @@ def read_update_disponibilidade():
         range="A:H",
     )
     df = pd.DataFrame().from_dict(data["values"])
-    df = df.iloc[4:]
+    df = df.iloc[7:]
     df.columns = df.iloc[0]
     df = df[1:]
     # df.to_csv("disponibilidade.csv")

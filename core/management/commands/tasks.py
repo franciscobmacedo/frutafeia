@@ -4,6 +4,7 @@ from core.update_db import (
     read_update_produtos,
     read_update_produtores,
     read_update_disponibilidade,
+    calculate_and_update_ranking,
 )
 from django.conf import settings
 
@@ -36,12 +37,28 @@ class Command(BaseCommand):
             help="Read and update disponibilidade",
         )
 
+        parser.add_argument(
+            "-ranking",
+            "--ranking",
+            action="store_true",
+            help="Read and update disponibilidade",
+        )
+
+        parser.add_argument(
+            "-r",
+            "--replace",
+            action="store_true",
+            help="Read and update disponibilidade",
+        )
+
     def handle(self, *args, **options):
         produto = options["produto"]
         produtor = options["produtor"]
         disponibilidade = options["disponibilidade"]
+        ranking = options["ranking"]
+        replace = options["replace"]
 
-        if not any([produto, produtor, disponibilidade]):
+        if not any([produto, produtor, disponibilidade, ranking]):
             # locale.setlocale(locale.LC_ALL, "pt_pt.UTF-8")
 
             # week_start, week_end = get_start_end_week()
@@ -58,15 +75,19 @@ class Command(BaseCommand):
             #     values=[[cell_text]],
             # )
             # gs.run_function(script_id, "resetAvailability")
-            read_update_produtos()
-            read_update_produtores()
+            read_update_produtos(replace)
+            read_update_produtores(replace)
             read_update_disponibilidade()
+            calculate_and_update_ranking()
+
         else:
             if produto:
-                read_update_produtos()
+                read_update_produtos(replace)
             if produtor:
-                read_update_produtores()
+                read_update_produtores(replace)
             if disponibilidade:
                 read_update_disponibilidade()
+            if ranking:
+                calculate_and_update_ranking()
 
     # def calculate_ran
