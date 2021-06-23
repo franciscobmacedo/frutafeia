@@ -137,7 +137,7 @@ class CestaNovaViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         """Return objects for most recent cestas"""
         date_start, _ = get_start_end_next_week()
-        queryset = self.queryset.filter(data__lte=date_start)
+        queryset = self.queryset.filter(data__gte=date_start)
         return queryset
 
     # def list(self, request, pk=None):
