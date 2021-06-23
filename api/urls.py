@@ -58,4 +58,9 @@ urlpatterns = [
         views.rankingAlterado.as_view(),
         name="ranking_alterado",
     ),
+    path(
+        "cesta_success",
+        views.CestaMessageViewSet.as_view(),
+        name="cesta_sucess",
+    ),
 ]

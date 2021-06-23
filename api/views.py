@@ -140,19 +140,26 @@ class CestaNovaViewSet(viewsets.ModelViewSet):
         queryset = self.queryset.filter(data__lte=date_start)
         return queryset
 
-    def list(self, request, pk=None):
-        print("asdasdasdasd")
-        if CestaResult.objects.all().exists():
-            info = CestaResult.objects.last()
-            if info.result == False:
-                return JsonResponse(
-                    {"success": False, "message": info.message, "data": []}
-                )
-        serializer = self.serializer_class(self.queryset, many=True)
-        print(serializer.data)
-        return JsonResponse({"success": True, "message": "", "data": serializer.data})
+    # def list(self, request, pk=None):
+    #     print("asdasdasdasd")
+    #     if CestaResult.objects.all().exists():
+    #         info = CestaResult.objects.last()
+    #         if info.result == False:
+    #             return JsonResponse(
+    #                 {"success": False, "message": info.message, "data": []}
+    #             )
 
-        return Response(serializer.data)
+    #     serializer = self.serializer_class(self.queryset, many=True)
+    #     print(self.queryset.first().conteudo.first().produtor)
+    #     data = serializer.data
+    #     if data:
+    #         if not data[0]['conteudo']:
+    #             for d in data:
+    #                 d['conteudo'] =
+
+    #     return JsonResponse({"success": True, "message": "", "data": serializer.data})
+
+    #     return Response(serializer.data)
 
 
 class CestaAntigaViewSet(viewsets.ModelViewSet):
@@ -166,6 +173,15 @@ class CestaAntigaViewSet(viewsets.ModelViewSet):
         date_start, _ = get_start_end_this_week()
         queryset = self.queryset.filter(data__lt=date_start)
         return queryset
+
+
+class CestaMessageViewSet(APIView):
+    def get(self, request, *args, **kwargs):
+        if CestaResult.objects.all().exists():
+            info = CestaResult.objects.last()
+            if info.result == False:
+                return JsonResponse({"success": False, "message": info.message})
+        return JsonResponse({"success": True, "message": ""})
 
 
 class getDisponibilidades(APIView):
