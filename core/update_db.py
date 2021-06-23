@@ -10,7 +10,7 @@ from core.utils import (
     get_medida,
     get_produtor_by_name,
     get_produto_by_name,
-    get_start_end_this_week,
+    get_start_end_next_week,
 )
 from datetime import datetime as dt
 from dateutil.relativedelta import relativedelta
@@ -320,7 +320,7 @@ def calculate_and_update_cestas():
         return False
 
     # delete the ones that where calculated before if they exist
-    date_start, _ = get_start_end_this_week()
+    date_start, _ = get_start_end_next_week()
     Cesta.objects.filter(data__gte=date_start).delete()
 
     print(f"Updating {len(result)} cestas..")

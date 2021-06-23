@@ -22,7 +22,7 @@ from core.update_db import (
     calculate_and_update_cestas,
 )
 from core.enum import MEDIDA_CHOICES, TIPO_PRODUTO_CHOICES, ESTADO_CHOICES
-from core.utils import get_start_end_this_week, get_start_end_last_week
+from core.utils import get_start_end_this_week, get_start_end_next_week
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -136,7 +136,7 @@ class CestaNovaViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         """Return objects for most recent cestas"""
-        date_start, _ = get_start_end_this_week()
+        date_start, _ = get_start_end_next_week()
         queryset = self.queryset.filter(data__lte=date_start)
         return queryset
 
@@ -170,7 +170,7 @@ class CestaAntigaViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         """Return objects for old cestas"""
-        date_start, _ = get_start_end_this_week()
+        date_start, _ = get_start_end_next_week()
         queryset = self.queryset.filter(data__lt=date_start)
         return queryset
 
