@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 from api import views
 
 router = DefaultRouter()
-# router.register("cestasantigas", views.CestaAntigaViewSet)
+router.register("cestasantigas", views.CestaAntigaViewSet)
 router.register("produtores", views.ProdutorViewSet)
 router.register("produtos", views.ProdutoViewSet)
 router.register("familiaproduto", views.FamiliaProdutoViewSet)
