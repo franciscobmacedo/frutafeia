@@ -4,13 +4,14 @@ from rest_framework.routers import DefaultRouter
 from api import views
 
 router = DefaultRouter()
+# router.register("cestasantigas", views.CestaAntigaViewSet)
 router.register("produtores", views.ProdutorViewSet)
 router.register("produtos", views.ProdutoViewSet)
 router.register("familiaproduto", views.FamiliaProdutoViewSet)
 router.register("disponibilidades", views.DisponibilidadeViewSet)
 router.register("ranking", views.RankingViewSet)
 router.register("mapasdecampo", views.MapasDeCampoViewSet)
-router.register("cestas", views.CestaViewSet)
+router.register("cestasnovas", views.CestaNovaViewSet)
 
 
 app_name = "api"

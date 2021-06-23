@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.checks import messages
 from gsheets.connect import ConnectGS
 import pandas as pd
 import numpy as np
@@ -188,11 +189,11 @@ def try_float(x):
 def read_update_disponibilidade():
     """Reads isponibilidades data from google sheets and updates database"""
 
-    print("\nReading sheet 'Disponibilidade' from google sheets")
+    print("\nReading sheet 'Cesta Feita' from google sheets")
     gs = ConnectGS()
     data = gs.read_sheet(
         sheet_id=spreadsheet,
-        worksheet="Disponibilidade",
+        worksheet="Cesta Feita",
         range="A:H",
     )
     df = pd.DataFrame().from_dict(data["values"])
@@ -267,6 +268,7 @@ def calculate_and_update_ranking():
 
 def calculate_and_update_cestas():
     print("calculating cestas")
+    CestaResult.objects.all().delete()
 
     qs = Disponibilidade.objects.all().values(
         "produto__nome",
@@ -312,10 +314,15 @@ def calculate_and_update_cestas():
         inplace=True,
     )
 
-    sucess, result = cesta_feia.main(df)
-    if not sucess:
-        print(result)
-        return
+    success, result = cesta_feia.main(df)
+    if not success:
+        CestaResult.objects.create(result=False, message=result).save()
+        return False
+
+    # delete the ones that where calculated before if they exist
+    date_start, _ = get_start_end_this_week()
+    Cesta.objects.filter(data__gte=date_start).delete()
+
     print(f"Updating {len(result)} cestas..")
     for i, res in enumerate(result):
         print(f"cesta {i + 1}")
@@ -334,7 +341,6 @@ def calculate_and_update_cestas():
         df.produtor = df.produtor.map(get_produtor_by_name)
         df.produto = df.produto.map(get_produto_by_name)
         df.medida = df.medida.map(get_medida)
-        date_start, _ = get_start_end_this_week()
         cesta, _ = Cesta.objects.get_or_create(
             data=date_start,
             preco_pequena=res["stats"]["pequena"]["preco"],
@@ -353,3 +359,18 @@ def calculate_and_update_cestas():
                 produto_extra=int(row.yij) == 1,
             )
             cesta.conteudo.add(obj)
+
+    CestaResult.objects.create(result=True, message="success").save()
+    return True
+
+
+def map_from_avai():
+    for d in Disponibilidade.objects.all():
+        MapaDeCampo.objects.create(
+            data=d.data,
+            produto=d.produto,
+            produtor=d.produtor,
+            quantidade=d.quantidade,
+            medida=d.medida,
+            preco=d.preco,
+        ).save()

@@ -4,6 +4,7 @@ from rest_framework import viewsets
 from rest_framework.views import APIView
 
 from core.models import (
+    CestaResult,
     FamiliaProduto,
     MapaDeCampo,
     Produtor,
@@ -18,6 +19,7 @@ from core.update_db import (
     read_update_produtores,
     read_update_produtos,
     calculate_and_update_ranking,
+    calculate_and_update_cestas,
 )
 from core.enum import MEDIDA_CHOICES, TIPO_PRODUTO_CHOICES, ESTADO_CHOICES
 from core.utils import get_start_end_this_week, get_start_end_last_week
@@ -29,13 +31,6 @@ from datetime import timedelta
 
 from django.conf import settings
 from analysis.ranking.adjusted_ranking import adjusted_ranking
-
-
-class CestaViewSet(viewsets.ModelViewSet):
-    """Access Providers in the database"""
-
-    serializer_class = serializers.CestaSerializer
-    queryset = Cesta.objects.all()
 
 
 class ProdutorViewSet(viewsets.ModelViewSet):
@@ -62,14 +57,34 @@ class ProdutoViewSet(viewsets.ModelViewSet):
 class DisponibilidadeViewSet(viewsets.ModelViewSet):
     """Access Disponibilidade in the database"""
 
+    queryset = Disponibilidade.objects.all()
+
     def get_serializer_class(self):
         if self.action == "list":
             return serializers.DisponibilidadeDetailSerializer
-        return (
-            serializers.DisponibilidadeSerializer
-        )  # I dont' know what you want for create/destroy/update.
+        return serializers.DisponibilidadeSerializer
 
-    queryset = Disponibilidade.objects.all()
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(
+            data=request.data, many=isinstance(request.data, list)
+        )
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        calculate_and_update_cestas()
+        """
+            today = dt.now()
+            start_date = today - timedelta(years=2)
+            qs_mapas_de_campo = MapaDeCampo.objects.filter(data__gte=start_date)
+            df_mapas_de_campo = read_frame(qs_mapas_de_campo)
+            ranking = get_ranking(df_mapas_de_campo)
+            Ranking.objects.all().delete()
+            obj_list = [Ranking(**r) for r in ranking]
+            objs = Ranking.objects.bulk_create(obj_list)
+        """
+        headers = self.get_success_headers(serializer.data)
+        return Response(
+            serializer.data, status=status.HTTP_201_CREATED, headers=headers
+        )
 
 
 class RankingViewSet(viewsets.ModelViewSet):
@@ -93,7 +108,10 @@ class MapasDeCampoViewSet(viewsets.ModelViewSet):
         )
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        calculate_and_update_ranking()
+        try:
+            calculate_and_update_ranking()
+        except:
+            pass
         """
             today = dt.now()
             start_date = today - timedelta(years=2)
@@ -110,9 +128,50 @@ class MapasDeCampoViewSet(viewsets.ModelViewSet):
         )
 
 
+class CestaNovaViewSet(viewsets.ModelViewSet):
+    """Access Cesta in the database"""
+
+    serializer_class = serializers.CestaSerializer
+    queryset = Cesta.objects.all()
+
+    def get_queryset(self):
+        """Return objects for most recent cestas"""
+        date_start, _ = get_start_end_this_week()
+        queryset = self.queryset.filter(data__lte=date_start)
+        return queryset
+
+    def list(self, request, pk=None):
+        print("asdasdasdasd")
+        if CestaResult.objects.all().exists():
+            info = CestaResult.objects.last()
+            if info.result == False:
+                return JsonResponse(
+                    {"success": False, "message": info.message, "data": []}
+                )
+        serializer = self.serializer_class(self.queryset, many=True)
+        print(serializer.data)
+        return JsonResponse({"success": True, "message": "", "data": serializer.data})
+
+        return Response(serializer.data)
+
+
+class CestaAntigaViewSet(viewsets.ModelViewSet):
+    """Access Cesta in the database"""
+
+    serializer_class = serializers.CestaSerializer
+    queryset = Cesta.objects.all()
+
+    def get_queryset(self):
+        """Return objects for old cestas"""
+        date_start, _ = get_start_end_this_week()
+        queryset = self.queryset.filter(data__lt=date_start)
+        return queryset
+
+
 class getDisponibilidades(APIView):
     def get(self, request, *args, **kwargs):
         read_update_disponibilidade()
+        calculate_and_update_cestas()
         return JsonResponse({"success": True})
 
 

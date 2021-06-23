@@ -79,7 +79,7 @@ class Command(BaseCommand):
             # gs = ConnectGS()
             # data = gs.write_sheet(
             #     sheet_id=spreadsheet,
-            #     worksheet="Disponibilidade",
+            #     worksheet="Cesta Feita",
             #     range="A5:A5",
             #     values=[[cell_text]],
             # )

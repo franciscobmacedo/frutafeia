@@ -146,6 +146,11 @@ class Cesta(models.Model):
     peso_grande = models.FloatField()
 
 
+class CestaResult(models.Model):
+    result = models.BooleanField()
+    message = models.TextField()
+
+
 class Ranking(models.Model):
     """Sugestão de produtor/produtos a contactar para cada semana. Atualizado semanalmente"""
 
