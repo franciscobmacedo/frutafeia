@@ -137,6 +137,7 @@ class DisponibilidadeDetailSerializer(serializers.ModelSerializer):
             "preco",
             "medida_dict",
             "medida",
+            "on_hold",
         )
 
 
