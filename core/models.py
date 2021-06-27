@@ -78,7 +78,7 @@ class Disponibilidade(models.Model):
     )
     preco = models.FloatField(null=True, blank=True)
     urgente = models.BooleanField()
-    on_hold = models.BooleanField()
+    on_hold = models.BooleanField(default=True)
 
     @property
     def medida_name(self):
