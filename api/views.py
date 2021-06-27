@@ -60,7 +60,7 @@ class DisponibilidadeViewSet(viewsets.ModelViewSet):
     queryset = Disponibilidade.objects.all()
 
     def get_queryset(self):
-        """Return objects for disponibilidade not on hold"""
+        """Return objects for disponibilidade on hold"""
         queryset = self.queryset.filter(on_hold=True)
         return queryset
 
@@ -90,6 +90,18 @@ class DisponibilidadeViewSet(viewsets.ModelViewSet):
         return Response(
             serializer.data, status=status.HTTP_201_CREATED, headers=headers
         )
+
+
+class DisponibilidadeAntigaViewSet(viewsets.ModelViewSet):
+    """Access old Disponibilidade in the database"""
+
+    serializer_class = serializers.DisponibilidadeDetailSerializer
+    queryset = Disponibilidade.objects.all()
+
+    def get_queryset(self):
+        """Return objects for disponibilidade not on hold"""
+        queryset = self.queryset.filter(on_hold=False)
+        return queryset
 
 
 class RankingViewSet(viewsets.ModelViewSet):
@@ -177,18 +189,6 @@ class CestaAntigaViewSet(viewsets.ModelViewSet):
         """Return objects for old cestas"""
         date_start, _ = get_start_end_next_week()
         queryset = self.queryset.filter(data__lt=date_start)
-        return queryset
-
-
-class DisponibilidadeAntigaViewSet(viewsets.ModelViewSet):
-    """Access old Disponibilidade in the database"""
-
-    serializer_class = serializers.DisponibilidadeDetailSerializer
-    queryset = Disponibilidade.objects.all()
-
-    def get_queryset(self):
-        """Return objects for disponibilidade not on hold"""
-        queryset = self.queryset.filter(on_hold=False)
         return queryset
 
 

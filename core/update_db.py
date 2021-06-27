@@ -183,7 +183,15 @@ def try_float(x):
     if not x:
         return None
     else:
-        return float(x)
+        try:
+            return float(x)
+        except:
+            if "," in x and "." in x:  # '.' is decimal and ',' is thousands
+                return float(x.replace(",", ""))
+            elif "," in x:
+                return float(x.replace(",", "."))
+            else:
+                return None
 
 
 def read_update_disponibilidade():
