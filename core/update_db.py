@@ -210,10 +210,16 @@ def read_update_disponibilidade():
     df.preco = df.preco.map(try_float)
     df.remover = df.remover.map(check_bool)
     df.urgente = df.urgente.map(check_bool)
-    print("Updating 'Disponobilidade' Table\n")
+
+    if df.empty:
+        print("No 'disponibilidade' available (all done). Setting on_hold to False\n")
+        qs = Disponibilidade.objects.filter(on_hold=True)
+        qs.update(on_hold=False)
+        return
 
     # Delete everything first, so we make sure we dont have any duplicates
-    Disponibilidade.objects.all().delete()
+    Disponibilidade.objects.filter(on_hold=True).delete()
+    print("Updating 'Disponibilidade' Table\n")
     for i, row in df.iterrows():
         print("getting", row.data, row.produtor, row.produto)
         if row.remover:
@@ -237,6 +243,7 @@ def read_update_disponibilidade():
             medida=row.medida,
             preco=row.preco,
             urgente=row.urgente,
+            on_hold=True,
         ).save()
     print("\n\nDone!")
 

@@ -141,7 +141,7 @@ class DisponibilidadeDetailSerializer(serializers.ModelSerializer):
 
 
 class RankingSerializer(serializers.ModelSerializer):
-    """Serializer for disponibilidade objects"""
+    """Serializer for ranking objects"""
 
     produto = serializers.SlugRelatedField(
         queryset=Produto.objects.all(), read_only=False, slug_field="nome"

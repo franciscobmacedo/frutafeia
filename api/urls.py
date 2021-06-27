@@ -12,6 +12,7 @@ router.register("disponibilidades", views.DisponibilidadeViewSet)
 router.register("ranking", views.RankingViewSet)
 router.register("mapasdecampo", views.MapasDeCampoViewSet)
 router.register("cestasnovas", views.CestaNovaViewSet)
+router.register("disponibilidadesantigas", views.DisponibilidadeAntigaViewSet)
 
 
 app_name = "api"
