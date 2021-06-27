@@ -59,6 +59,11 @@ class DisponibilidadeViewSet(viewsets.ModelViewSet):
 
     queryset = Disponibilidade.objects.all()
 
+    def get_queryset(self):
+        """Return objects for disponibilidade not on hold"""
+        queryset = self.queryset.filter(on_hold=True)
+        return queryset
+
     def get_serializer_class(self):
         if self.action == "list":
             return serializers.DisponibilidadeDetailSerializer
@@ -178,7 +183,7 @@ class CestaAntigaViewSet(viewsets.ModelViewSet):
 class DisponibilidadeAntigaViewSet(viewsets.ModelViewSet):
     """Access old Disponibilidade in the database"""
 
-    serializer_class = serializers.DisponibilidadeSerializer
+    serializer_class = serializers.DisponibilidadeDetailSerializer
     queryset = Disponibilidade.objects.all()
 
     def get_queryset(self):
