@@ -188,7 +188,7 @@ class CestaAntigaViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         """Return objects for old cestas"""
         date_start, _ = get_start_end_next_week()
-        queryset = self.queryset.filter(data__lt=date_start)
+        queryset = self.queryset.filter(data__lt=date_start).order_by("-data")
         return queryset
 
 
