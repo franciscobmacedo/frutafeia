@@ -6,6 +6,7 @@ from core.update_db import (
     read_update_produtores,
     read_update_disponibilidade,
     calculate_and_update_ranking,
+    read_update_sazonalidade,
 )
 from django.conf import settings
 
@@ -53,6 +54,13 @@ class Command(BaseCommand):
         )
 
         parser.add_argument(
+            "-sazonalidade",
+            "--sazonalidade",
+            action="store_true",
+            help="Calculate Cesta",
+        )
+
+        parser.add_argument(
             "-r",
             "--replace",
             action="store_true",
@@ -65,9 +73,11 @@ class Command(BaseCommand):
         disponibilidade = options["disponibilidade"]
         ranking = options["ranking"]
         cesta = options["cesta"]
+        sazonalidade = options["sazonalidade"]
+
         replace = options["replace"]
 
-        if not any([produto, produtor, disponibilidade, ranking, cesta]):
+        if not any([produto, produtor, disponibilidade, ranking, cesta, sazonalidade]):
             # locale.setlocale(locale.LC_ALL, "pt_pt.UTF-8")
 
             # week_start, week_end = get_start_end_week()
@@ -89,6 +99,7 @@ class Command(BaseCommand):
             read_update_disponibilidade()
             calculate_and_update_ranking()
             calculate_and_update_cestas()
+            read_update_sazonalidade()
 
         else:
             if produto:
@@ -101,5 +112,7 @@ class Command(BaseCommand):
                 calculate_and_update_ranking()
             if cesta:
                 calculate_and_update_cestas()
+            if sazonalidade:
+                read_update_sazonalidade()
 
     # def calculate_ran

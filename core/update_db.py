@@ -49,13 +49,13 @@ def read_update_produtores(replace=False):
 
     # df.to_csv("produtores.csv")
     df.columns = [c.lower() for c in df.columns]
-
     df.columns = rename_produtores_columns(df.columns)
     df.remover = df.remover.apply(lambda x: x.lower() == "true")
 
     if not df.empty and replace:
         Produtor.objects.all().delete()
 
+    df = df.loc[~df.produtor.isnull()]
     print("Updating 'Produtores' Table\n")
     for i, row in df.iterrows():
         if row.remover:
@@ -392,22 +392,30 @@ def read_update_sazonalidade():
     df = pd.DataFrame().from_dict(data["values"])
     df.columns = df.iloc[0]
     df = df[1:]
+    df = df.loc[~df.Produto.isnull()]
 
-    df.columns = [c.lower() for c in df.columns]
+    # df.columns = [c.lower() for c in df.columns]
     if df.empty:
         return
 
     Sazonalidade.objects.all().delete()
+    df = df.melt(id_vars="Produto")
+    df.columns = ["produto", "mes", "sazonalidade"]
+    # update mes
+    import locale
+
+    locale.setlocale(locale.LC_ALL, "pt_pt.UTF-8")
+    df.mes = pd.to_datetime(df.mes, format="%B").dt.month
     print("Updating 'Sazonalidade' Table\n")
     for i, row in df.iterrows():
         try:
-            produto = Produto.objects.get(nome=row.produto).delete()
+            produto = Produto.objects.get(nome=row.produto)
         except:
-            pass
+            continue
         Sazonalidade.objects.create(
             produto=produto,
             mes=row.mes,
-            pontuacao=row.pontuacao,
+            sazonalidade=row.sazonalidade,
         ).save()
 
     print("\n\nDone!")

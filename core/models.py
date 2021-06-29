@@ -165,4 +165,4 @@ class Sazonalidade(models.Model):
 
     mes = models.SmallIntegerField()
     produto = models.ForeignKey("Produto", on_delete=models.CASCADE)
-    sazonalidade = models.FloatField()
+    sazonalidade = models.FloatField(null=True, blank=True)
