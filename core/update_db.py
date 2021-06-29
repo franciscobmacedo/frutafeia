@@ -370,13 +370,48 @@ def calculate_and_update_cestas():
                 quantidade_pequena=row.quantidade_cesta_pequena,
                 quantidade_grande=row.quantidade_cesta_grande,
                 medida=row.medida,
-                preco_unitario=3,
+                preco_unitario=row.preco,
                 produto_extra=int(row.yij) == 1,
             )
             cesta.conteudo.add(obj)
 
     CestaResult.objects.create(result=True, message="success").save()
     return True
+
+
+def read_update_sazonalidade():
+    """Reads sazonalidade data from google sheets and updates database"""
+
+    print("\nReading sheet 'Sazonalidade' from google sheets")
+    gs = ConnectGS()
+    data = gs.read_sheet(
+        sheet_id=spreadsheet,
+        worksheet="Sazonalidade",
+        range="A:M",
+    )
+    df = pd.DataFrame().from_dict(data["values"])
+    df.columns = df.iloc[0]
+    df = df[1:]
+
+    df.columns = [c.lower() for c in df.columns]
+    if df.empty:
+        return
+
+    Sazonalidade.objects.all().delete()
+    print("Updating 'Sazonalidade' Table\n")
+    for i, row in df.iterrows():
+        try:
+            produto = Produto.objects.get(nome=row.produto).delete()
+        except:
+            pass
+        Sazonalidade.objects.create(
+            produto=produto,
+            mes=row.mes,
+            pontuacao=row.pontuacao,
+        ).save()
+
+    print("\n\nDone!")
+    print(len(df), Sazonalidade.objects.all().count())
 
 
 def map_from_avai():

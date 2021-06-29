@@ -161,8 +161,8 @@ class Ranking(models.Model):
 
 
 class Sazonalidade(models.Model):
-    """Sazonalidade (de 0 a 1 ou de 0 a 100) de produtos"""
+    """Sazonalidade (de 0 a 1) de produtos"""
 
-    semana = models.SmallIntegerField()
+    mes = models.SmallIntegerField()
     produto = models.ForeignKey("Produto", on_delete=models.CASCADE)
     sazonalidade = models.FloatField()
