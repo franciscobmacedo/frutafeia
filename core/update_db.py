@@ -285,7 +285,7 @@ def calculate_and_update_cestas():
     print("calculating cestas")
     CestaResult.objects.all().delete()
 
-    qs = Disponibilidade.objects.all().values(
+    qs = Disponibilidade.objects.filter(on_hold=True).values(
         "produto__nome",
         "produto__id",
         "produto__familia__nome",
