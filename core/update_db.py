@@ -125,7 +125,6 @@ def read_update_produtos(replace=False):
         Produto.objects.all().delete()
     print("Updating 'Produto' Table\n")
     for i, row in df.iterrows():
-        print(row)
         try:
             family_obj, created = FamiliaProduto.objects.get_or_create(nome=row.familia)
         except:
