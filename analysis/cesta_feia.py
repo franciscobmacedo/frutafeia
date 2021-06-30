@@ -217,7 +217,8 @@ def cesta_feia(df):
     # estes valores podem ser input da google sheet, porque no verão este valores podem ser inferiores
     peso_cp_min = 3
     peso_cp_max = 4
-
+    print(df)
+    print(lpSum(xij[(i, j)] * df.Peso_CP.loc[i, j] for (i, j) in produtores_produtor))
     prob += (
         lpSum(xij[(i, j)] * df.Peso_CP.loc[i, j] for (i, j) in produtores_produtor)
         >= peso_cp_min
