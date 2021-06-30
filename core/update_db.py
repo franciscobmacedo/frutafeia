@@ -415,14 +415,21 @@ def read_update_sazonalidade():
     # df.columns = [c.lower() for c in df.columns]
     if df.empty:
         return
-
+    df.columns = [c.lower() for c in df.columns]
+    df.rename(columns={
+        'março': 'marco'
+    }, inplace=True)
     Sazonalidade.objects.all().delete()
-    df = df.melt(id_vars="Produto")
-    df.columns = ["produto", "mes", "sazonalidade"]
+    # df = df.melt(id_vars="Produto")
+    # df.columns = ["produto", "mes", "sazonalidade"]
     # update mes
 
-    df.mes = df.mes.map(months)
-    df.sazonalidade = df.sazonalidade.map(try_float)
+    # df.mes = df.mes.map(months)
+    for c in df.columns:
+        if c == 'produo':
+            continue
+        df[c] = df[c].map(try_float)
+    
     print("Updating 'Sazonalidade' Table\n")
     for i, row in df.iterrows():
         try:
@@ -431,8 +438,18 @@ def read_update_sazonalidade():
             continue
         Sazonalidade.objects.create(
             produto=produto,
-            mes=row.mes,
-            sazonalidade=row.sazonalidade,
+            janeiro=row.janeiro,
+            fevereiro=row.fevereiro,
+            marco=row.marco,
+            abril=row.abril,
+            maio=row.maio,
+            junho=row.junho,
+            julho=row.julho,
+            agosto=row.agosto,
+            setembro=row.setembro,
+            outubro=row.outubro,
+            novembro=row.novembro,
+            dezembro=row.dezembro,
         ).save()
 
     print("\n\nDone!")
