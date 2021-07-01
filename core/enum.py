@@ -4,12 +4,14 @@ from enum import Enum
 class TipoProduto(Enum):
     VERDE = 1
     FRUTA = 2
-    OUTRO = 3
+    LEGUME = 3
+    OUTRO = 4
 
 
 TIPO_PRODUTO_CHOICES = (
     (TipoProduto.VERDE.value, "Verde"),
     (TipoProduto.FRUTA.value, "Fruta"),
+    (TipoProduto.LEGUME.value, "Legume"),
     (TipoProduto.OUTRO.value, "Outro"),
 )
 

@@ -36,6 +36,11 @@ def get_estado(estado_str):
 def get_tipo_produto(tipo_str):
     return get_choice_value(tipo_str, TIPO_PRODUTO_CHOICES)
 
+def get_tipo_produto_str(tipo_id):
+    tipo_str = dict(TIPO_PRODUTO_CHOICES).get(tipo_id).lower()
+    if tipo_str == 'legume':
+        return 'verde'
+    return tipo_str
 
 def get_medida(medida_str):
     if isinstance(medida_str, str):
@@ -94,3 +99,20 @@ def check():
 # df_falta = pd.DataFrame(mismatch)
 # df_falta.produtos = df_falta.produtos.apply(lambda x: ", ".join(x))
 # df_falta.to_excel("produtores_em_falta.xlsx")
+
+def months(m):
+    m = m.lower()
+    return {
+        'janeiro':1,
+        'fevereiro':2,
+        'março':3,
+        'abril':4,
+        'maio':5,
+        'junho':6,
+        'julho':7,
+        'agosto':8,
+        'setembro':9,
+        'outubro':10,
+        'novembro':11,
+        'dezembro':12,
+    }[m]

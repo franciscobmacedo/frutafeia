@@ -6,6 +6,7 @@ __pycache__/
 
 # CSV files
 *.csv
+*.xlsx
 # C extensions
 *.so
 keys.json

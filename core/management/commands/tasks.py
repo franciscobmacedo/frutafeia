@@ -5,6 +5,7 @@ from core.update_db import (
     read_update_produtos,
     read_update_produtores,
     read_update_disponibilidade,
+    read_update_mapas_de_campo,
     calculate_and_update_ranking,
     read_update_sazonalidade,
 )
@@ -35,6 +36,12 @@ class Command(BaseCommand):
         parser.add_argument(
             "-disponibilidade",
             "--disponibilidade",
+            action="store_true",
+            help="Read and update disponibilidade",
+        )
+        parser.add_argument(
+            "-mapadecampo",
+            "--mapadecampo",
             action="store_true",
             help="Read and update disponibilidade",
         )
@@ -74,10 +81,13 @@ class Command(BaseCommand):
         ranking = options["ranking"]
         cesta = options["cesta"]
         sazonalidade = options["sazonalidade"]
+        mapadecampo = options["mapadecampo"]
 
         replace = options["replace"]
 
-        if not any([produto, produtor, disponibilidade, ranking, cesta, sazonalidade]):
+        print(f'{replace=}')
+
+        if not any([produto, produtor, disponibilidade, ranking, cesta, sazonalidade, mapadecampo]):
             # locale.setlocale(locale.LC_ALL, "pt_pt.UTF-8")
 
             # week_start, week_end = get_start_end_week()
@@ -97,6 +107,7 @@ class Command(BaseCommand):
             read_update_produtos(replace)
             read_update_produtores(replace)
             read_update_disponibilidade()
+            read_update_mapas_de_campo()
             calculate_and_update_ranking()
             calculate_and_update_cestas()
             read_update_sazonalidade()
@@ -108,6 +119,8 @@ class Command(BaseCommand):
                 read_update_produtores(replace)
             if disponibilidade:
                 read_update_disponibilidade()
+            if mapadecampo:
+                read_update_mapas_de_campo()
             if ranking:
                 calculate_and_update_ranking()
             if cesta:
@@ -115,4 +128,3 @@ class Command(BaseCommand):
             if sazonalidade:
                 read_update_sazonalidade()
 
-    # def calculate_ran

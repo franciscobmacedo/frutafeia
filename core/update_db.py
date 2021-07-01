@@ -11,6 +11,8 @@ from core.utils import (
     get_produtor_by_name,
     get_produto_by_name,
     get_start_end_next_week,
+    get_tipo_produto_str,
+    months
 )
 from datetime import datetime as dt
 from dateutil.relativedelta import relativedelta
@@ -302,10 +304,8 @@ def calculate_and_update_cestas():
     )
     df = read_frame(qs)
     df.reset_index(inplace=True, drop=True)
-    df.produto__tipo = df.produto__tipo.apply(
-        lambda x: dict(TIPO_PRODUTO_CHOICES).get(x).lower()
-    )
-
+    df.produto__tipo = df.produto__tipo.map(get_tipo_produto_str)
+    
     df["ranking"] = 10
     for i, row in df.iterrows():
         try:
@@ -379,23 +379,6 @@ def calculate_and_update_cestas():
     CestaResult.objects.create(result=True, message="success").save()
     return True
 
-def months(m):
-    m = m.lower()
-    return {
-        'janeiro':1,
-        'fevereiro':2,
-        'março':3,
-        'abril':4,
-        'maio':5,
-        'junho':6,
-        'julho':7,
-        'agosto':8,
-        'setembro':9,
-        'outubro':10,
-        'novembro':11,
-        'dezembro':12,
-    }[m]
-
 def read_update_sazonalidade():
     """Reads sazonalidade data from google sheets and updates database"""
 
@@ -465,3 +448,114 @@ def map_from_avai():
             medida=d.medida,
             preco=d.preco,
         ).save()
+
+
+
+    
+
+def read_update_mapas_de_campo():
+    """Reads Histórico data from google sheets and updates database"""
+
+    print("\nReading sheet 'Histórico' from google sheets")
+    gs = ConnectGS()
+    data = gs.read_sheet(
+        sheet_id=spreadsheet,
+        worksheet="Histórico",
+        range="A:D",
+    )
+    df = pd.DataFrame().from_dict(data["values"])
+    df.columns = df.iloc[0]
+    df = df[1:]
+    # df.to_csv("disponibilidade.csv")
+    df.columns = [c.lower() for c in df.columns]
+    df = df.loc[~df.produtor.isnull()]
+    df.data = pd.to_datetime(df.data)
+    df = df.loc[df.cesta == 'cesta grande']
+    df = df.drop_duplicates()
+    for idx, row in df.iterrows():
+        produtor = Produtor.objects.get(nome=row.produtor)
+        produto = Produto.objects.get(nome=row.produto)
+        res = MapaDeCampo.objects.get_or_create(
+            data=row.data,
+            produto=produto,
+            produtor=produtor
+        )
+
+# df.head(10)
+
+# # df.produto
+# df.data = df.data.dt.strftime('%Y-%m-%d')
+
+# df.to_excel('clean_cesta_3.xlsx')
+    # row.produto = row.produto.lower().replace(' - ', '-')
+    # if 'feijão' in row.produto or 'alho' in row.produto:
+    #     row.produto = row.produto.replace(' ', '-')
+
+
+
+# c = 0
+# dates_complete= ['07 junho 2021', '31 maio 2021', '24 maio 2021', '17 maio 2021', '10 maio 2021', '3 maio 2021', '26 abril 2021', '19 abril 2021', '12 abril 2021', '5 abril 2021', '29 março 2021', '22 março 2021', '15 março 2021', '08 março 2021', '1 março 2021', '22 fevereiro 2021', '15 fevereiro 2021', '8 fevereiro 2021', '01 fevereiro 2021', '25 janeiro 2021', '18 janeiro 2021', '11 janeiro 2021', '04 janeiro 2021', '14zembro 2020', '7zembro 2020', '30 novembro 2020', '23 novembro 2020', '16 novembro 2020', '9 novembro 2020', '2 novembro 2020', '26 outubro 2020', '19 outubro 2020', '12 outubro 2020', '28 setembro 2020', '21 setembro 2020', '14 setembro 2020', '7 setembro 2020', '31 agosto 2020', '27 julho 2020', '20 julho 2020', '13 julho 2020', '6 julho 2020', '29 junho 2020', '22 junho 2020', '15 junho 2020', '8 junho 2020', '01 junho 2020', '25 maio 2020', '18 maio 2020', '11 maio 2020', '4 maio 2020', '27 abril 2020', '20 abril 2020', '13 abril 2020', '06 abril 2020', '09 março 2020', '2 março 2020', '24 fevereiro 2020', '17 fevereiro 2020', '10 fevereiro 2020', '03 fevereiro 2020', '27 janeiro 2020', '20 janeiro 2020', '13 janeiro 2020', '6 janeiro 2020', '16zembro 2019', '9zembro 2019', '2zembro 2019', '25 novembro 2019', '18 novembro 2019', '11 novembro 2019', '4 novembro 2019', '28 outubro 2019', '21 outubro 2019', '14 outubro 2019', '07 outubro 2019', '30 setembro 2019', '23 setembro 2019', '16 setembro 2019', '9 setembro 2019', '2 setembro 2019', '22 julho 2019', '15 julho 2019', '8 julho 2019', '01 julho 2019', '17 junho 2019', '03 junho 2019', '27 maio 2019', '20 maio 2019', '13 maio 2019', '6 maio 2019', '29 abril 2019', '22 abril 2019', '15 abril 2019', '8 abril 2019', '1 abril 2019', '25 março 2019', '18 março 2019', '11 março 2019', '4 março 2019', '25 fevereiro 2019', '18 fevereiro 2019', '11 fevereiro 2019', '4 fevereiro 2019', '28 janeiro 2019', '21 janeiro 2019', '14 janeiro 2019', '7 janeiro 2019', '17zembro 2018', '10zembro 2018', '3zembro 2018', '26 novembro 2018', '19 novembro 2018', '12 novembro 2018', '5 novembro 2018', '29 outubro 2018', '22 outubro 2018', '15 outubro 2018', '4 outubro 2018', '27 setembro 2018', 'do dia 20 setembro 2018', '13 setembro 2018', '6 setembro 2018', '26 julho 2018', '19 julho 2018', '12 julho 2018', '5 julho 2018', '28 junho 2018', '21 junho 2018']
+
+# datas = df.data.unique()
+# for idx, row in df.iterrows():
+#     data = row.data
+#     d_ = [d_ for d_ in dates_complete if data in d_][0]        
+#     produtor = Produtor.objects.get(nome=row.produtor)
+#     try:
+#         row.data = toCustomMonth(d_)
+#     except:
+#         c+=1
+# df.data = df.data.dt.strftime('%Y-%m-%d')
+
+# for idx, row in df.iterrows():
+#     produtor = Produtor.objects.get(nome=row.produtor)
+
+
+
+# def toCustomMonth(date):
+#     date = date.lower()
+#     months = {
+#         'janeiro':1,
+#         'fevereiro':2,
+#         'março':3,
+#         'abril':4,
+#         'maio':5,
+#         'junho':6,
+#         'julho':7,
+#         'agosto':8,
+#         'setembro':9,
+#         'outubro':10,
+#         'novembro':11,
+#         'dezembro':12,
+#     }
+#     date = date.replace('do dia ', '')
+#     if date == '22 março':
+#         return dt(2021, 3, 22)
+#     if date == '11 janeiro':
+#         return dt(2021, 1, 11)
+#     if date == '26 outubro':
+#         return dt(2020, 10, 26)
+#     if date == '6 julho':
+#         return dt(2020, 7, 6)
+#     if date == '15 julho':
+#         return dt(2019, 7, 15)
+#     if date == '15 junho':
+#         return dt(2020, 6, 15)
+#     if date == '20 abril':
+#         return dt(2020, 4, 20)
+#     if date == '13 abril':
+#         return dt(2020, 4, 13)
+#     if date == '10 fevereiro':
+#         return dt(2020, 2, 10)
+#     date_month = None
+#     if "zembro" in date:
+#         date_month = 12
+#         date_day = date.split('zembro')[0]
+#     else:
+#         for m, m_nr in months.items():
+#             if m in date:
+#                 date_month =  m_nr
+#                 break
+#         date_day = date.split(' ')[0]
+#     date_year = date.split(' ')[-1]
+#     return dt(int(date_year), int(date_month), int(date_day))         
