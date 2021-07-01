@@ -107,7 +107,7 @@ class Command(BaseCommand):
             read_update_produtos(replace)
             read_update_produtores(replace)
             read_update_disponibilidade()
-            read_update_mapas_de_campo()
+            # read_update_mapas_de_campo()
             calculate_and_update_ranking()
             calculate_and_update_cestas()
             read_update_sazonalidade()
