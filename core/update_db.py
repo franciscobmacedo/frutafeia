@@ -470,7 +470,7 @@ def read_update_mapas_de_campo():
     df.columns = [c.lower() for c in df.columns]
     df = df.loc[~df.produtor.isnull()]
     df.data = pd.to_datetime(df.data)
-    df = df.loc[df.cesta == 'cesta grande']
+    # df = df.loc[df.cesta == 'cesta grande']
     df = df.drop_duplicates()
     for idx, row in df.iterrows():
         produtor = Produtor.objects.get(nome=row.produtor)
