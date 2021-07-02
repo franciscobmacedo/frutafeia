@@ -12,7 +12,7 @@ from core.utils import (
     get_produto_by_name,
     get_start_end_next_week,
     get_tipo_produto_str,
-    months
+    months,
 )
 from datetime import datetime as dt
 from dateutil.relativedelta import relativedelta
@@ -259,6 +259,9 @@ def read_update_disponibilidade():
     print("\n\nDone!")
 
 
+print("test")
+
+
 def calculate_and_update_ranking():
     print("calculating Ranking")
     today = dt.now()
@@ -305,7 +308,7 @@ def calculate_and_update_cestas():
     df = read_frame(qs)
     df.reset_index(inplace=True, drop=True)
     df.produto__tipo = df.produto__tipo.map(get_tipo_produto_str)
-    
+
     df["ranking"] = 10
     for i, row in df.iterrows():
         try:
@@ -379,6 +382,7 @@ def calculate_and_update_cestas():
     CestaResult.objects.create(result=True, message="success").save()
     return True
 
+
 def read_update_sazonalidade():
     """Reads sazonalidade data from google sheets and updates database"""
 
@@ -398,9 +402,7 @@ def read_update_sazonalidade():
     if df.empty:
         return
     df.columns = [c.lower() for c in df.columns]
-    df.rename(columns={
-        'março': 'marco'
-    }, inplace=True)
+    df.rename(columns={"março": "marco"}, inplace=True)
     Sazonalidade.objects.all().delete()
     # df = df.melt(id_vars="Produto")
     # df.columns = ["produto", "mes", "sazonalidade"]
@@ -408,10 +410,10 @@ def read_update_sazonalidade():
 
     # df.mes = df.mes.map(months)
     for c in df.columns:
-        if c == 'produo':
+        if c == "produo":
             continue
         df[c] = df[c].map(try_float)
-    
+
     print("Updating 'Sazonalidade' Table\n")
     for i, row in df.iterrows():
         try:
@@ -450,9 +452,6 @@ def map_from_avai():
         ).save()
 
 
-
-    
-
 def read_update_mapas_de_campo():
     """Reads Histórico data from google sheets and updates database"""
 
@@ -476,10 +475,9 @@ def read_update_mapas_de_campo():
         produtor = Produtor.objects.get(nome=row.produtor)
         produto = Produto.objects.get(nome=row.produto)
         res = MapaDeCampo.objects.get_or_create(
-            data=row.data,
-            produto=produto,
-            produtor=produtor
+            data=row.data, produto=produto, produtor=produtor
         )
+
 
 # df.head(10)
 
@@ -487,10 +485,9 @@ def read_update_mapas_de_campo():
 # df.data = df.data.dt.strftime('%Y-%m-%d')
 
 # df.to_excel('clean_cesta_3.xlsx')
-    # row.produto = row.produto.lower().replace(' - ', '-')
-    # if 'feijão' in row.produto or 'alho' in row.produto:
-    #     row.produto = row.produto.replace(' ', '-')
-
+# row.produto = row.produto.lower().replace(' - ', '-')
+# if 'feijão' in row.produto or 'alho' in row.produto:
+#     row.produto = row.produto.replace(' ', '-')
 
 
 # c = 0
@@ -499,7 +496,7 @@ def read_update_mapas_de_campo():
 # datas = df.data.unique()
 # for idx, row in df.iterrows():
 #     data = row.data
-#     d_ = [d_ for d_ in dates_complete if data in d_][0]        
+#     d_ = [d_ for d_ in dates_complete if data in d_][0]
 #     produtor = Produtor.objects.get(nome=row.produtor)
 #     try:
 #         row.data = toCustomMonth(d_)
@@ -509,7 +506,6 @@ def read_update_mapas_de_campo():
 
 # for idx, row in df.iterrows():
 #     produtor = Produtor.objects.get(nome=row.produtor)
-
 
 
 # def toCustomMonth(date):
@@ -558,4 +554,4 @@ def read_update_mapas_de_campo():
 #                 break
 #         date_day = date.split(' ')[0]
 #     date_year = date.split(' ')[-1]
-#     return dt(int(date_year), int(date_month), int(date_day))         
+#     return dt(int(date_year), int(date_month), int(date_day))
