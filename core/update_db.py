@@ -22,6 +22,7 @@ from analysis.ranking.ranking import ranking
 from analysis import cesta_feia
 
 spreadsheet = settings.SPREADSHEET_ID
+pd.options.mode.chained_assignment = None  # default='warn'
 
 
 def rename_produtores_columns(cols):
@@ -335,6 +336,7 @@ def calculate_and_update_cestas():
 
     success, result = cesta_feia.main(df)
     if not success:
+        print('\n\n FAIL \n\n')
         CestaResult.objects.create(result=False, message=result).save()
         return False
 
@@ -410,7 +412,7 @@ def read_update_sazonalidade():
 
     # df.mes = df.mes.map(months)
     for c in df.columns:
-        if c == "produo":
+        if c == "produto":
             continue
         df[c] = df[c].map(try_float)
 

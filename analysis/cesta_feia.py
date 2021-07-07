@@ -124,6 +124,9 @@ def cesta_feia(df):
 
     produtores_produtor_verde = list(df[df.tipo == "verde"].index.values)
     produtores_produtor_fruta = list(df[df.tipo == "fruta"].index.values)
+    # [AM] 2021-07-03 Adicionado
+    produtores_produtor_legume = list(df[df.tipo == "legume"].index.values)
+
     # produtores_produtor_uni = list(df[df.medida=='Unidade'].index.values)
     # produtores_produtor_kg = list(df[df.medida=='Kg'].index.values)
 
@@ -192,11 +195,14 @@ def cesta_feia(df):
         n = n + 1
         print("A cesta está a : ", "{0:.0%}".format(n / 5))
 
+    # [AM] 2021-07-03
+    # email FF Cada cesta tem que ter um verde ("folhosas") obrigatoriamente, os restantes são legumes e frutas,
+    # sendo que preferencialmente 3/4 de frutas e os restantes legumes.
     # Restrição soft - deal são 3 verdes + 4 frutas
     prob += (
-        lpSum(xij[(i, j)] for (i, j) in produtores_produtor_verde)
-        >= min(3, len(df[df.tipo == "verde"])),
-        "R_n_minimo_verdes",
+        lpSum(xij[(i, j)] for (i, j) in produtores_produtor_legume)
+        >= min(3, len(df[df.tipo == "legume"])),
+        "R_n_minimo_legumes",
     )
     prob += (
         lpSum(xij[(i, j)] for (i, j) in produtores_produtor_fruta)
@@ -206,7 +212,7 @@ def cesta_feia(df):
 
     prob.solve()
     if prob.solve() != 1:
-        error_msg = "Erro na construção ideal de cestas - 3 verdes e 4 frutas"
+        error_msg = "Erro na construção ideal de cestas"
         return False, error_msg
     else:
         # print(LpStatus[prob.status], prob.objective.value())
