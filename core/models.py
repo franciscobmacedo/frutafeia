@@ -99,7 +99,9 @@ class MapaDeCampo(models.Model):
     produto = models.ForeignKey("Produto", on_delete=models.CASCADE)
     produtor = models.ForeignKey("Produtor", on_delete=models.CASCADE)
     quantidade = models.FloatField(null=True, blank=True)
-    medida = models.PositiveSmallIntegerField(choices=MEDIDA_CHOICES, blank=True, null=True)
+    medida = models.PositiveSmallIntegerField(
+        choices=MEDIDA_CHOICES, blank=True, null=True
+    )
     preco = models.FloatField(null=True, blank=True)
 
     @property
@@ -163,7 +165,6 @@ class Ranking(models.Model):
 class Sazonalidade(models.Model):
     """Sazonalidade (de 0 a 1) de produtos"""
 
-    mes = models.SmallIntegerField()
     produto = models.ForeignKey("Produto", on_delete=models.CASCADE)
     janeiro = models.FloatField(null=True, blank=True)
     fevereiro = models.FloatField(null=True, blank=True)

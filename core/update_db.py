@@ -145,12 +145,14 @@ def read_update_produtos(replace=False):
                 row.quantidade_cesta_grande = None
 
         product_obj, created = Produto.objects.get_or_create(
-            familia=family_obj,
             nome=row.produto,
-            tipo=get_tipo_produto(row.tipo),
-            medida=get_medida(row.medida),
-            quantidade_cesta_pequena=row.quantidade_cesta_pequena,
-            quantidade_cesta_grande=row.quantidade_cesta_grande,
+            defaults={
+                "familia": family_obj,
+                "tipo": get_tipo_produto(row.tipo),
+                "medida": get_medida(row.medida),
+                "quantidade_cesta_pequena": row.quantidade_cesta_pequena,
+                "quantidade_cesta_grande": row.quantidade_cesta_grande,
+            },
         )
 
     print("\n\nDone!")
@@ -172,7 +174,10 @@ def rename_disponibilidade_columns(cols):
         else:
             clean_cols.append(c.lower())
     return clean_cols
-print('testing')
+
+
+print("testing")
+
 
 def check_bool(u):
     if u:
@@ -336,7 +341,7 @@ def calculate_and_update_cestas():
 
     success, result = cesta_feia.main(df)
     if not success:
-        print('\n\n FAIL \n\n')
+        print("\n\n FAIL \n\n")
         CestaResult.objects.create(result=False, message=result).save()
         return False
 
