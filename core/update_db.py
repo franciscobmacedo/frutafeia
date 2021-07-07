@@ -172,7 +172,7 @@ def rename_disponibilidade_columns(cols):
         else:
             clean_cols.append(c.lower())
     return clean_cols
-
+print('testing')
 
 def check_bool(u):
     if u:
