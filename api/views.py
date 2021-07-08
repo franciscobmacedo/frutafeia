@@ -12,6 +12,7 @@ from core.models import (
     Disponibilidade,
     Ranking,
     Cesta,
+    noWorkLastWeek,
 )
 from api import serializers
 from core.update_db import (
@@ -241,12 +242,49 @@ class medida(APIView):
         )
 
 
+class setNoWorkLastWeek(APIView):
+    def get(self, request, *args, **kwargs):
+        qs = noWorkLastWeek.objects.all()
+        if qs.exists():
+            return JsonResponse({"didntWork?": noWorkLastWeek.objects.first().value})
+        else:
+            return JsonResponse({"didntWork?": None})
+
+    def post(self, request, *args, **kwargs):
+        value = request.data.get("value")
+        if value is not None:
+            qs = noWorkLastWeek.objects.all().delete()
+            qs = noWorkLastWeek.objects.create(value=value).save()
+            result = noWorkLastWeek.objects.all().first().value
+        else:
+            qs = noWorkLastWeek.objects.all()
+            if qs.exists():
+                result = qs.first().value
+            else:
+                result = None
+        return JsonResponse({"didntWork?": result})
+
+    # def post(self, request, *args, **kwargs):
+    #     noWorkLastWeek.objects.all().delete()
+    #     noWorkLastWeek.objects.create(value=True).save()
+    #     return JsonResponse({"didntWork?": noWorkLastWeek.objects.first().value})
+
+
 class comMapaDeCampo(APIView):
     def get(self, request, *args, **kwargs):
+        qs_work = noWorkLastWeek.objects.all()
+        if qs_work.exists():
+            didnt_work_last_week = qs_work.first().value
+        else:
+            didnt_work_last_week = True
+        if didnt_work_last_week:
+            return JsonResponse({"has_data": True})
+
         qs = MapaDeCampo.objects.all()
         if qs.exists():
             last_mapa = qs.order_by("data").last()
             start, end = get_start_end_this_week()
+
             if last_mapa.data >= start.date():
                 return JsonResponse({"has_data": True})
 

@@ -112,6 +112,10 @@ class MapaDeCampo(models.Model):
         return f"{self.data} : {self.produtor} : {self.produto}"
 
 
+class noWorkLastWeek(models.Model):
+    value = models.BooleanField(default=False)
+
+
 class CestasFeitas(models.Model):
     """Quantidade de cestas feitas em cada semana"""
 

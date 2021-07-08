@@ -64,4 +64,9 @@ urlpatterns = [
         views.CestaMessageViewSet.as_view(),
         name="cesta_sucess",
     ),
+    path(
+        "no_work_last_week",
+        views.setNoWorkLastWeek.as_view(),
+        name="no_work",
+    ),
 ]

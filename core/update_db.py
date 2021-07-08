@@ -284,6 +284,8 @@ def calculate_and_update_ranking():
         return False
     Ranking.objects.all().delete()
     for rank in result:
+        if not rank.get("pontuacao"):
+            continue
         # rank = result[0]
         produtor = Produtor.objects.get(nome=rank.get("produtor"))
         produto = Produto.objects.get(nome=rank.get("produto"))
@@ -296,6 +298,8 @@ def calculate_and_update_ranking():
 def calculate_and_update_cestas():
     print("calculating cestas")
     CestaResult.objects.all().delete()
+    noWorkLastWeek.objects.all().delete()
+    noWorkLastWeek.objects.create(value=False).save()
 
     qs = Disponibilidade.objects.filter(on_hold=True).values(
         "produto__nome",
@@ -341,7 +345,9 @@ def calculate_and_update_cestas():
 
     success, result = cesta_feia.main(df)
     if not success:
-        print("\n\n FAIL \n\n")
+        print("\n\n FAIL")
+        print(result)
+        print(" \n\n")
         CestaResult.objects.create(result=False, message=result).save()
         return False
 

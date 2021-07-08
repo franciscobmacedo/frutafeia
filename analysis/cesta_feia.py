@@ -262,7 +262,7 @@ def cesta_feia(df):
 
     prob.solve()
     if prob.solve() != 1:
-        error_msg = "A lista de disponibiliade não cumpre o critério - 6-8 kg para cestas pequenas"
+        error_msg = "A lista de disponibiliade não cumpre o critério - 6-8 kg para cestas grandes"
         return False, error_msg
     else:
         # print(LpStatus[prob.status], prob.objective.value())
