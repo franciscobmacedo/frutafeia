@@ -278,7 +278,26 @@ def calculate_and_update_ranking():
     df = read_frame(qs)
     df.rename(columns={"produto__nome": "produto"}, inplace=True)
     df.data = pd.to_datetime(df.data)
-    result = ranking(df)
+
+    qs_sazonalidade = Sazonalidade.objects.all().values(
+        "produto__nome",
+        "janeiro",
+        "fevereiro",
+        "marco",
+        "abril",
+        "maio",
+        "junho",
+        "julho",
+        "agosto",
+        "setembro",
+        "outubro",
+        "novembro",
+        "dezembro",
+    )
+    df_sazonalidade = read_frame(qs_sazonalidade)
+    df_sazonalidade.rename(columns={"produto__nome": "produto"}, inplace=True)
+
+    result = ranking(df, df_sazonalidade)
     if not result:
         print("No data estimated..")
         return False
