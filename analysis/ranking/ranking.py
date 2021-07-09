@@ -2,6 +2,9 @@
 import pandas as pd
 import numpy as np
 
+from datetime import date
+from core.utils import text_months
+
 
 # Function to compute the Statistics for a given field
 def compute_statistics(df_mapas_campo, field):
@@ -60,7 +63,7 @@ def compute_statistics(df_mapas_campo, field):
 
 
 # Function to compute the Ranking from the Mapas de Campo
-def ranking(df_mapas_campo):
+def ranking(df_mapas_campo, df_sazonalidade = None):
     """The purpose of this function is to use the Mapas de Campo to compute the Ranking.
 
     Input:
@@ -82,15 +85,41 @@ def ranking(df_mapas_campo):
     df_pairs = df_agric_prod.drop_duplicates()
     dict_of_pairs = df_pairs.to_dict("records")
 
+    # Sazonalidade Dataframe set-up
+    if isinstance(df_sazonalidade, pd.DataFrame):
+        df_sazonalidade = df_sazonalidade.fillna(0)
+        df_sazonalidade.columns = [c.lower() for c in df_sazonalidade.columns]
+    
+        if "março" in df_sazonalidade.columns:
+            df_sazonalidade.rename(columns={"março": "marco"}, inplace=True)
+    
+        df_sazonalidade = df_sazonalidade.set_index("produto")
+        index_sazonalidade = df_sazonalidade.index
+        print(type(index_sazonalidade))
+    else:
+        index_sazonalidade = None
+    
+    # Obtain current month
+    today = date.today()
+    month = int(today.strftime("%m"))
+
     # Compute the Ranking
     ranking = []
 
     for pair in dict_of_pairs:
 
+        if isinstance(index_sazonalidade, pd.core.indexes.base.Index):
+            if pair['Produto'] not in index_sazonalidade:
+                value_sazonalidade = 1
+            else:
+                value_sazonalidade = df_sazonalidade.loc[pair['Produto'], text_months(month)]
+        else:
+            value_sazonalidade = 1
+        
         pontuacao = (10 / 4) * (agricultor_dict[pair['produtor']]['inv_frequency'] + 
                                 agricultor_dict[pair['produtor']]['antiquity'] + 
                                 produto_dict[pair['produto']]['inv_frequency'] +
-                                produto_dict[pair['produto']]['antiquity'])
+                                produto_dict[pair['produto']]['antiquity']) * value_sazonalidade
         ranked_dict = {'produtor': pair['produtor'], 'produto': pair['produto'], 'pontuacao': pontuacao}
 
         ranking.append(ranked_dict)
