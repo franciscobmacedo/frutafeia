@@ -74,4 +74,9 @@ urlpatterns = [
         views.getMapasDeCampo.as_view(),
         name="get_mapas_de_campo",
     ),
+    path(
+        "getsazonalidade",
+        views.getSazonalidade.as_view(),
+        name="get_sazonalidade",
+    ),
 ]

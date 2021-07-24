@@ -22,6 +22,7 @@ from core.update_db import (
     calculate_and_update_ranking,
     calculate_and_update_cestas,
     read_update_mapas_de_campo,
+    read_update_sazonalidade
 )
 from core.enum import MEDIDA_CHOICES, TIPO_PRODUTO_CHOICES, ESTADO_CHOICES
 from core.utils import get_start_end_this_week, get_start_end_next_week
@@ -147,6 +148,15 @@ class getMapasDeCampo(APIView):
             pass
         return JsonResponse({"success": True})
 
+
+class getSazonalidade(APIView):
+    def get(self, request, *args, **kwargs):
+        read_update_sazonalidade()
+        try:
+            calculate_and_update_ranking()
+        except:
+            pass
+        return JsonResponse({"success": True})
 
 class CestaNovaViewSet(viewsets.ModelViewSet):
     """Access Cesta in the database"""
