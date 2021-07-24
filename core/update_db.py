@@ -451,6 +451,7 @@ def read_update_sazonalidade():
         try:
             produto = Produto.objects.get(nome=row.produto)
         except:
+            print("fail", row.produto)
             continue
         Sazonalidade.objects.create(
             produto=produto,

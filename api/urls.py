@@ -69,4 +69,9 @@ urlpatterns = [
         views.setNoWorkLastWeek.as_view(),
         name="no_work",
     ),
+    path(
+        "getmapasdecampo",
+        views.getMapasDeCampo.as_view(),
+        name="get_mapas_de_campo",
+    ),
 ]

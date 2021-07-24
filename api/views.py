@@ -21,6 +21,7 @@ from core.update_db import (
     read_update_produtos,
     calculate_and_update_ranking,
     calculate_and_update_cestas,
+    read_update_mapas_de_campo,
 )
 from core.enum import MEDIDA_CHOICES, TIPO_PRODUTO_CHOICES, ESTADO_CHOICES
 from core.utils import get_start_end_this_week, get_start_end_next_week
@@ -77,16 +78,7 @@ class DisponibilidadeViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         calculate_and_update_cestas()
-        """
-            today = dt.now()
-            start_date = today - timedelta(years=2)
-            qs_mapas_de_campo = MapaDeCampo.objects.filter(data__gte=start_date)
-            df_mapas_de_campo = read_frame(qs_mapas_de_campo)
-            ranking = get_ranking(df_mapas_de_campo)
-            Ranking.objects.all().delete()
-            obj_list = [Ranking(**r) for r in ranking]
-            objs = Ranking.objects.bulk_create(obj_list)
-        """
+
         headers = self.get_success_headers(serializer.data)
         return Response(
             serializer.data, status=status.HTTP_201_CREATED, headers=headers
@@ -144,6 +136,16 @@ class MapasDeCampoViewSet(viewsets.ModelViewSet):
         return Response(
             serializer.data, status=status.HTTP_201_CREATED, headers=headers
         )
+
+
+class getMapasDeCampo(APIView):
+    def get(self, request, *args, **kwargs):
+        read_update_mapas_de_campo()
+        try:
+            calculate_and_update_ranking()
+        except:
+            pass
+        return JsonResponse({"success": True})
 
 
 class CestaNovaViewSet(viewsets.ModelViewSet):
