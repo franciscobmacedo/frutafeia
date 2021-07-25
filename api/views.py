@@ -12,7 +12,7 @@ from core.models import (
     Disponibilidade,
     Ranking,
     Cesta,
-    noWorkLastWeek,
+    PrecisaMapaDeCampo,
 )
 from api import serializers
 from core.update_db import (
@@ -22,7 +22,7 @@ from core.update_db import (
     calculate_and_update_ranking,
     calculate_and_update_cestas,
     read_update_mapas_de_campo,
-    read_update_sazonalidade
+    read_update_sazonalidade,
 )
 from core.enum import MEDIDA_CHOICES, TIPO_PRODUTO_CHOICES, ESTADO_CHOICES
 from core.utils import get_start_end_this_week, get_start_end_next_week
@@ -119,20 +119,17 @@ class MapasDeCampoViewSet(viewsets.ModelViewSet):
         )
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
+
+        # Does not need mapa de campo for next week anymore
+        needs = PrecisaMapaDeCampo.objects.first()
+        needs.value = False
+        needs.date = dt.now() + timedelta(days=7)
+        needs.save()
         try:
             calculate_and_update_ranking()
         except:
             pass
-        """
-            today = dt.now()
-            start_date = today - timedelta(years=2)
-            qs_mapas_de_campo = MapaDeCampo.objects.filter(data__gte=start_date)
-            df_mapas_de_campo = read_frame(qs_mapas_de_campo)
-            ranking = get_ranking(df_mapas_de_campo)
-            Ranking.objects.all().delete()
-            obj_list = [Ranking(**r) for r in ranking]
-            objs = Ranking.objects.bulk_create(obj_list)
-        """
+
         headers = self.get_success_headers(serializer.data)
         return Response(
             serializer.data, status=status.HTTP_201_CREATED, headers=headers
@@ -157,6 +154,7 @@ class getSazonalidade(APIView):
         except:
             pass
         return JsonResponse({"success": True})
+
 
 class CestaNovaViewSet(viewsets.ModelViewSet):
     """Access Cesta in the database"""
@@ -254,53 +252,34 @@ class medida(APIView):
         )
 
 
-class setNoWorkLastWeek(APIView):
+class needsMapaDeCampo(APIView):
     def get(self, request, *args, **kwargs):
-        qs = noWorkLastWeek.objects.all()
-        if qs.exists():
-            return JsonResponse({"didntWork?": noWorkLastWeek.objects.first().value})
+        from core.utils import get_start_end_this_week
+
+        needs = PrecisaMapaDeCampo.objects.first()
+        start, end = get_start_end_this_week()
+
+        # if it was set for this week or later the value is what it is
+        if needs.date >= start:
+            return JsonResponse({"needs_mapadecampo": needs.value, "date": needs.date})
+
+        # if it was set in last or older week the value is wrong
         else:
-            return JsonResponse({"didntWork?": None})
+            return JsonResponse({"needs_mapadecampo": True})
 
     def post(self, request, *args, **kwargs):
         value = request.data.get("value")
         if value is not None:
-            qs = noWorkLastWeek.objects.all().delete()
-            qs = noWorkLastWeek.objects.create(value=value).save()
-            result = noWorkLastWeek.objects.all().first().value
+            needs = PrecisaMapaDeCampo.objects.all().first()
+            needs.value = value
+            needs.date = dt.now()
+            needs.save()
+
         else:
-            qs = noWorkLastWeek.objects.all()
-            if qs.exists():
-                result = qs.first().value
-            else:
-                result = None
-        return JsonResponse({"didntWork?": result})
+            needs = PrecisaMapaDeCampo.objects.all().first()
+            value = needs.value
 
-    # def post(self, request, *args, **kwargs):
-    #     noWorkLastWeek.objects.all().delete()
-    #     noWorkLastWeek.objects.create(value=True).save()
-    #     return JsonResponse({"didntWork?": noWorkLastWeek.objects.first().value})
-
-
-class comMapaDeCampo(APIView):
-    def get(self, request, *args, **kwargs):
-        qs_work = noWorkLastWeek.objects.all()
-        if qs_work.exists():
-            didnt_work_last_week = qs_work.first().value
-        else:
-            didnt_work_last_week = True
-        if didnt_work_last_week:
-            return JsonResponse({"has_data": True})
-
-        qs = MapaDeCampo.objects.all()
-        if qs.exists():
-            last_mapa = qs.order_by("data").last()
-            start, end = get_start_end_this_week()
-
-            if last_mapa.data >= start.date():
-                return JsonResponse({"has_data": True})
-
-        return JsonResponse({"has_data": False})
+        return JsonResponse({"needs_mapadecampo": value, "date": needs.date})
 
 
 class rankingAlterado(APIView):
@@ -368,57 +347,3 @@ class rankingAlterado(APIView):
         #     d["produtor"] = Produtor.objects.filter(nome=d["produtor"]).values()[0]
 
         return JsonResponse({"data": data})
-
-
-"""
-    - Mapas de campo dos ultimos 2 anos (ex de 5 Junho de 2020 a 5 Junho de 2021)
-    - Passar uma dataframe com data, produtor, produto
-    
-    from core.utils import get_start_end_this_week
-    start_week, end_week = get_start_end_this_week()
-    ranking = Ranking.objects.filter(data__gte=start_week, data__lte=end_week).values('produtor', 'produto', 'pontuacao')
-
-    # daqui sai isto
-    ls = [
-        {'produtor': 'Natália Dias', 'produto': 'laranja', 'pontuação': 64.58333333333334},
-        {'produtor': 'Adelino', 'produto': 'limão', 'pontuação': 81.25},
-        {'produtor': 'Francelina', 'produto': 'morango', 'pontuação': 100.0},
-        {'produtor': 'David Oliveira', 'produto': 'alface', 'pontuação': 68.75},
-        {'produtor': 'PAM', 'produto': 'couve coração', 'pontuação': 68.75}
-    ]
-    # df = read_frame(ls)
-
-    # .... Código a fazer ....
-    # daqui sai isto
-    ranking_ajustado = 
-                [
-                    {  
-                        'produtor': 'PAM',
-                        'produtos' : [
-                                        {'produto': 'couve coração', 'pontuação': 68.75},
-                                        {'produto': 'alho-francês', 'pontuação': 33.33333333333333}
-                                        {'produto': 'espargos', 'pontuação': 33.33333333333333}
-                                    ]
-                    },
-                    {
-                        'produtor': 'Natália Dias', 
-                        'produtos' : [
-                                        {'produto': 'laranja', 'pontuação': 34.5}
-                                    ]
-                    },
-                ]
-"""
-# class mapaDeCampoAtualizado(APIView):
-#     def get(self, request, *args, **kwargs):
-#         last_map = MapaDeCampo.objects.order_by("data").last()
-
-#         today = dt.now()
-#         # offset = (today.weekday() - settings.START_WEEK_DAY) % 7
-#         # last_week_day = today - timedelta(days=offset)
-#         recent_map_data = False
-
-#         if today.weekday >= settings.START_WEEK_DAY and not recent_map_data:
-#             return
-#         return JsonResponse(
-#             [{"id": t[0], "nome": t[1]} for t in MEDIDA_CHOICES], safe=False
-#         )

@@ -85,9 +85,19 @@ class Command(BaseCommand):
 
         replace = options["replace"]
 
-        print(f'{replace=}')
+        print(f"{replace=}")
 
-        if not any([produto, produtor, disponibilidade, ranking, cesta, sazonalidade, mapadecampo]):
+        if not any(
+            [
+                produto,
+                produtor,
+                disponibilidade,
+                ranking,
+                cesta,
+                sazonalidade,
+                mapadecampo,
+            ]
+        ):
             # locale.setlocale(locale.LC_ALL, "pt_pt.UTF-8")
 
             # week_start, week_end = get_start_end_week()
@@ -107,7 +117,7 @@ class Command(BaseCommand):
             read_update_produtos(replace)
             read_update_produtores(replace)
             read_update_disponibilidade()
-            # read_update_mapas_de_campo()
+            read_update_mapas_de_campo()
             calculate_and_update_ranking()
             calculate_and_update_cestas()
             read_update_sazonalidade()
@@ -127,4 +137,3 @@ class Command(BaseCommand):
                 calculate_and_update_cestas()
             if sazonalidade:
                 read_update_sazonalidade()
-

@@ -112,8 +112,9 @@ class MapaDeCampo(models.Model):
         return f"{self.data} : {self.produtor} : {self.produto}"
 
 
-class noWorkLastWeek(models.Model):
+class PrecisaMapaDeCampo(models.Model):
     value = models.BooleanField(default=False)
+    date = models.DateTimeField()
 
 
 class CestasFeitas(models.Model):

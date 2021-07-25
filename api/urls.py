@@ -50,9 +50,9 @@ urlpatterns = [
         name="medida",
     ),
     path(
-        "com_mapadecampo",
-        views.comMapaDeCampo.as_view(),
-        name="com_mapadecampo",
+        "needsmapadecampo",
+        views.needsMapaDeCampo.as_view(),
+        name="needs_mapadecampo",
     ),
     path(
         "ranking_alterado",
@@ -63,11 +63,6 @@ urlpatterns = [
         "cesta_success",
         views.CestaMessageViewSet.as_view(),
         name="cesta_sucess",
-    ),
-    path(
-        "no_work_last_week",
-        views.setNoWorkLastWeek.as_view(),
-        name="no_work",
     ),
     path(
         "getmapasdecampo",

@@ -144,7 +144,7 @@ def read_update_produtos(replace=False):
             except:
                 row.quantidade_cesta_grande = None
 
-        product_obj, created = Produto.objects.get_or_create(
+        product_obj, created = Produto.objects.update_or_create(
             nome=row.produto,
             defaults={
                 "familia": family_obj,
@@ -317,8 +317,6 @@ def calculate_and_update_ranking():
 def calculate_and_update_cestas():
     print("calculating cestas")
     CestaResult.objects.all().delete()
-    noWorkLastWeek.objects.all().delete()
-    noWorkLastWeek.objects.create(value=False).save()
 
     qs = Disponibilidade.objects.filter(on_hold=True).values(
         "produto__nome",
@@ -504,12 +502,16 @@ def read_update_mapas_de_campo():
     df.data = pd.to_datetime(df.data)
     # df = df.loc[df.cesta == 'cesta grande']
     df = df.drop_duplicates()
-    for idx, row in df.iterrows():
-        produtor = Produtor.objects.get(nome=row.produtor)
-        produto = Produto.objects.get(nome=row.produto)
-        res = MapaDeCampo.objects.get_or_create(
-            data=row.data, produto=produto, produtor=produtor
-        )
+
+    # apagar todas as entries numa data andes de ir a cada row
+    for data, df_data in df.groupby("data"):
+        MapaDeCampo.objects.filter(data=data).delete()
+        for idx, row in df_data.iterrows():
+            produtor = Produtor.objects.get(nome=row.produtor)
+            produto = Produto.objects.get(nome=row.produto)
+            res = MapaDeCampo.objects.update_or_create(
+                data=row.data, produtor=produtor, produto=produto
+            )
 
 
 # df.head(10)
