@@ -258,9 +258,10 @@ class needsMapaDeCampo(APIView):
 
         needs = PrecisaMapaDeCampo.objects.first()
         start, end = get_start_end_this_week()
-
+        # print("start", start.date())
+        # print("dte", needs.date.date())
         # if it was set for this week or later the value is what it is
-        if needs.date >= start:
+        if needs.date.date() >= start.date():
             return JsonResponse({"needs_mapadecampo": needs.value, "date": needs.date})
 
         # if it was set in last or older week the value is wrong
