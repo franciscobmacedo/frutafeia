@@ -265,7 +265,7 @@ class needsMapaDeCampo(APIView):
 
         # if it was set in last or older week the value is wrong
         else:
-            return JsonResponse({"needs_mapadecampo": True})
+            return JsonResponse({"needs_mapadecampo": True, "date": needs.date})
 
     def post(self, request, *args, **kwargs):
         value = request.data.get("value")
