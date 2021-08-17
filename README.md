@@ -80,9 +80,3 @@ These are the API endpoints and their description.
     - `/api/disponibilidades/` lists all disponibilidades
 
 
-## TODO
-- Quantidade de cestas a fazer
-- Produtos Quantidades de referencia
-- Sazonalidade de Produtos (semana: inteiro, produto: foreignKey, sazonalidade: float)
-
-
