@@ -1,6 +1,6 @@
 # frutafeia :cherries: :tangerine: :watermelon:
 
-Fruta Feia Django API
+Django API to manage Fruta Feia's farmers and products data with custom suggestions.
 
 ## SETUP
 - You need to store a file with the google cloud credentials in `gsheets/keys.json`. Go to https://console.cloud.google.com for more.
