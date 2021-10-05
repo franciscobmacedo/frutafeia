@@ -1,0 +1,32 @@
+[
+  {
+    "nome": "Aaron Valsat (G. sementes)",
+    "produtos": [{ "id": 1, "nome": "espargos" }],
+    "estado_name": "Final",
+    "email": "aaron@germisem.com",
+    "telefone": "966297118",
+    "morada": "Zona Industrial Lt16 3400-060",
+    "concelho": "Oliveira do Hospital"
+  },
+  {
+    "nome": "Ana Costa - Violetfuture",
+    "produtos": [
+      { "id": 2, "nome": "framboesa" },
+      { "id": 3, "nome": "mirtilo" }
+    ],
+    "estado_name": "Potencial",
+    "email": "violetfuturegeral@gmail.com",
+    "telefone": "966297118, 912837238",
+    "morada": "Rua da Variante, Romariz",
+    "concelho": "Romariz, santa Maria da Feira"
+  },
+  {
+    "nome": "Ana Meireles",
+    "produtos": [{ "id": 4, "nome": "abóbora" }],
+    "estado_name": "Antigo",
+    "email": "ana.meireles@dearbaby.eu",
+    "telefone": "966297118",
+    "morada": "Amares",
+    "concelho": "Guimarães"
+  }
+]

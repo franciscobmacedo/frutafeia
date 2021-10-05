@@ -1,0 +1,1169 @@
+[
+  {
+    "id": 1311,
+    "data": "2020-06-21",
+    "produto": {
+      "id": 215,
+      "nome": "maçã",
+      "tipo": 2,
+      "quantidade_cesta_pequena": 0.5,
+      "quantidade_cesta_grande": 1.0,
+      "medida": 2,
+      "familia": 50
+    },
+    "produtor": {
+      "id": 548,
+      "nome": "José Oliva Teles - Quinta da Derreigada",
+      "produtos": [
+        {
+          "id": 152,
+          "nome": "avelã",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.1,
+          "quantidade_cesta_grande": 0.15,
+          "medida": 2,
+          "familia": 10
+        },
+        {
+          "id": 154,
+          "nome": "batata",
+          "tipo": 1,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 12
+        },
+        {
+          "id": 159,
+          "nome": "castanha",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.3,
+          "quantidade_cesta_grande": 0.5,
+          "medida": 2,
+          "familia": 16
+        },
+        {
+          "id": 215,
+          "nome": "maçã",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 50
+        },
+        {
+          "id": 218,
+          "nome": "maçã gala",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 50
+        },
+        {
+          "id": 219,
+          "nome": "maçã golden",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 50
+        },
+        {
+          "id": 227,
+          "nome": "maçã vermelha",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 50
+        },
+        {
+          "id": 265,
+          "nome": "uva",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.3,
+          "quantidade_cesta_grande": 0.5,
+          "medida": 2,
+          "familia": 79
+        },
+        {
+          "id": 266,
+          "nome": "uva de mesa",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.3,
+          "quantidade_cesta_grande": 0.5,
+          "medida": 2,
+          "familia": 79
+        }
+      ],
+      "estado": 1,
+      "estado_name": "Final",
+      "telefone": "936544703",
+      "email": "quinta.derreigada@gmail.com",
+      "morada": "",
+      "concelho": "Moimenta da Beira, Distrito Viseu",
+      "produtos_ids": [152, 154, 159, 215, 218, 219, 227, 265, 266]
+    },
+    "quantidade": 1.0,
+    "preco": 0.3,
+    "medida_dict": {
+      "id": 2,
+      "nome": "Kg"
+    },
+    "medida": 2,
+    "on_hold": true
+  },
+  {
+    "id": 1312,
+    "data": "2020-06-22",
+    "produto": {
+      "id": 265,
+      "nome": "uva",
+      "tipo": 2,
+      "quantidade_cesta_pequena": 0.3,
+      "quantidade_cesta_grande": 0.5,
+      "medida": 2,
+      "familia": 79
+    },
+    "produtor": {
+      "id": 548,
+      "nome": "José Oliva Teles - Quinta da Derreigada",
+      "produtos": [
+        {
+          "id": 152,
+          "nome": "avelã",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.1,
+          "quantidade_cesta_grande": 0.15,
+          "medida": 2,
+          "familia": 10
+        },
+        {
+          "id": 154,
+          "nome": "batata",
+          "tipo": 1,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 12
+        },
+        {
+          "id": 159,
+          "nome": "castanha",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.3,
+          "quantidade_cesta_grande": 0.5,
+          "medida": 2,
+          "familia": 16
+        },
+        {
+          "id": 215,
+          "nome": "maçã",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 50
+        },
+        {
+          "id": 218,
+          "nome": "maçã gala",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 50
+        },
+        {
+          "id": 219,
+          "nome": "maçã golden",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 50
+        },
+        {
+          "id": 227,
+          "nome": "maçã vermelha",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 50
+        },
+        {
+          "id": 265,
+          "nome": "uva",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.3,
+          "quantidade_cesta_grande": 0.5,
+          "medida": 2,
+          "familia": 79
+        },
+        {
+          "id": 266,
+          "nome": "uva de mesa",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.3,
+          "quantidade_cesta_grande": 0.5,
+          "medida": 2,
+          "familia": 79
+        }
+      ],
+      "estado": 1,
+      "estado_name": "Final",
+      "telefone": "936544703",
+      "email": "quinta.derreigada@gmail.com",
+      "morada": "",
+      "concelho": "Moimenta da Beira, Distrito Viseu",
+      "produtos_ids": [152, 154, 159, 215, 218, 219, 227, 265, 266]
+    },
+    "quantidade": 0.8,
+    "preco": 0.5,
+    "medida_dict": {
+      "id": 2,
+      "nome": "Kg"
+    },
+    "medida": 2,
+    "on_hold": true
+  },
+  {
+    "id": 1313,
+    "data": "2020-06-23",
+    "produto": {
+      "id": 203,
+      "nome": "kiwi",
+      "tipo": 2,
+      "quantidade_cesta_pequena": 0.4,
+      "quantidade_cesta_grande": 0.8,
+      "medida": 2,
+      "familia": 44
+    },
+    "produtor": {
+      "id": 589,
+      "nome": "Vasco Sequeira do Valle e Ana Valle (filha)",
+      "produtos": [
+        {
+          "id": 134,
+          "nome": "abóbora",
+          "tipo": 1,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 1
+        },
+        {
+          "id": 164,
+          "nome": "clementina",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 21
+        },
+        {
+          "id": 203,
+          "nome": "kiwi",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.4,
+          "quantidade_cesta_grande": 0.8,
+          "medida": 2,
+          "familia": 44
+        },
+        {
+          "id": 204,
+          "nome": "kiwi amarelo",
+          "tipo": 2,
+          "quantidade_cesta_pequena": null,
+          "quantidade_cesta_grande": null,
+          "medida": null,
+          "familia": 44
+        }
+      ],
+      "estado": 1,
+      "estado_name": "Final",
+      "telefone": "Vasco Valle 962856015; Ana Valle 966547072",
+      "email": "anagodinhovalle@gmail.com",
+      "morada": "Quinta de Boução Cangosta do pulo nº3 Dume 4700-078",
+      "concelho": "Braga",
+      "produtos_ids": [134, 164, 203, 204]
+    },
+    "quantidade": 0.8,
+    "preco": 0.35,
+    "medida_dict": {
+      "id": 2,
+      "nome": "Kg"
+    },
+    "medida": 2,
+    "on_hold": true
+  },
+  {
+    "id": 1314,
+    "data": "2020-06-24",
+    "produto": {
+      "id": 175,
+      "nome": "couve lombarda",
+      "tipo": 1,
+      "quantidade_cesta_pequena": null,
+      "quantidade_cesta_grande": null,
+      "medida": null,
+      "familia": 24
+    },
+    "produtor": {
+      "id": 527,
+      "nome": "David Oliveira",
+      "produtos": [
+        {
+          "id": 140,
+          "nome": "alface",
+          "tipo": 1,
+          "quantidade_cesta_pequena": 1.0,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 1,
+          "familia": 4
+        },
+        {
+          "id": 158,
+          "nome": "brócolo",
+          "tipo": 1,
+          "quantidade_cesta_pequena": 1.0,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 1,
+          "familia": 15
+        },
+        {
+          "id": 173,
+          "nome": "couve coração",
+          "tipo": 1,
+          "quantidade_cesta_pequena": 1.0,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 1,
+          "familia": 24
+        },
+        {
+          "id": 176,
+          "nome": "couve penca",
+          "tipo": 1,
+          "quantidade_cesta_pequena": 1.0,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 1,
+          "familia": 24
+        },
+        {
+          "id": 185,
+          "nome": "espinafres",
+          "tipo": 1,
+          "quantidade_cesta_pequena": 1.0,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 1,
+          "familia": 28
+        },
+        {
+          "id": 213,
+          "nome": "limão",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.4,
+          "quantidade_cesta_grande": 0.8,
+          "medida": 2,
+          "familia": 48
+        },
+        {
+          "id": 238,
+          "nome": "nabiças",
+          "tipo": 1,
+          "quantidade_cesta_pequena": 1.0,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 1,
+          "familia": 57
+        }
+      ],
+      "estado": 1,
+      "estado_name": "Final",
+      "telefone": "938241295",
+      "email": "",
+      "morada": "Gondomar",
+      "concelho": "Gondomar",
+      "produtos_ids": [140, 158, 173, 176, 185, 213, 238]
+    },
+    "quantidade": 1.0,
+    "preco": 0.3,
+    "medida_dict": {
+      "id": 1,
+      "nome": "Unidade"
+    },
+    "medida": 1,
+    "on_hold": true
+  },
+  {
+    "id": 1315,
+    "data": "2020-06-25",
+    "produto": {
+      "id": 134,
+      "nome": "abóbora",
+      "tipo": 1,
+      "quantidade_cesta_pequena": 0.5,
+      "quantidade_cesta_grande": 1.0,
+      "medida": 2,
+      "familia": 1
+    },
+    "produtor": {
+      "id": 527,
+      "nome": "David Oliveira",
+      "produtos": [
+        {
+          "id": 140,
+          "nome": "alface",
+          "tipo": 1,
+          "quantidade_cesta_pequena": 1.0,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 1,
+          "familia": 4
+        },
+        {
+          "id": 158,
+          "nome": "brócolo",
+          "tipo": 1,
+          "quantidade_cesta_pequena": 1.0,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 1,
+          "familia": 15
+        },
+        {
+          "id": 173,
+          "nome": "couve coração",
+          "tipo": 1,
+          "quantidade_cesta_pequena": 1.0,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 1,
+          "familia": 24
+        },
+        {
+          "id": 176,
+          "nome": "couve penca",
+          "tipo": 1,
+          "quantidade_cesta_pequena": 1.0,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 1,
+          "familia": 24
+        },
+        {
+          "id": 185,
+          "nome": "espinafres",
+          "tipo": 1,
+          "quantidade_cesta_pequena": 1.0,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 1,
+          "familia": 28
+        },
+        {
+          "id": 213,
+          "nome": "limão",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.4,
+          "quantidade_cesta_grande": 0.8,
+          "medida": 2,
+          "familia": 48
+        },
+        {
+          "id": 238,
+          "nome": "nabiças",
+          "tipo": 1,
+          "quantidade_cesta_pequena": 1.0,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 1,
+          "familia": 57
+        }
+      ],
+      "estado": 1,
+      "estado_name": "Final",
+      "telefone": "938241295",
+      "email": "",
+      "morada": "Gondomar",
+      "concelho": "Gondomar",
+      "produtos_ids": [140, 158, 173, 176, 185, 213, 238]
+    },
+    "quantidade": 1.0,
+    "preco": 0.3,
+    "medida_dict": {
+      "id": 2,
+      "nome": "Kg"
+    },
+    "medida": 2,
+    "on_hold": true
+  },
+  {
+    "id": 1316,
+    "data": "2020-06-22",
+    "produto": {
+      "id": 154,
+      "nome": "batata",
+      "tipo": 1,
+      "quantidade_cesta_pequena": 0.5,
+      "quantidade_cesta_grande": 1.0,
+      "medida": 2,
+      "familia": 12
+    },
+    "produtor": {
+      "id": 548,
+      "nome": "José Oliva Teles - Quinta da Derreigada",
+      "produtos": [
+        {
+          "id": 152,
+          "nome": "avelã",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.1,
+          "quantidade_cesta_grande": 0.15,
+          "medida": 2,
+          "familia": 10
+        },
+        {
+          "id": 154,
+          "nome": "batata",
+          "tipo": 1,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 12
+        },
+        {
+          "id": 159,
+          "nome": "castanha",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.3,
+          "quantidade_cesta_grande": 0.5,
+          "medida": 2,
+          "familia": 16
+        },
+        {
+          "id": 215,
+          "nome": "maçã",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 50
+        },
+        {
+          "id": 218,
+          "nome": "maçã gala",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 50
+        },
+        {
+          "id": 219,
+          "nome": "maçã golden",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 50
+        },
+        {
+          "id": 227,
+          "nome": "maçã vermelha",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 50
+        },
+        {
+          "id": 265,
+          "nome": "uva",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.3,
+          "quantidade_cesta_grande": 0.5,
+          "medida": 2,
+          "familia": 79
+        },
+        {
+          "id": 266,
+          "nome": "uva de mesa",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.3,
+          "quantidade_cesta_grande": 0.5,
+          "medida": 2,
+          "familia": 79
+        }
+      ],
+      "estado": 1,
+      "estado_name": "Final",
+      "telefone": "936544703",
+      "email": "quinta.derreigada@gmail.com",
+      "morada": "",
+      "concelho": "Moimenta da Beira, Distrito Viseu",
+      "produtos_ids": [152, 154, 159, 215, 218, 219, 227, 265, 266]
+    },
+    "quantidade": 1.0,
+    "preco": 0.25,
+    "medida_dict": {
+      "id": 2,
+      "nome": "Kg"
+    },
+    "medida": 2,
+    "on_hold": true
+  },
+  {
+    "id": 1317,
+    "data": "2020-06-22",
+    "produto": {
+      "id": 262,
+      "nome": "tomate",
+      "tipo": 1,
+      "quantidade_cesta_pequena": 0.5,
+      "quantidade_cesta_grande": 1.0,
+      "medida": 2,
+      "familia": 78
+    },
+    "produtor": {
+      "id": 557,
+      "nome": "Manuel Silva",
+      "produtos": [
+        {
+          "id": 181,
+          "nome": "dióspiro",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.4,
+          "quantidade_cesta_grande": 0.8,
+          "medida": 2,
+          "familia": 26
+        },
+        {
+          "id": 229,
+          "nome": "maracujá",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.2,
+          "quantidade_cesta_grande": 0.4,
+          "medida": 2,
+          "familia": 51
+        }
+      ],
+      "estado": 1,
+      "estado_name": "Final",
+      "telefone": "917367309",
+      "email": "manueljfmsilva@hotmail.com",
+      "morada": "Oiã",
+      "concelho": "Oliveira do Bairro",
+      "produtos_ids": [181, 229]
+    },
+    "quantidade": 1.0,
+    "preco": 0.3,
+    "medida_dict": {
+      "id": 2,
+      "nome": "Kg"
+    },
+    "medida": 2,
+    "on_hold": true
+  },
+  {
+    "id": 1318,
+    "data": "2020-06-10",
+    "produto": {
+      "id": 164,
+      "nome": "clementina",
+      "tipo": 2,
+      "quantidade_cesta_pequena": 0.5,
+      "quantidade_cesta_grande": 1.0,
+      "medida": 2,
+      "familia": 21
+    },
+    "produtor": {
+      "id": 589,
+      "nome": "Vasco Sequeira do Valle e Ana Valle (filha)",
+      "produtos": [
+        {
+          "id": 134,
+          "nome": "abóbora",
+          "tipo": 1,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 1
+        },
+        {
+          "id": 164,
+          "nome": "clementina",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 21
+        },
+        {
+          "id": 203,
+          "nome": "kiwi",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.4,
+          "quantidade_cesta_grande": 0.8,
+          "medida": 2,
+          "familia": 44
+        },
+        {
+          "id": 204,
+          "nome": "kiwi amarelo",
+          "tipo": 2,
+          "quantidade_cesta_pequena": null,
+          "quantidade_cesta_grande": null,
+          "medida": null,
+          "familia": 44
+        }
+      ],
+      "estado": 1,
+      "estado_name": "Final",
+      "telefone": "Vasco Valle 962856015; Ana Valle 966547072",
+      "email": "anagodinhovalle@gmail.com",
+      "morada": "Quinta de Boução Cangosta do pulo nº3 Dume 4700-078",
+      "concelho": "Braga",
+      "produtos_ids": [134, 164, 203, 204]
+    },
+    "quantidade": 1.0,
+    "preco": 0.45,
+    "medida_dict": {
+      "id": 2,
+      "nome": "Kg"
+    },
+    "medida": 2,
+    "on_hold": true
+  },
+  {
+    "id": 1319,
+    "data": "2020-06-01",
+    "produto": {
+      "id": 225,
+      "nome": "maçã royal gala",
+      "tipo": 2,
+      "quantidade_cesta_pequena": 0.5,
+      "quantidade_cesta_grande": 1.0,
+      "medida": 2,
+      "familia": 50
+    },
+    "produtor": {
+      "id": 516,
+      "nome": "António Gomes",
+      "produtos": [
+        {
+          "id": 162,
+          "nome": "cereja",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.4,
+          "quantidade_cesta_grande": 0.8,
+          "medida": 2,
+          "familia": 19
+        },
+        {
+          "id": 215,
+          "nome": "maçã",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 50
+        },
+        {
+          "id": 245,
+          "nome": "pêra",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 64
+        },
+        {
+          "id": 248,
+          "nome": "pêssego",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 65
+        }
+      ],
+      "estado": 1,
+      "estado_name": "Final",
+      "telefone": "962869709",
+      "email": "",
+      "morada": "",
+      "concelho": "Lamego",
+      "produtos_ids": [162, 215, 245, 248]
+    },
+    "quantidade": 1.0,
+    "preco": 0.35,
+    "medida_dict": {
+      "id": 2,
+      "nome": "Kg"
+    },
+    "medida": 2,
+    "on_hold": true
+  },
+  {
+    "id": 1320,
+    "data": "2020-06-22",
+    "produto": {
+      "id": 245,
+      "nome": "pêra",
+      "tipo": 2,
+      "quantidade_cesta_pequena": 0.5,
+      "quantidade_cesta_grande": 1.0,
+      "medida": 2,
+      "familia": 64
+    },
+    "produtor": {
+      "id": 516,
+      "nome": "António Gomes",
+      "produtos": [
+        {
+          "id": 162,
+          "nome": "cereja",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.4,
+          "quantidade_cesta_grande": 0.8,
+          "medida": 2,
+          "familia": 19
+        },
+        {
+          "id": 215,
+          "nome": "maçã",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 50
+        },
+        {
+          "id": 245,
+          "nome": "pêra",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 64
+        },
+        {
+          "id": 248,
+          "nome": "pêssego",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 65
+        }
+      ],
+      "estado": 1,
+      "estado_name": "Final",
+      "telefone": "962869709",
+      "email": "",
+      "morada": "",
+      "concelho": "Lamego",
+      "produtos_ids": [162, 215, 245, 248]
+    },
+    "quantidade": 1.0,
+    "preco": 0.4,
+    "medida_dict": {
+      "id": 2,
+      "nome": "Kg"
+    },
+    "medida": 2,
+    "on_hold": true
+  },
+  {
+    "id": 1321,
+    "data": "2020-06-02",
+    "produto": {
+      "id": 212,
+      "nome": "lima",
+      "tipo": 2,
+      "quantidade_cesta_pequena": 0.4,
+      "quantidade_cesta_grande": 0.8,
+      "medida": 2,
+      "familia": 47
+    },
+    "produtor": {
+      "id": 536,
+      "nome": "Greencenter - Eliana Silva",
+      "produtos": [
+        {
+          "id": 212,
+          "nome": "lima",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.4,
+          "quantidade_cesta_grande": 0.8,
+          "medida": 2,
+          "familia": 47
+        },
+        {
+          "id": 229,
+          "nome": "maracujá",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.2,
+          "quantidade_cesta_grande": 0.4,
+          "medida": 2,
+          "familia": 51
+        }
+      ],
+      "estado": 1,
+      "estado_name": "Final",
+      "telefone": "925406328",
+      "email": "geral@greencenter.pt",
+      "morada": "",
+      "concelho": "Cedrim, Sever do Vouga",
+      "produtos_ids": [212, 229]
+    },
+    "quantidade": 0.8,
+    "preco": 0.6,
+    "medida_dict": {
+      "id": 2,
+      "nome": "Kg"
+    },
+    "medida": 2,
+    "on_hold": true
+  },
+  {
+    "id": 1322,
+    "data": "2020-06-22",
+    "produto": {
+      "id": 185,
+      "nome": "espinafres",
+      "tipo": 1,
+      "quantidade_cesta_pequena": 1.0,
+      "quantidade_cesta_grande": 1.0,
+      "medida": 1,
+      "familia": 28
+    },
+    "produtor": {
+      "id": 557,
+      "nome": "Manuel Silva",
+      "produtos": [
+        {
+          "id": 181,
+          "nome": "dióspiro",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.4,
+          "quantidade_cesta_grande": 0.8,
+          "medida": 2,
+          "familia": 26
+        },
+        {
+          "id": 229,
+          "nome": "maracujá",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.2,
+          "quantidade_cesta_grande": 0.4,
+          "medida": 2,
+          "familia": 51
+        }
+      ],
+      "estado": 1,
+      "estado_name": "Final",
+      "telefone": "917367309",
+      "email": "manueljfmsilva@hotmail.com",
+      "morada": "Oiã",
+      "concelho": "Oliveira do Bairro",
+      "produtos_ids": [181, 229]
+    },
+    "quantidade": 1.0,
+    "preco": 0.3,
+    "medida_dict": {
+      "id": 1,
+      "nome": "Unidade"
+    },
+    "medida": 1,
+    "on_hold": true
+  },
+  {
+    "id": 1323,
+    "data": "2020-06-22",
+    "produto": {
+      "id": 160,
+      "nome": "cebola",
+      "tipo": 1,
+      "quantidade_cesta_pequena": 0.5,
+      "quantidade_cesta_grande": 1.0,
+      "medida": 2,
+      "familia": 17
+    },
+    "produtor": {
+      "id": 557,
+      "nome": "Manuel Silva",
+      "produtos": [
+        {
+          "id": 181,
+          "nome": "dióspiro",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.4,
+          "quantidade_cesta_grande": 0.8,
+          "medida": 2,
+          "familia": 26
+        },
+        {
+          "id": 229,
+          "nome": "maracujá",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.2,
+          "quantidade_cesta_grande": 0.4,
+          "medida": 2,
+          "familia": 51
+        }
+      ],
+      "estado": 1,
+      "estado_name": "Final",
+      "telefone": "917367309",
+      "email": "manueljfmsilva@hotmail.com",
+      "morada": "Oiã",
+      "concelho": "Oliveira do Bairro",
+      "produtos_ids": [181, 229]
+    },
+    "quantidade": 0.9,
+    "preco": 0.35,
+    "medida_dict": {
+      "id": 2,
+      "nome": "Kg"
+    },
+    "medida": 2,
+    "on_hold": true
+  },
+  {
+    "id": 1324,
+    "data": "2020-06-03",
+    "produto": {
+      "id": 170,
+      "nome": "courgette",
+      "tipo": 1,
+      "quantidade_cesta_pequena": 0.5,
+      "quantidade_cesta_grande": 1.0,
+      "medida": 2,
+      "familia": 23
+    },
+    "produtor": {
+      "id": 590,
+      "nome": "Vitor Lima",
+      "produtos": [
+        {
+          "id": 141,
+          "nome": "alho-francês",
+          "tipo": 1,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 6
+        },
+        {
+          "id": 170,
+          "nome": "courgette",
+          "tipo": 1,
+          "quantidade_cesta_pequena": 0.5,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 2,
+          "familia": 23
+        },
+        {
+          "id": 176,
+          "nome": "couve penca",
+          "tipo": 1,
+          "quantidade_cesta_pequena": 1.0,
+          "quantidade_cesta_grande": 1.0,
+          "medida": 1,
+          "familia": 24
+        },
+        {
+          "id": 177,
+          "nome": "couve roxa",
+          "tipo": 1,
+          "quantidade_cesta_pequena": null,
+          "quantidade_cesta_grande": null,
+          "medida": null,
+          "familia": 24
+        },
+        {
+          "id": 189,
+          "nome": "feijão-verde",
+          "tipo": 1,
+          "quantidade_cesta_pequena": 0.3,
+          "quantidade_cesta_grande": 0.5,
+          "medida": 2,
+          "familia": 31
+        },
+        {
+          "id": 250,
+          "nome": "pimento",
+          "tipo": 1,
+          "quantidade_cesta_pequena": null,
+          "quantidade_cesta_grande": null,
+          "medida": null,
+          "familia": 67
+        }
+      ],
+      "estado": 1,
+      "estado_name": "Final",
+      "telefone": "933214276",
+      "email": "geral.diamantina@outlook.pt",
+      "morada": "Aguçadoura",
+      "concelho": "Póvoa do Varzim",
+      "produtos_ids": [141, 170, 176, 177, 189, 250]
+    },
+    "quantidade": 0.9,
+    "preco": 0.4,
+    "medida_dict": {
+      "id": 2,
+      "nome": "Kg"
+    },
+    "medida": 2,
+    "on_hold": true
+  },
+  {
+    "id": 1325,
+    "data": "2020-06-05",
+    "produto": {
+      "id": 205,
+      "nome": "kiwi baby",
+      "tipo": 2,
+      "quantidade_cesta_pequena": 0.15,
+      "quantidade_cesta_grande": 0.25,
+      "medida": 2,
+      "familia": 44
+    },
+    "produtor": {
+      "id": 550,
+      "nome": "Lúcia Sousa - o contacto é com o Paulo Almeida de Sá",
+      "produtos": [
+        {
+          "id": 151,
+          "nome": "arguta",
+          "tipo": 2,
+          "quantidade_cesta_pequena": null,
+          "quantidade_cesta_grande": null,
+          "medida": null,
+          "familia": 11
+        },
+        {
+          "id": 205,
+          "nome": "kiwi baby",
+          "tipo": 2,
+          "quantidade_cesta_pequena": 0.15,
+          "quantidade_cesta_grande": 0.25,
+          "medida": 2,
+          "familia": 44
+        }
+      ],
+      "estado": 1,
+      "estado_name": "Final",
+      "telefone": "paulocsa@sapo.pt",
+      "email": "",
+      "morada": "935650015",
+      "concelho": "Laje, Vila Verde",
+      "produtos_ids": [151, 205]
+    },
+    "quantidade": 0.24,
+    "preco": 1.5,
+    "medida_dict": {
+      "id": 2,
+      "nome": "Kg"
+    },
+    "medida": 2,
+    "on_hold": true
+  }
+]

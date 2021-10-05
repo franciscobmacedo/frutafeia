@@ -1,0 +1,865 @@
+[
+  {
+    "produtor": {
+      "id": 13,
+      "nome": "António Marques",
+      "estado": 1,
+      "email": "verdesatitudes@gmail.com",
+      "morada": "Rua do Casal, Marco de Canaveses.",
+      "concelho": "Marco de Canaveses",
+      "telefone": "917635254"
+    },
+    "produtos": [
+      {
+        "produto": "morango",
+        "pontuacao": 10
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 36,
+      "nome": "João Saramago",
+      "estado": 1,
+      "email": "sa.quintadomiradouro@gmail.com",
+      "morada": "Lugar do Miradouro 4640-447 Santa Leucádia/Baião",
+      "concelho": "Baião",
+      "telefone": "938 046 459"
+    },
+    "produtos": [
+      {
+        "produto": "nectarina",
+        "pontuacao": 10
+      },
+      {
+        "produto": "pêra",
+        "pontuacao": 6.875
+      },
+      {
+        "produto": "maçã",
+        "pontuacao": 6.458333333333334
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 27,
+      "nome": "Francelina",
+      "estado": 1,
+      "email": "hexagonopadrao@gmail.com",
+      "morada": "Rua da Escola, Abragão, Penafiel.",
+      "concelho": "Penafiel",
+      "telefone": "911181411"
+    },
+    "produtos": [
+      {
+        "produto": "morango",
+        "pontuacao": 10
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 40,
+      "nome": "Jorge Silva",
+      "estado": 1,
+      "email": " jorgegaia@hotmail.com",
+      "morada": "962 107 046",
+      "concelho": "Resende",
+      "telefone": ""
+    },
+    "produtos": [
+      {
+        "produto": "damasco",
+        "pontuacao": 9.375
+      },
+      {
+        "produto": "morango",
+        "pontuacao": 9.375
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 142,
+      "nome": "João Mineiro",
+      "estado": 2,
+      "email": "jsor@sapo.pt",
+      "morada": "",
+      "concelho": "Penafiel",
+      "telefone": ""
+    },
+    "produtos": [
+      {
+        "produto": "pimento",
+        "pontuacao": 9.375
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 11,
+      "nome": "António Gomes",
+      "estado": 1,
+      "email": "",
+      "morada": "",
+      "concelho": "Lamego",
+      "telefone": "962869709"
+    },
+    "produtos": [
+      {
+        "produto": "cereja",
+        "pontuacao": 8.75
+      },
+      {
+        "produto": "ameixa",
+        "pontuacao": 6.875
+      },
+      {
+        "produto": "maçã",
+        "pontuacao": 5.208333333333332
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 48,
+      "nome": "Luísa Botelho/ João Botelho",
+      "estado": 1,
+      "email": "",
+      "morada": "Lamego",
+      "concelho": "Lamego",
+      "telefone": "Luísa - 937935114/ João (marido) - 932062441"
+    },
+    "produtos": [
+      {
+        "produto": "cereja",
+        "pontuacao": 8.75
+      },
+      {
+        "produto": "ameixa",
+        "pontuacao": 6.875
+      }
+    ]
+  },
+
+  {
+    "produtor": {
+      "id": 13,
+      "nome": "António Marques",
+      "estado": 1,
+      "email": "verdesatitudes@gmail.com",
+      "morada": "Rua do Casal, Marco de Canaveses.",
+      "concelho": "Marco de Canaveses",
+      "telefone": "917635254"
+    },
+    "produtos": [
+      {
+        "produto": "morango",
+        "pontuacao": 10
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 36,
+      "nome": "João Saramago",
+      "estado": 1,
+      "email": "sa.quintadomiradouro@gmail.com",
+      "morada": "Lugar do Miradouro 4640-447 Santa Leucádia/Baião",
+      "concelho": "Baião",
+      "telefone": "938 046 459"
+    },
+    "produtos": [
+      {
+        "produto": "nectarina",
+        "pontuacao": 10
+      },
+      {
+        "produto": "pêra",
+        "pontuacao": 6.875
+      },
+      {
+        "produto": "maçã",
+        "pontuacao": 6.458333333333334
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 27,
+      "nome": "Francelina",
+      "estado": 1,
+      "email": "hexagonopadrao@gmail.com",
+      "morada": "Rua da Escola, Abragão, Penafiel.",
+      "concelho": "Penafiel",
+      "telefone": "911181411"
+    },
+    "produtos": [
+      {
+        "produto": "morango",
+        "pontuacao": 10
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 40,
+      "nome": "Jorge Silva",
+      "estado": 1,
+      "email": " jorgegaia@hotmail.com",
+      "morada": "962 107 046",
+      "concelho": "Resende",
+      "telefone": ""
+    },
+    "produtos": [
+      {
+        "produto": "damasco",
+        "pontuacao": 9.375
+      },
+      {
+        "produto": "morango",
+        "pontuacao": 9.375
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 142,
+      "nome": "João Mineiro",
+      "estado": 2,
+      "email": "jsor@sapo.pt",
+      "morada": "",
+      "concelho": "Penafiel",
+      "telefone": ""
+    },
+    "produtos": [
+      {
+        "produto": "pimento",
+        "pontuacao": 9.375
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 11,
+      "nome": "António Gomes",
+      "estado": 1,
+      "email": "",
+      "morada": "",
+      "concelho": "Lamego",
+      "telefone": "962869709"
+    },
+    "produtos": [
+      {
+        "produto": "cereja",
+        "pontuacao": 8.75
+      },
+      {
+        "produto": "ameixa",
+        "pontuacao": 6.875
+      },
+      {
+        "produto": "maçã",
+        "pontuacao": 5.208333333333332
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 48,
+      "nome": "Luísa Botelho/ João Botelho",
+      "estado": 1,
+      "email": "",
+      "morada": "Lamego",
+      "concelho": "Lamego",
+      "telefone": "Luísa - 937935114/ João (marido) - 932062441"
+    },
+    "produtos": [
+      {
+        "produto": "cereja",
+        "pontuacao": 8.75
+      },
+      {
+        "produto": "ameixa",
+        "pontuacao": 6.875
+      }
+    ]
+  },
+
+  {
+    "produtor": {
+      "id": 13,
+      "nome": "António Marques",
+      "estado": 1,
+      "email": "verdesatitudes@gmail.com",
+      "morada": "Rua do Casal, Marco de Canaveses.",
+      "concelho": "Marco de Canaveses",
+      "telefone": "917635254"
+    },
+    "produtos": [
+      {
+        "produto": "morango",
+        "pontuacao": 10
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 36,
+      "nome": "João Saramago",
+      "estado": 1,
+      "email": "sa.quintadomiradouro@gmail.com",
+      "morada": "Lugar do Miradouro 4640-447 Santa Leucádia/Baião",
+      "concelho": "Baião",
+      "telefone": "938 046 459"
+    },
+    "produtos": [
+      {
+        "produto": "nectarina",
+        "pontuacao": 10
+      },
+      {
+        "produto": "pêra",
+        "pontuacao": 6.875
+      },
+      {
+        "produto": "maçã",
+        "pontuacao": 6.458333333333334
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 27,
+      "nome": "Francelina",
+      "estado": 1,
+      "email": "hexagonopadrao@gmail.com",
+      "morada": "Rua da Escola, Abragão, Penafiel.",
+      "concelho": "Penafiel",
+      "telefone": "911181411"
+    },
+    "produtos": [
+      {
+        "produto": "morango",
+        "pontuacao": 10
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 40,
+      "nome": "Jorge Silva",
+      "estado": 1,
+      "email": " jorgegaia@hotmail.com",
+      "morada": "962 107 046",
+      "concelho": "Resende",
+      "telefone": ""
+    },
+    "produtos": [
+      {
+        "produto": "damasco",
+        "pontuacao": 9.375
+      },
+      {
+        "produto": "morango",
+        "pontuacao": 9.375
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 142,
+      "nome": "João Mineiro",
+      "estado": 2,
+      "email": "jsor@sapo.pt",
+      "morada": "",
+      "concelho": "Penafiel",
+      "telefone": ""
+    },
+    "produtos": [
+      {
+        "produto": "pimento",
+        "pontuacao": 9.375
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 11,
+      "nome": "António Gomes",
+      "estado": 1,
+      "email": "",
+      "morada": "",
+      "concelho": "Lamego",
+      "telefone": "962869709"
+    },
+    "produtos": [
+      {
+        "produto": "cereja",
+        "pontuacao": 8.75
+      },
+      {
+        "produto": "ameixa",
+        "pontuacao": 6.875
+      },
+      {
+        "produto": "maçã",
+        "pontuacao": 5.208333333333332
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 48,
+      "nome": "Luísa Botelho/ João Botelho",
+      "estado": 1,
+      "email": "",
+      "morada": "Lamego",
+      "concelho": "Lamego",
+      "telefone": "Luísa - 937935114/ João (marido) - 932062441"
+    },
+    "produtos": [
+      {
+        "produto": "cereja",
+        "pontuacao": 8.75
+      },
+      {
+        "produto": "ameixa",
+        "pontuacao": 6.875
+      }
+    ]
+  },
+
+  {
+    "produtor": {
+      "id": 13,
+      "nome": "António Marques",
+      "estado": 1,
+      "email": "verdesatitudes@gmail.com",
+      "morada": "Rua do Casal, Marco de Canaveses.",
+      "concelho": "Marco de Canaveses",
+      "telefone": "917635254"
+    },
+    "produtos": [
+      {
+        "produto": "morango",
+        "pontuacao": 10
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 36,
+      "nome": "João Saramago",
+      "estado": 1,
+      "email": "sa.quintadomiradouro@gmail.com",
+      "morada": "Lugar do Miradouro 4640-447 Santa Leucádia/Baião",
+      "concelho": "Baião",
+      "telefone": "938 046 459"
+    },
+    "produtos": [
+      {
+        "produto": "nectarina",
+        "pontuacao": 10
+      },
+      {
+        "produto": "pêra",
+        "pontuacao": 6.875
+      },
+      {
+        "produto": "maçã",
+        "pontuacao": 6.458333333333334
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 27,
+      "nome": "Francelina",
+      "estado": 1,
+      "email": "hexagonopadrao@gmail.com",
+      "morada": "Rua da Escola, Abragão, Penafiel.",
+      "concelho": "Penafiel",
+      "telefone": "911181411"
+    },
+    "produtos": [
+      {
+        "produto": "morango",
+        "pontuacao": 10
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 40,
+      "nome": "Jorge Silva",
+      "estado": 1,
+      "email": " jorgegaia@hotmail.com",
+      "morada": "962 107 046",
+      "concelho": "Resende",
+      "telefone": ""
+    },
+    "produtos": [
+      {
+        "produto": "damasco",
+        "pontuacao": 9.375
+      },
+      {
+        "produto": "morango",
+        "pontuacao": 9.375
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 142,
+      "nome": "João Mineiro",
+      "estado": 2,
+      "email": "jsor@sapo.pt",
+      "morada": "",
+      "concelho": "Penafiel",
+      "telefone": ""
+    },
+    "produtos": [
+      {
+        "produto": "pimento",
+        "pontuacao": 9.375
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 11,
+      "nome": "António Gomes",
+      "estado": 1,
+      "email": "",
+      "morada": "",
+      "concelho": "Lamego",
+      "telefone": "962869709"
+    },
+    "produtos": [
+      {
+        "produto": "cereja",
+        "pontuacao": 8.75
+      },
+      {
+        "produto": "ameixa",
+        "pontuacao": 6.875
+      },
+      {
+        "produto": "maçã",
+        "pontuacao": 5.208333333333332
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 48,
+      "nome": "Luísa Botelho/ João Botelho",
+      "estado": 1,
+      "email": "",
+      "morada": "Lamego",
+      "concelho": "Lamego",
+      "telefone": "Luísa - 937935114/ João (marido) - 932062441"
+    },
+    "produtos": [
+      {
+        "produto": "cereja",
+        "pontuacao": 8.75
+      },
+      {
+        "produto": "ameixa",
+        "pontuacao": 6.875
+      }
+    ]
+  },
+
+  {
+    "produtor": {
+      "id": 13,
+      "nome": "António Marques",
+      "estado": 1,
+      "email": "verdesatitudes@gmail.com",
+      "morada": "Rua do Casal, Marco de Canaveses.",
+      "concelho": "Marco de Canaveses",
+      "telefone": "917635254"
+    },
+    "produtos": [
+      {
+        "produto": "morango",
+        "pontuacao": 10
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 36,
+      "nome": "João Saramago",
+      "estado": 1,
+      "email": "sa.quintadomiradouro@gmail.com",
+      "morada": "Lugar do Miradouro 4640-447 Santa Leucádia/Baião",
+      "concelho": "Baião",
+      "telefone": "938 046 459"
+    },
+    "produtos": [
+      {
+        "produto": "nectarina",
+        "pontuacao": 10
+      },
+      {
+        "produto": "pêra",
+        "pontuacao": 6.875
+      },
+      {
+        "produto": "maçã",
+        "pontuacao": 6.458333333333334
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 27,
+      "nome": "Francelina",
+      "estado": 1,
+      "email": "hexagonopadrao@gmail.com",
+      "morada": "Rua da Escola, Abragão, Penafiel.",
+      "concelho": "Penafiel",
+      "telefone": "911181411"
+    },
+    "produtos": [
+      {
+        "produto": "morango",
+        "pontuacao": 10
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 40,
+      "nome": "Jorge Silva",
+      "estado": 1,
+      "email": " jorgegaia@hotmail.com",
+      "morada": "962 107 046",
+      "concelho": "Resende",
+      "telefone": ""
+    },
+    "produtos": [
+      {
+        "produto": "damasco",
+        "pontuacao": 9.375
+      },
+      {
+        "produto": "morango",
+        "pontuacao": 9.375
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 142,
+      "nome": "João Mineiro",
+      "estado": 2,
+      "email": "jsor@sapo.pt",
+      "morada": "",
+      "concelho": "Penafiel",
+      "telefone": ""
+    },
+    "produtos": [
+      {
+        "produto": "pimento",
+        "pontuacao": 9.375
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 11,
+      "nome": "António Gomes",
+      "estado": 1,
+      "email": "",
+      "morada": "",
+      "concelho": "Lamego",
+      "telefone": "962869709"
+    },
+    "produtos": [
+      {
+        "produto": "cereja",
+        "pontuacao": 8.75
+      },
+      {
+        "produto": "ameixa",
+        "pontuacao": 6.875
+      },
+      {
+        "produto": "maçã",
+        "pontuacao": 5.208333333333332
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 48,
+      "nome": "Luísa Botelho/ João Botelho",
+      "estado": 1,
+      "email": "",
+      "morada": "Lamego",
+      "concelho": "Lamego",
+      "telefone": "Luísa - 937935114/ João (marido) - 932062441"
+    },
+    "produtos": [
+      {
+        "produto": "cereja",
+        "pontuacao": 8.75
+      },
+      {
+        "produto": "ameixa",
+        "pontuacao": 6.875
+      }
+    ]
+  },
+
+  {
+    "produtor": {
+      "id": 13,
+      "nome": "António Marques",
+      "estado": 1,
+      "email": "verdesatitudes@gmail.com",
+      "morada": "Rua do Casal, Marco de Canaveses.",
+      "concelho": "Marco de Canaveses",
+      "telefone": "917635254"
+    },
+    "produtos": [
+      {
+        "produto": "morango",
+        "pontuacao": 10
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 36,
+      "nome": "João Saramago",
+      "estado": 1,
+      "email": "sa.quintadomiradouro@gmail.com",
+      "morada": "Lugar do Miradouro 4640-447 Santa Leucádia/Baião",
+      "concelho": "Baião",
+      "telefone": "938 046 459"
+    },
+    "produtos": [
+      {
+        "produto": "nectarina",
+        "pontuacao": 10
+      },
+      {
+        "produto": "pêra",
+        "pontuacao": 6.875
+      },
+      {
+        "produto": "maçã",
+        "pontuacao": 6.458333333333334
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 27,
+      "nome": "Francelina",
+      "estado": 1,
+      "email": "hexagonopadrao@gmail.com",
+      "morada": "Rua da Escola, Abragão, Penafiel.",
+      "concelho": "Penafiel",
+      "telefone": "911181411"
+    },
+    "produtos": [
+      {
+        "produto": "morango",
+        "pontuacao": 10
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 40,
+      "nome": "Jorge Silva",
+      "estado": 1,
+      "email": " jorgegaia@hotmail.com",
+      "morada": "962 107 046",
+      "concelho": "Resende",
+      "telefone": ""
+    },
+    "produtos": [
+      {
+        "produto": "damasco",
+        "pontuacao": 9.375
+      },
+      {
+        "produto": "morango",
+        "pontuacao": 9.375
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 142,
+      "nome": "João Mineiro",
+      "estado": 2,
+      "email": "jsor@sapo.pt",
+      "morada": "",
+      "concelho": "Penafiel",
+      "telefone": ""
+    },
+    "produtos": [
+      {
+        "produto": "pimento",
+        "pontuacao": 9.375
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 11,
+      "nome": "António Gomes",
+      "estado": 1,
+      "email": "",
+      "morada": "",
+      "concelho": "Lamego",
+      "telefone": "962869709"
+    },
+    "produtos": [
+      {
+        "produto": "cereja",
+        "pontuacao": 8.75
+      },
+      {
+        "produto": "ameixa",
+        "pontuacao": 6.875
+      },
+      {
+        "produto": "maçã",
+        "pontuacao": 5.208333333333332
+      }
+    ]
+  },
+  {
+    "produtor": {
+      "id": 48,
+      "nome": "Luísa Botelho/ João Botelho",
+      "estado": 1,
+      "email": "",
+      "morada": "Lamego",
+      "concelho": "Lamego",
+      "telefone": "Luísa - 937935114/ João (marido) - 932062441"
+    },
+    "produtos": [
+      {
+        "produto": "cereja",
+        "pontuacao": 8.75
+      },
+      {
+        "produto": "ameixa",
+        "pontuacao": 6.875
+      }
+    ]
+  }
+]
