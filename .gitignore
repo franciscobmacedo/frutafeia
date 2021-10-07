@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# extend
+extend.py
+extend.sh
+logs/
 
 # CSV files
 *.csv
