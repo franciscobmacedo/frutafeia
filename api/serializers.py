@@ -45,20 +45,36 @@ class CestaSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class ProdutoSerializer(serializers.ModelSerializer):
-    """Serializer for produto objects"""
-
-    class Meta:
-        model = Produto
-        fields = "__all__"
-
-
 class FamiliaProdutoSerializer(serializers.ModelSerializer):
     """Serializer for familia produto objects"""
 
     class Meta:
         model = FamiliaProduto
         fields = "__all__"
+
+
+class ProdutoSerializer(serializers.ModelSerializer):
+    """Serializer for produto objects"""
+
+    class Meta:
+        model = Produto
+        fields = (
+            "id",
+            "nome",
+            "tipo",
+            "quantidade_cesta_pequena",
+            "quantidade_cesta_grande",
+            "medida",
+            "familia",
+ 
+        )
+
+class ProdutoDetailSerializer(ProdutoSerializer):
+    """Serializer for produto objects"""
+    familia = FamiliaProdutoSerializer(many=False, read_only=True)
+
+    class Meta(ProdutoSerializer.Meta):
+        fields =  ProdutoSerializer.Meta.fields + ("tipo_name", "medida_name",)
 
 
 class ProdutoSimpleSerializer(serializers.ModelSerializer):

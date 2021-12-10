@@ -38,6 +38,10 @@ class Produto(models.Model):
     def tipo_name(self):
         return dict(TIPO_PRODUTO_CHOICES).get(self.tipo)
 
+    @property
+    def medida_name(self):
+        return dict(MEDIDA_CHOICES).get(self.medida)
+
     def __str__(self):
         return f"{self.nome} - {self.tipo_name}"
 
