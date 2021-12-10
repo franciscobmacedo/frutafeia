@@ -2,6 +2,7 @@ from core.models import Disponibilidade
 from django.core.management.base import BaseCommand, CommandError
 from core.update_db import (
     calculate_and_update_cestas,
+    read_update_familia,
     read_update_produtos,
     read_update_produtores,
     read_update_disponibilidade,
@@ -25,6 +26,12 @@ class Command(BaseCommand):
             "--produto",
             action="store_true",
             help="Read and update produtos",
+        )
+        parser.add_argument(
+            "-familia",
+            "--familia",
+            action="store_true",
+            help="Read and update familia de produtos",
         )
         parser.add_argument(
             "-produtor",
@@ -82,6 +89,7 @@ class Command(BaseCommand):
         cesta = options["cesta"]
         sazonalidade = options["sazonalidade"]
         mapadecampo = options["mapadecampo"]
+        familia = options["familia"]
 
         replace = options["replace"]
 
@@ -96,6 +104,7 @@ class Command(BaseCommand):
                 cesta,
                 sazonalidade,
                 mapadecampo,
+                familia
             ]
         ):
             # locale.setlocale(locale.LC_ALL, "pt_pt.UTF-8")
@@ -114,6 +123,7 @@ class Command(BaseCommand):
             #     values=[[cell_text]],
             # )
             # gs.run_function(script_id, "resetAvailability")
+            read_update_familia(replace)
             read_update_produtos(replace)
             read_update_produtores(replace)
             read_update_disponibilidade()
@@ -123,6 +133,8 @@ class Command(BaseCommand):
             read_update_sazonalidade()
 
         else:
+            if familia:
+                read_update_familia(replace)
             if produto:
                 read_update_produtos(replace)
             if produtor:

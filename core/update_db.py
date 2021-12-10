@@ -108,6 +108,37 @@ def rename_produtos_columns(cols):
     return clean_cols
 
 
+def rename_familia_columns(cols):
+    clean_cols = []
+    for c_ in cols:
+        c = c_.lower()
+        if "família" in c:
+            clean_cols.append("nome")
+    return clean_cols
+
+def read_update_familia(replace=False):
+    """Reads familia data from google sheets and updates database"""
+
+    print("\nReading sheet 'Dados Estáticos' from google sheets")
+    gs = ConnectGS()
+    data = gs.read_sheet(
+        sheet_id=spreadsheet,
+        worksheet="Dados Estáticos",
+        range="D:D",
+    )
+    df = pd.DataFrame().from_dict(data["values"])
+    df.columns = df.iloc[0]
+    df = df[1:]
+    df.columns = rename_familia_columns(df.columns)
+
+    if not df.empty and replace:
+        FamiliaProduto.objects.all().delete()
+    print("Updating 'FamiliaProduto' Table\n")
+    for i, row in df.iterrows():
+        if row.nome:
+            FamiliaProduto.objects.get_or_create(nome=row.nome)
+    print("\n\nDone!")
+
 def read_update_produtos(replace=False):
     """Reads produtos data from google sheets and updates database"""
 

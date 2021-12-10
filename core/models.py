@@ -24,7 +24,7 @@ class Produto(models.Model):
     """Possible products"""
 
     nome = models.CharField(max_length=255)
-    familia = models.ForeignKey("FamiliaProduto", on_delete=models.CASCADE, null=True)
+    familia = models.ForeignKey("FamiliaProduto", on_delete=models.SET_NULL, null=True)
     tipo = models.PositiveSmallIntegerField(
         choices=TIPO_PRODUTO_CHOICES, blank=True, null=True
     )
