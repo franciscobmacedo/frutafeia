@@ -128,10 +128,11 @@ def read_update_produtos(replace=False):
         Produto.objects.all().delete()
     print("Updating 'Produto' Table\n")
     for i, row in df.iterrows():
-        try:
-            family_obj, created = FamiliaProduto.objects.get_or_create(nome=row.familia)
-        except:
-            pass
+        if row.familia:
+            try:
+                family_obj, created = FamiliaProduto.objects.get_or_create(nome=row.familia)
+            except:
+                pass
         if isinstance(row.quantidade_cesta_pequena, str):
             try:
                 row.quantidade_cesta_pequena = float(row.quantidade_cesta_pequena)
