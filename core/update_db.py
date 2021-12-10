@@ -359,8 +359,13 @@ def calculate_and_update_cestas():
         },
         inplace=True,
     )
-
-    success, result = cesta_feia.main(df)
+    try:
+        success, result = cesta_feia.main(df)
+    except Exception as e:
+        print('FAIL creating cesta', e)
+        CestaResult.objects.create(result=False, message="erro desconhecido a criar as cestas").save()
+        return False
+    
     if not success:
         print("\n\n FAIL")
         print(result)
