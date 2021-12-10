@@ -59,8 +59,14 @@ class FamiliaProdutoViewSet(viewsets.ModelViewSet):
 class ProdutoViewSet(viewsets.ModelViewSet):
     """Access Products in the database"""
 
-    serializer_class = serializers.ProdutoSerializer
+    serializer_class = serializers.ProdutoDetailSerializer
     queryset = Produto.objects.all()
+    def get_serializer_class(self):
+        print(self.action)
+        if self.action == "update" or self.action == "create":
+            return serializers.ProdutoSerializer
+
+        return serializers.ProdutoDetailSerializer
 
 
 class DisponibilidadeViewSet(viewsets.ModelViewSet):

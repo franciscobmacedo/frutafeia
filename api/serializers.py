@@ -1,5 +1,6 @@
 from pandas.core import series
 from rest_framework import serializers
+from core.enum import TIPO_PRODUTO_CHOICES
 from core.models import (
     Cesta,
     ConteudoCesta,
@@ -45,12 +46,6 @@ class CestaSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class ProdutoSerializer(serializers.ModelSerializer):
-    """Serializer for produto objects"""
-
-    class Meta:
-        model = Produto
-        fields = "__all__"
 
 
 class FamiliaProdutoSerializer(serializers.ModelSerializer):
@@ -61,14 +56,32 @@ class FamiliaProdutoSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class ProdutoSimpleSerializer(serializers.ModelSerializer):
+class ProdutoSerializer(serializers.ModelSerializer):
     """Serializer for produto objects"""
-
-    id = serializers.IntegerField()
-
+  
     class Meta:
         model = Produto
         fields = "__all__"
+        extra_kwargs = {'nome': {'required': False}}
+
+
+
+
+class ProdutoDetailSerializer(serializers.ModelSerializer):
+    """Serializer for produto objects"""
+    familia = FamiliaProdutoSerializer(many=False, read_only=True)
+    tipo = serializers.SerializerMethodField()
+    medida = serializers.SerializerMethodField()
+
+    def get_tipo(self, obj):
+        return {'id': obj.tipo, "nome": obj.tipo_name}
+
+    def get_medida(self, obj):
+        return {'id': obj.medida, "nome": obj.medida_name}
+    class Meta:
+        model = Produto
+        fields = "__all__"
+
 
 
 class ProdutoNameSerializer(serializers.ModelSerializer):
