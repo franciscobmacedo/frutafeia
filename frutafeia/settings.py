@@ -126,11 +126,11 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-# STATIC_URL = "/static/"
-# STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
-STATIC_ROOT = "var/static_root/"
-STATICFILES_DIRS = ["static"]
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# STATIC_URL = "/static/"
+# STATIC_ROOT = "var/static_root/"
+# STATICFILES_DIRS = ["static"]
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -141,4 +141,4 @@ SPREADSHEET_ID = "1rGTPmY7BTazRxiCUuQMeHBA_w30b3gTiw_H6-VW_4Ro"
 SCRIPT_ID = "1SPpPRvrxuHL0GR97u_4holiJYmLZ6zW42HbfV3naHy5lRV-XEKCJrDac"
 
 
-START_WEEK_DAY = 3  # Dia da semana em que começa uma nova iteração do uso da ferramenta (0 - segunda; 6 - domingo)
+START_WEEK_DAY = 0  # Dia da semana em que começa uma nova iteração do uso da ferramenta (0 - segunda; 6 - domingo)

@@ -41,7 +41,13 @@ class ProdutorViewSet(viewsets.ModelViewSet):
 
     serializer_class = serializers.ProdutorSerializer
     queryset = Produtor.objects.all()
+    
+    def get_serializer_class(self):
+        print(self.action)
+        if self.action == "update" or self.action == "create":
+            return serializers.ProdutorSerializer
 
+        return serializers.ProdutorDetailSerializer
 
 class FamiliaProdutoViewSet(viewsets.ModelViewSet):
     """Access Products in the database"""

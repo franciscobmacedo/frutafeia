@@ -82,11 +82,6 @@ class ProdutoNameSerializer(serializers.ModelSerializer):
 class ProdutorSerializer(serializers.ModelSerializer):
     """Serializer for produtor objects"""
 
-    produtos = ProdutoSerializer(many=True, read_only=True)
-    produtos_ids = serializers.PrimaryKeyRelatedField(
-        many=True, read_only=False, queryset=Produto.objects.all(), source="produtos"
-    )
-
     class Meta:
         model = Produtor
         fields = (
@@ -99,8 +94,21 @@ class ProdutorSerializer(serializers.ModelSerializer):
             "email",
             "morada",
             "concelho",
-            "produtos_ids",
         )
+        extra_kwargs = {'nome': {'required': False}}
+
+
+class ProdutorDetailSerializer(ProdutorSerializer):
+    """Serializer for produtor objects"""
+
+    produtos = ProdutoSerializer(many=True, read_only=True)
+    produtos_ids = serializers.PrimaryKeyRelatedField(
+        many=True, read_only=False, queryset=Produto.objects.all(), source="produtos"
+    )
+
+    class Meta(ProdutorSerializer.Meta):
+        fields = ProdutorSerializer.Meta.fields + ('produtos_ids',)
+   
 
 
 class DisponibilidadeSerializer(serializers.ModelSerializer):
