@@ -61,14 +61,6 @@ class ProdutoViewSet(viewsets.ModelViewSet):
 
     serializer_class = serializers.ProdutoSerializer
     queryset = Produto.objects.all()
-    
-    def get_serializer_class(self):
-        print(self.action)
-        if self.action == "update" or self.action == "create":
-            return serializers.ProdutoSerializer
-
-        return serializers.ProdutoDetailSerializer
-
 
 
 class DisponibilidadeViewSet(viewsets.ModelViewSet):
