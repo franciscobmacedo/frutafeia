@@ -395,7 +395,7 @@ def calculate_and_update_cestas():
         success, result = cesta_feia.main(df)
     except Exception as e:
         print('FAIL creating cesta', e)
-        CestaResult.objects.create(result=False, message="erro desconhecido a criar as cestas").save()
+        CestaResult.objects.create(result=False, message="erro desconhecido a criar as cestas. Será que repetiu um par produtor-produto? Não é possível montar as cestas nesta situação.").save()
         return False
     
     if not success:
